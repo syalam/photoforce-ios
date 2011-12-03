@@ -1,0 +1,450 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F7859DE0148AB63D00B1F94C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DDF148AB63D00B1F94C /* UIKit.framework */; };
+		F7859DE2148AB63D00B1F94C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DE1148AB63D00B1F94C /* Foundation.framework */; };
+		F7859DE4148AB63D00B1F94C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DE3148AB63D00B1F94C /* CoreGraphics.framework */; };
+		F7859DEA148AB63D00B1F94C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7859DE8148AB63D00B1F94C /* InfoPlist.strings */; };
+		F7859DEC148AB63D00B1F94C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DEB148AB63D00B1F94C /* main.m */; };
+		F7859DF0148AB63D00B1F94C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DEF148AB63D00B1F94C /* AppDelegate.m */; };
+		F7859DF3148AB63D00B1F94C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7859DF1148AB63D00B1F94C /* MainStoryboard.storyboard */; };
+		F7859DF6148AB63D00B1F94C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DF5148AB63D00B1F94C /* MasterViewController.m */; };
+		F7859DF9148AB63E00B1F94C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DF8148AB63E00B1F94C /* DetailViewController.m */; };
+		F7859E01148AB63E00B1F94C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859E00148AB63E00B1F94C /* SenTestingKit.framework */; };
+		F7859E02148AB63E00B1F94C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DDF148AB63D00B1F94C /* UIKit.framework */; };
+		F7859E03148AB63E00B1F94C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DE1148AB63D00B1F94C /* Foundation.framework */; };
+		F7859E0B148AB63E00B1F94C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7859E09148AB63E00B1F94C /* InfoPlist.strings */; };
+		F7859E0E148AB63E00B1F94C /* PhotoforceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859E0D148AB63E00B1F94C /* PhotoforceTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F7859E04148AB63E00B1F94C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7859DD2148AB63D00B1F94C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F7859DDA148AB63D00B1F94C;
+			remoteInfo = Photoforce;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F7859DDB148AB63D00B1F94C /* Photoforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photoforce.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7859DDF148AB63D00B1F94C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F7859DE1148AB63D00B1F94C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F7859DE3148AB63D00B1F94C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F7859DE7148AB63D00B1F94C /* Photoforce-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photoforce-Info.plist"; sourceTree = "<group>"; };
+		F7859DE9148AB63D00B1F94C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F7859DEB148AB63D00B1F94C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F7859DED148AB63D00B1F94C /* Photoforce-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photoforce-Prefix.pch"; sourceTree = "<group>"; };
+		F7859DEE148AB63D00B1F94C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F7859DEF148AB63D00B1F94C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F7859DF2148AB63D00B1F94C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		F7859DF4148AB63D00B1F94C /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		F7859DF5148AB63D00B1F94C /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		F7859DF7148AB63E00B1F94C /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		F7859DF8148AB63E00B1F94C /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		F7859DFF148AB63E00B1F94C /* PhotoforceTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoforceTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7859E00148AB63E00B1F94C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F7859E08148AB63E00B1F94C /* PhotoforceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoforceTests-Info.plist"; sourceTree = "<group>"; };
+		F7859E0A148AB63E00B1F94C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F7859E0C148AB63E00B1F94C /* PhotoforceTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoforceTests.h; sourceTree = "<group>"; };
+		F7859E0D148AB63E00B1F94C /* PhotoforceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoforceTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F7859DD8148AB63D00B1F94C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7859DE0148AB63D00B1F94C /* UIKit.framework in Frameworks */,
+				F7859DE2148AB63D00B1F94C /* Foundation.framework in Frameworks */,
+				F7859DE4148AB63D00B1F94C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7859DFB148AB63E00B1F94C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7859E01148AB63E00B1F94C /* SenTestingKit.framework in Frameworks */,
+				F7859E02148AB63E00B1F94C /* UIKit.framework in Frameworks */,
+				F7859E03148AB63E00B1F94C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F7859DD0148AB63D00B1F94C = {
+			isa = PBXGroup;
+			children = (
+				F7859DE5148AB63D00B1F94C /* Photoforce */,
+				F7859E06148AB63E00B1F94C /* PhotoforceTests */,
+				F7859DDE148AB63D00B1F94C /* Frameworks */,
+				F7859DDC148AB63D00B1F94C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F7859DDC148AB63D00B1F94C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7859DDB148AB63D00B1F94C /* Photoforce.app */,
+				F7859DFF148AB63E00B1F94C /* PhotoforceTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F7859DDE148AB63D00B1F94C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7859DDF148AB63D00B1F94C /* UIKit.framework */,
+				F7859DE1148AB63D00B1F94C /* Foundation.framework */,
+				F7859DE3148AB63D00B1F94C /* CoreGraphics.framework */,
+				F7859E00148AB63E00B1F94C /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F7859DE5148AB63D00B1F94C /* Photoforce */ = {
+			isa = PBXGroup;
+			children = (
+				F7859DEE148AB63D00B1F94C /* AppDelegate.h */,
+				F7859DEF148AB63D00B1F94C /* AppDelegate.m */,
+				F7859DF1148AB63D00B1F94C /* MainStoryboard.storyboard */,
+				F7859DF4148AB63D00B1F94C /* MasterViewController.h */,
+				F7859DF5148AB63D00B1F94C /* MasterViewController.m */,
+				F7859DF7148AB63E00B1F94C /* DetailViewController.h */,
+				F7859DF8148AB63E00B1F94C /* DetailViewController.m */,
+				F7859DE6148AB63D00B1F94C /* Supporting Files */,
+			);
+			path = Photoforce;
+			sourceTree = "<group>";
+		};
+		F7859DE6148AB63D00B1F94C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F7859DE7148AB63D00B1F94C /* Photoforce-Info.plist */,
+				F7859DE8148AB63D00B1F94C /* InfoPlist.strings */,
+				F7859DEB148AB63D00B1F94C /* main.m */,
+				F7859DED148AB63D00B1F94C /* Photoforce-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F7859E06148AB63E00B1F94C /* PhotoforceTests */ = {
+			isa = PBXGroup;
+			children = (
+				F7859E0C148AB63E00B1F94C /* PhotoforceTests.h */,
+				F7859E0D148AB63E00B1F94C /* PhotoforceTests.m */,
+				F7859E07148AB63E00B1F94C /* Supporting Files */,
+			);
+			path = PhotoforceTests;
+			sourceTree = "<group>";
+		};
+		F7859E07148AB63E00B1F94C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F7859E08148AB63E00B1F94C /* PhotoforceTests-Info.plist */,
+				F7859E09148AB63E00B1F94C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F7859DDA148AB63D00B1F94C /* Photoforce */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7859E11148AB63E00B1F94C /* Build configuration list for PBXNativeTarget "Photoforce" */;
+			buildPhases = (
+				F7859DD7148AB63D00B1F94C /* Sources */,
+				F7859DD8148AB63D00B1F94C /* Frameworks */,
+				F7859DD9148AB63D00B1F94C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Photoforce;
+			productName = Photoforce;
+			productReference = F7859DDB148AB63D00B1F94C /* Photoforce.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F7859DFE148AB63E00B1F94C /* PhotoforceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7859E14148AB63E00B1F94C /* Build configuration list for PBXNativeTarget "PhotoforceTests" */;
+			buildPhases = (
+				F7859DFA148AB63E00B1F94C /* Sources */,
+				F7859DFB148AB63E00B1F94C /* Frameworks */,
+				F7859DFC148AB63E00B1F94C /* Resources */,
+				F7859DFD148AB63E00B1F94C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7859E05148AB63E00B1F94C /* PBXTargetDependency */,
+			);
+			name = PhotoforceTests;
+			productName = PhotoforceTests;
+			productReference = F7859DFF148AB63E00B1F94C /* PhotoforceTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F7859DD2148AB63D00B1F94C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = F7859DD5148AB63D00B1F94C /* Build configuration list for PBXProject "Photoforce" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F7859DD0148AB63D00B1F94C;
+			productRefGroup = F7859DDC148AB63D00B1F94C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F7859DDA148AB63D00B1F94C /* Photoforce */,
+				F7859DFE148AB63E00B1F94C /* PhotoforceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F7859DD9148AB63D00B1F94C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7859DEA148AB63D00B1F94C /* InfoPlist.strings in Resources */,
+				F7859DF3148AB63D00B1F94C /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7859DFC148AB63E00B1F94C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7859E0B148AB63E00B1F94C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F7859DFD148AB63E00B1F94C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F7859DD7148AB63D00B1F94C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7859DEC148AB63D00B1F94C /* main.m in Sources */,
+				F7859DF0148AB63D00B1F94C /* AppDelegate.m in Sources */,
+				F7859DF6148AB63D00B1F94C /* MasterViewController.m in Sources */,
+				F7859DF9148AB63E00B1F94C /* DetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7859DFA148AB63E00B1F94C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7859E0E148AB63E00B1F94C /* PhotoforceTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F7859E05148AB63E00B1F94C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F7859DDA148AB63D00B1F94C /* Photoforce */;
+			targetProxy = F7859E04148AB63E00B1F94C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F7859DE8148AB63D00B1F94C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7859DE9148AB63D00B1F94C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F7859DF1148AB63D00B1F94C /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7859DF2148AB63D00B1F94C /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		F7859E09148AB63E00B1F94C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7859E0A148AB63E00B1F94C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F7859E0F148AB63E00B1F94C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F7859E10148AB63E00B1F94C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F7859E12148AB63E00B1F94C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "Photoforce/Photoforce-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F7859E13148AB63E00B1F94C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "Photoforce/Photoforce-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F7859E15148AB63E00B1F94C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Photoforce.app/Photoforce";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "PhotoforceTests/PhotoforceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		F7859E16148AB63E00B1F94C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Photoforce.app/Photoforce";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "PhotoforceTests/PhotoforceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F7859DD5148AB63D00B1F94C /* Build configuration list for PBXProject "Photoforce" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7859E0F148AB63E00B1F94C /* Debug */,
+				F7859E10148AB63E00B1F94C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7859E11148AB63E00B1F94C /* Build configuration list for PBXNativeTarget "Photoforce" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7859E12148AB63E00B1F94C /* Debug */,
+				F7859E13148AB63E00B1F94C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F7859E14148AB63E00B1F94C /* Build configuration list for PBXNativeTarget "PhotoforceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7859E15148AB63E00B1F94C /* Debug */,
+				F7859E16148AB63E00B1F94C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F7859DD2148AB63D00B1F94C /* Project object */;
+}
