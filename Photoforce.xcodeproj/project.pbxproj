@@ -14,8 +14,6 @@
 		F7859DEC148AB63D00B1F94C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DEB148AB63D00B1F94C /* main.m */; };
 		F7859DF0148AB63D00B1F94C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DEF148AB63D00B1F94C /* AppDelegate.m */; };
 		F7859DF3148AB63D00B1F94C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7859DF1148AB63D00B1F94C /* MainStoryboard.storyboard */; };
-		F7859DF6148AB63D00B1F94C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DF5148AB63D00B1F94C /* MasterViewController.m */; };
-		F7859DF9148AB63E00B1F94C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859DF8148AB63E00B1F94C /* DetailViewController.m */; };
 		F7859E01148AB63E00B1F94C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859E00148AB63E00B1F94C /* SenTestingKit.framework */; };
 		F7859E02148AB63E00B1F94C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DDF148AB63D00B1F94C /* UIKit.framework */; };
 		F7859E03148AB63E00B1F94C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DE1148AB63D00B1F94C /* Foundation.framework */; };
@@ -33,6 +31,7 @@
 		F7EAE9F0148B0269003187B8 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9E0148B0269003187B8 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7EAE9F1148B0269003187B8 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9E2148B0269003187B8 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7EAE9F2148B0269003187B8 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9E4148B0269003187B8 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F7EAE9FB148B59AC003187B8 /* HomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9FA148B59AC003187B8 /* HomeScreenViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,10 +56,6 @@
 		F7859DEE148AB63D00B1F94C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F7859DEF148AB63D00B1F94C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F7859DF2148AB63D00B1F94C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		F7859DF4148AB63D00B1F94C /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		F7859DF5148AB63D00B1F94C /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		F7859DF7148AB63E00B1F94C /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		F7859DF8148AB63E00B1F94C /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F7859DFF148AB63E00B1F94C /* PhotoforceTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoforceTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7859E00148AB63E00B1F94C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F7859E08148AB63E00B1F94C /* PhotoforceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoforceTests-Info.plist"; sourceTree = "<group>"; };
@@ -92,6 +87,8 @@
 		F7EAE9E2148B0269003187B8 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		F7EAE9E3148B0269003187B8 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		F7EAE9E4148B0269003187B8 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		F7EAE9F9148B59AC003187B8 /* HomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenViewController.h; sourceTree = "<group>"; };
+		F7EAE9FA148B59AC003187B8 /* HomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,13 +152,11 @@
 				F7859DEE148AB63D00B1F94C /* AppDelegate.h */,
 				F7859DEF148AB63D00B1F94C /* AppDelegate.m */,
 				F7859DF1148AB63D00B1F94C /* MainStoryboard.storyboard */,
-				F7859DF4148AB63D00B1F94C /* MasterViewController.h */,
-				F7859DF5148AB63D00B1F94C /* MasterViewController.m */,
-				F7859DF7148AB63E00B1F94C /* DetailViewController.h */,
-				F7859DF8148AB63E00B1F94C /* DetailViewController.m */,
 				F7859DE6148AB63D00B1F94C /* Supporting Files */,
 				F7EAE9C5148ACADB003187B8 /* LoginScreen.h */,
 				F7EAE9C6148ACADB003187B8 /* LoginScreen.m */,
+				F7EAE9F9148B59AC003187B8 /* HomeScreenViewController.h */,
+				F7EAE9FA148B59AC003187B8 /* HomeScreenViewController.m */,
 			);
 			path = Photoforce;
 			sourceTree = "<group>";
@@ -344,8 +339,6 @@
 			files = (
 				F7859DEC148AB63D00B1F94C /* main.m in Sources */,
 				F7859DF0148AB63D00B1F94C /* AppDelegate.m in Sources */,
-				F7859DF6148AB63D00B1F94C /* MasterViewController.m in Sources */,
-				F7859DF9148AB63E00B1F94C /* DetailViewController.m in Sources */,
 				F7EAE9C7148ACADB003187B8 /* LoginScreen.m in Sources */,
 				F7EAE9E8148B0269003187B8 /* Facebook.m in Sources */,
 				F7EAE9EA148B0269003187B8 /* FBDialog.m in Sources */,
@@ -357,6 +350,7 @@
 				F7EAE9F0148B0269003187B8 /* SBJsonBase.m in Sources */,
 				F7EAE9F1148B0269003187B8 /* SBJsonParser.m in Sources */,
 				F7EAE9F2148B0269003187B8 /* SBJsonWriter.m in Sources */,
+				F7EAE9FB148B59AC003187B8 /* HomeScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

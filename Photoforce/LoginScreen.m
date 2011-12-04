@@ -7,6 +7,7 @@
 //
 
 #import "LoginScreen.h"
+#import "HomeScreenViewController.h"
 
 @implementation LoginScreen
 
@@ -43,12 +44,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    userNameTextField.delegate = self;
-    passwordTextField.delegate = self;
-    UIGestureRecognizer* recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
-    [(UITapGestureRecognizer *)recognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:recognizer];
-    recognizer.delegate = self;
+    
+    facebook = [[Facebook alloc] initWithAppId:@"266617523389474" andDelegate:self];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        HomeScreenViewController *homeScreen = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
+        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:homeScreen];
+        [self presentModalViewController:navController animated:YES];   
+    }
+    
 }
 
 
@@ -65,36 +71,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void) textFieldDidBeginEditing:(UITextField *)textField
-{
-    [self performSelector:@selector(scrollScreen:) withObject:nil afterDelay:0.1];
-}
-     
--(void)scrollScreen:(id)sender {
-    scrollView.contentSize = CGSizeMake(320, 500);
-    CGPoint bottomOffeset = CGPointMake(0, 140);
-    [scrollView setContentOffset:bottomOffeset animated:YES];
-}
-
--(void)scrollScreenBack {
-    CGPoint bottomOffset = CGPointMake(0, 0);
-    [scrollView setContentOffset: bottomOffset animated: YES];
-}
-
--(void)tapMethod:(id)sender {
-    [userNameTextField resignFirstResponder];
-    [passwordTextField resignFirstResponder];
-    [self scrollScreenBack];
-    //[scrollView resignFirstResponder];
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if ((touch.view == loginButton || touch.view == self.view)) {
-        return NO;
-    }
-    return YES;
-}
-
 - (IBAction)loginButtonClicked:(id)sender {
     facebook = [[Facebook alloc] initWithAppId:@"266617523389474" andDelegate:self];
     
@@ -109,23 +85,6 @@
     }
 }
 
-/*- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [facebook handleOpenURL:url]; 
-}
-
-// For 4.2+ support
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [facebook handleOpenURL:url]; 
-}
-
-- (void)fbDidLogin {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-}*/
 
 
 @end
