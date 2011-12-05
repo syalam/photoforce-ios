@@ -7,26 +7,81 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginScreen.h"
+#import "HomeScreenViewController.h"
+
+static NSString* kAppId = @"266617523389474";
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize facebook;
+@synthesize userPermissions;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*facebook = [[Facebook alloc] initWithAppId:@"266617523389474" andDelegate:self];
+
+    /*HomeScreenViewController *hsvc = [[HomeScreenViewController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
+    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:hsvc];*/
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    LoginScreen *login = [[LoginScreen alloc]init];
+    facebook = [[Facebook alloc]initWithAppId:kAppId andDelegate:login];
+    
+    userPermissions = [[NSMutableDictionary alloc] initWithCapacity:1];
+    
+    [self.window makeKeyAndVisible];
+    
+    // Check App ID:
+    // This is really a warning for the developer, this should not
+    // happen in a completed app
+    if (!kAppId) {
+        UIAlertView *alertView = [[UIAlertView alloc] 
+                                  initWithTitle:@"Setup Error" 
+                                  message:@"Missing app ID. You cannot run the app until you provide this in the code." 
+                                  delegate:self 
+                                  cancelButtonTitle:@"OK" 
+                                  otherButtonTitles:nil, 
+                                  nil];
+        [alertView show];
+    } 
+    else {
+        // Now check that the URL scheme fb[app_id]://authorize is in the .plist and can
+        // be opened, doing a simple check without local app id factored in here
+        NSString *url = [NSString stringWithFormat:@"fb%@://authorize",kAppId];
+        BOOL bSchemeInPlist = NO; // find out if the sceme is in the plist file.
+        NSArray* aBundleURLTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+        
+        if ([aBundleURLTypes isKindOfClass:[NSArray class]] && 
+            ([aBundleURLTypes count] > 0)) {
+            NSDictionary* aBundleURLTypes0 = [aBundleURLTypes objectAtIndex:0];
+            
+            if ([aBundleURLTypes0 isKindOfClass:[NSDictionary class]]) {
+                NSArray* aBundleURLSchemes = [aBundleURLTypes0 objectForKey:@"CFBundleURLSchemes"];
+                
+                if ([aBundleURLSchemes isKindOfClass:[NSArray class]] &&
+                    ([aBundleURLSchemes count] > 0)) {
+                    NSString *scheme = [aBundleURLSchemes objectAtIndex:0];
+                   
+                    if ([scheme isKindOfClass:[NSString class]] && 
+                        [url hasPrefix:scheme]) {
+                        bSchemeInPlist = YES;
+                    }
+                }
+            }
+        }
+        // Check if the authorization callback will work
+        BOOL bCanOpenUrl = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString: url]];
+        if (!bSchemeInPlist || !bCanOpenUrl) {
+            UIAlertView *alertView = [[UIAlertView alloc] 
+                                      initWithTitle:@"Setup Error" 
+                                      message:@"Invalid or missing URL scheme. You cannot run the app until you set up a valid URL scheme in your .plist." 
+                                      delegate:self 
+                                      cancelButtonTitle:@"OK" 
+                                      otherButtonTitles:nil, 
+                                      nil];
+            [alertView show];
+        }
     }
-    if (![facebook isSessionValid]) {
-        [facebook authorize:nil];
-    }*/
-    
     
     // Override point for customization after application launch.
     return YES;

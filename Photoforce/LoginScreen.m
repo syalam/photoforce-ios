@@ -8,6 +8,7 @@
 
 #import "LoginScreen.h"
 #import "HomeScreenViewController.h"
+#import "AppDelegate.h"
 
 @implementation LoginScreen
 
@@ -39,20 +40,22 @@
 }
 */
 
+- (void) showLoggedIn {
+    HomeScreenViewController *hsvc = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:hsvc];
+    [self presentModalViewController:nav animated:YES];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
-    facebook = [[Facebook alloc] initWithAppId:@"266617523389474" andDelegate:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    permissions = [[NSArray alloc] initWithObjects:@"offline_access", nil];
     
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        HomeScreenViewController *homeScreen = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
-        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:homeScreen];
-        [self presentModalViewController:navController animated:YES];   
+    if ([[delegate facebook] isSessionValid]) {
+        [self showLoggedIn];
     }
     
 }
@@ -72,18 +75,51 @@
 }
 
 - (IBAction)loginButtonClicked:(id)sender {
-    facebook = [[Facebook alloc] initWithAppId:@"266617523389474" andDelegate:self];
+
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
-    if (![facebook isSessionValid]) {
-        [facebook authorize:nil];
+    if (![[delegate facebook] isSessionValid]) {
+        [delegate facebook].sessionDelegate = self;
+        [[delegate facebook] authorize:permissions];
     }
 }
+
+#pragma mark - FBSessionDelegate Methods
+/**
+ * Called when the user has logged in successfully.
+ */
+- (void)fbDidLogin {
+    [self showLoggedIn];
+    
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    // Save authorization information
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+
+/**
+ * Called when the user canceled the authorization dialog.
+ */
+-(void)fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"did not login");
+}
+
+/**
+ * Called when the request logout has succeeded.
+ */
+- (void)fbDidLogout {
+    //[self showLoggedOut:YES];
+}
+
 
 
 

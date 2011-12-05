@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Facebook.h"
 
-@interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate> {
+typedef enum apiCall {
+    kAPIGraphMe
+}apiCall;
+
+@interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate> {
     IBOutlet UITableView *homeTableView;
+    int currentAPICall;
+    NSMutableArray *facebookData;
 }
 @property(nonatomic,retain) Facebook *facebook;
 

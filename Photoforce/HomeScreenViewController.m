@@ -7,6 +7,7 @@
 //
 
 #import "HomeScreenViewController.h"
+#import "AppDelegate.h"
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -45,10 +46,66 @@
     
     homeTableView.dataSource = self;
     
-    [facebook requestWithGraphPath:@"me" andDelegate:self];
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"name,picture",  @"fields",
+                                   nil];
+    
+    [[delegate facebook] requestWithGraphPath:@"me" andParams:params andDelegate:self];
+    currentAPICall = kAPIGraphMe;
+    
     
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOutButtonClicked:)];
     self.navigationItem.rightBarButtonItem = logOutButton;
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)fbDidLogin {
+   AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    // Save updated authorization information
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"received response");
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    switch (currentAPICall) {
+        case kAPIGraphMe:
+        {
+            NSString *nameID = [[NSString alloc] initWithFormat:@"%@ (%@)", [result objectForKey:@"name"], [result objectForKey:@"id"]];
+            facebookData = [[NSMutableArray alloc] initWithObjects:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [result objectForKey:@"id"], @"id", 
+                             nameID, @"name", 
+                             [result objectForKey:@"picture"], @"details", 
+                             nil], nil];
+            [homeTableView reloadData];
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
 }
 
 - (void)logOutButtonClicked:(id)sender {
@@ -73,7 +130,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return facebookData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,7 +142,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.text = @"Image";
+    cell.textLabel.text = [[facebookData objectAtIndex:indexPath.row] objectForKey:@"name"];
     
     return cell;
 }

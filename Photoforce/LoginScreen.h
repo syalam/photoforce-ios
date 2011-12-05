@@ -14,6 +14,7 @@
     IBOutlet UITextField *userNameTextField;
     IBOutlet UITextField *passwordTextField;
     IBOutlet UIScrollView *scrollView;
+    NSArray *permissions;
     
     Facebook *facebook;
 }
