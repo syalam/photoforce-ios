@@ -15,9 +15,13 @@ typedef enum apiCall {
 
 @interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate> {
     IBOutlet UITableView *homeTableView;
+    IBOutlet UIButton *loginButton;
     int currentAPICall;
     NSMutableArray *facebookData;
+    NSArray *permissions;
 }
 @property(nonatomic,retain) Facebook *facebook;
+
+- (IBAction)loginButtonClicked:(id)sender;
 
 @end

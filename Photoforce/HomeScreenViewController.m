@@ -28,7 +28,6 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
-
 #pragma mark - View lifecycle
 
 /*
@@ -38,16 +37,8 @@
 }
 */
 
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    homeTableView.dataSource = self;
-    
+- (void) displayLoggedInItems {
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    @"name,picture",  @"fields",
                                    nil];
@@ -58,11 +49,55 @@
     
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOutButtonClicked:)];
     self.navigationItem.rightBarButtonItem = logOutButton;
+}
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    BOOL userLoggedIn = NO;
+    
+    homeTableView.dataSource = self;
+    
+    //AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        homeTableView.hidden = NO;
+        loginButton.hidden = YES;
+        userLoggedIn = YES;
+        [self displayLoggedInItems];
+    }
+    else {
+        homeTableView.hidden = YES;
+        loginButton.hidden = NO;
+    }
     
 }
 
+
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+
+}
+
+- (IBAction)loginButtonClicked:(id)sender {
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![[delegate facebook] isSessionValid]) {
+        [delegate facebook].sessionDelegate = self;
+        [[delegate facebook] authorize:permissions];
+    }
 }
 
 - (void)fbDidLogin {
@@ -73,6 +108,9 @@
     [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
+    homeTableView.hidden = NO;
+    loginButton.hidden = YES;
+    [self displayLoggedInItems];
 }
 
 
@@ -109,7 +147,21 @@
 }
 
 - (void)logOutButtonClicked:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[delegate facebook]logout:self];
+}
+
+- (void) fbDidLogout {
+    // Remove saved authorization information if it exists
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"]) {
+        [defaults removeObjectForKey:@"FBAccessTokenKey"];
+        [defaults removeObjectForKey:@"FBExpirationDateKey"];
+        [defaults synchronize];
+        homeTableView.hidden = YES;
+        loginButton.hidden = NO;
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (void)viewDidUnload
