@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginScreen.h"
 #import "HomeScreenViewController.h"
 
 static NSString* kAppId = @"266617523389474";
@@ -21,11 +20,9 @@ static NSString* kAppId = @"266617523389474";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-    /*HomeScreenViewController *hsvc = [[HomeScreenViewController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
-    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:hsvc];*/
+    HomeScreenViewController *hsvc = [[HomeScreenViewController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
+    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:hsvc];
     
-    LoginScreen *login = [[LoginScreen alloc]init];
-    facebook = [[Facebook alloc]initWithAppId:kAppId andDelegate:login];
     
     userPermissions = [[NSMutableDictionary alloc] initWithCapacity:1];
     

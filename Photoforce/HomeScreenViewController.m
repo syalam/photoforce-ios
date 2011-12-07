@@ -37,15 +37,23 @@
 }
 */
 
+
+#pragma mark - View Lifecycle
+
 - (void) displayLoggedInItems {
+    
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+    /*NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    @"name,picture",  @"fields",
-                                   nil];
+                                   nil];*/
+    homeTableView.hidden = NO;
+    photoFoceLabel.hidden = YES;
     
-    [[delegate facebook] requestWithGraphPath:@"me" andParams:params andDelegate:self];
-    currentAPICall = kAPIGraphMe;
-    
+    //[[delegate facebook] requestWithGraphPath:@"me/friends" andParams:params andDelegate:self];
+    [[delegate facebook] requestWithGraphPath:@"me/home" andDelegate:self];
+     
+     
+    self.navigationItem.rightBarButtonItem = nil;
     
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOutButtonClicked:)];
     self.navigationItem.rightBarButtonItem = logOutButton;
@@ -56,23 +64,23 @@
 {
     [super viewDidLoad];
     
-    BOOL userLoggedIn = NO;
-    
     homeTableView.dataSource = self;
+    
     
     //AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        homeTableView.hidden = NO;
-        loginButton.hidden = YES;
-        userLoggedIn = YES;
         [self displayLoggedInItems];
     }
     else {
         homeTableView.hidden = YES;
-        loginButton.hidden = NO;
+        
+        self.navigationItem.rightBarButtonItem = nil;
+        
+        UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
+        self.navigationItem.rightBarButtonItem = loginButton;
     }
     
 }
@@ -84,86 +92,6 @@
 
 
 }
-
-- (IBAction)loginButtonClicked:(id)sender {
-    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    if (![[delegate facebook] isSessionValid]) {
-        [delegate facebook].sessionDelegate = self;
-        [[delegate facebook] authorize:permissions];
-    }
-}
-
-- (void)fbDidLogin {
-   AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    
-    // Save updated authorization information
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    homeTableView.hidden = NO;
-    loginButton.hidden = YES;
-    [self displayLoggedInItems];
-}
-
-
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"received response");
-}
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    switch (currentAPICall) {
-        case kAPIGraphMe:
-        {
-            NSString *nameID = [[NSString alloc] initWithFormat:@"%@ (%@)", [result objectForKey:@"name"], [result objectForKey:@"id"]];
-            facebookData = [[NSMutableArray alloc] initWithObjects:
-                            [NSDictionary dictionaryWithObjectsAndKeys:
-                             [result objectForKey:@"id"], @"id", 
-                             nameID, @"name", 
-                             [result objectForKey:@"picture"], @"details", 
-                             nil], nil];
-            [homeTableView reloadData];
-            
-            break;
-        }
-            
-        default:
-            break;
-    }
-}
-
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
-}
-
-- (void)logOutButtonClicked:(id)sender {
-    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [[delegate facebook]logout:self];
-}
-
-- (void) fbDidLogout {
-    // Remove saved authorization information if it exists
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"]) {
-        [defaults removeObjectForKey:@"FBAccessTokenKey"];
-        [defaults removeObjectForKey:@"FBExpirationDateKey"];
-        [defaults synchronize];
-        homeTableView.hidden = YES;
-        loginButton.hidden = NO;
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -177,6 +105,91 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Button Clicks
+
+- (void)loginButtonClicked:(id)sender {
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", nil];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![[delegate facebook] isSessionValid]) {
+        [delegate facebook].sessionDelegate = self;
+        [[delegate facebook] authorize:permissions];
+    }
+}
+
+- (void)logOutButtonClicked:(id)sender {
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[delegate facebook]logout:self];
+}
+
+#pragma mark - Facebook Delegate Methods
+
+- (void)fbDidLogin {
+   AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    // Save updated authorization information
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    homeTableView.hidden = NO;
+    [self displayLoggedInItems];
+}
+
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"received response");
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    facebookData = [[NSMutableArray alloc]initWithCapacity:1];
+    NSArray *resultData = [result objectForKey:@"data"];
+    if ([resultData count] > 0) {
+        for (NSUInteger i = 0; i < resultData.count; i++) {
+            if ([[resultData objectAtIndex:i]objectForKey:@"picture"]) {
+                [facebookData addObject:[resultData objectAtIndex:i]];
+            }
+        }
+    }
+                    
+    [homeTableView reloadData];
+}
+
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
+}
+
+
+
+- (void) fbDidLogout {
+    // Remove saved authorization information if it exists
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"]) {
+        [defaults removeObjectForKey:@"FBAccessTokenKey"];
+        [defaults removeObjectForKey:@"FBExpirationDateKey"];
+        [defaults synchronize];
+        homeTableView.hidden = YES;
+        photoFoceLabel.hidden = NO;
+        self.navigationItem.rightBarButtonItem = nil;
+        
+        UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
+        self.navigationItem.rightBarButtonItem = loginButton;
+    }
+}
+
+
+#pragma mark - UITableViewDatasource and UITableViewDelegate Methods
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -185,16 +198,28 @@
     return facebookData.count;
 }
 
+/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}*/
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"MainTableView";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.text = [[facebookData objectAtIndex:indexPath.row] objectForKey:@"name"];
+    NSURL *picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:picURL]];
+    UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(32.0, 2.0, 39.0, 39.0)];
+    photoImageView.image = image;
+    photoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [cell.contentView addSubview:photoImageView];
+
+    //cell.textLabel.text = [[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"];
     
     return cell;
 }
