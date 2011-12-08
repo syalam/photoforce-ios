@@ -20,6 +20,7 @@ typedef enum apiCall {
     int currentAPICall;
     NSMutableArray *facebookData;
     NSArray *permissions;
+    NSUInteger imageTag;
 }
 @property(nonatomic,retain) Facebook *facebook;
 

@@ -8,6 +8,7 @@
 
 #import "HomeScreenViewController.h"
 #import "AppDelegate.h"
+#import "AsyncImageView.h"
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -65,10 +66,15 @@
     [super viewDidLoad];
     
     homeTableView.dataSource = self;
+    homeTableView.delegate = self;
     
+    imageTag = 1;
     
-    //AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+    [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
@@ -198,26 +204,61 @@
     return facebookData.count;
 }
 
-/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
-}*/
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 200.0;    
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"MainTableView";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //static NSString *CellIdentifier = @"MainTableView";
     
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [[UITableViewCell alloc]init];
     
+    cell = nil;
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] init];
+        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    /*else {
+        AsyncImageView* oldImage = (AsyncImageView*)
+        [cell.contentView viewWithTag:imageTag];
+        [oldImage removeFromSuperview];
+    }*/
+    
+    CGRect frame;
+	frame.size.width=180; frame.size.height=180;
+	frame.origin.x=70; frame.origin.y=10;
+	AsyncImageView* asyncImage = [[AsyncImageView alloc]
+                                   initWithFrame:frame];
+	asyncImage.tag = imageTag;
+    
+    imageTag ++;
+    if (imageTag > 10) {
+        imageTag = 1;
     }
     
-    NSURL *picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:picURL]];
-    UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(32.0, 2.0, 39.0, 39.0)];
+    NSURL *picURL;
+    
+    picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]];
+    
+    /*if ([[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]) {
+        picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]];
+    }
+    else {
+        picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"link"]];
+    }*/
+
+    [asyncImage loadImageFromURL:picURL];
+    
+    [cell.contentView addSubview:asyncImage];
+    
+    /*UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:picURL]];
+    UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(32.0, 10.0, 180.0, 180.0)];
     photoImageView.image = image;
     photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.contentView addSubview:photoImageView];
+    [cell.contentView addSubview:photoImageView];*/
 
     //cell.textLabel.text = [[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"];
     

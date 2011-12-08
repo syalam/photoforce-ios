@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F766B4C1149073180070854C /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F766B4C0149073180070854C /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7859DE0148AB63D00B1F94C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DDF148AB63D00B1F94C /* UIKit.framework */; };
 		F7859DE2148AB63D00B1F94C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DE1148AB63D00B1F94C /* Foundation.framework */; };
 		F7859DE4148AB63D00B1F94C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DE3148AB63D00B1F94C /* CoreGraphics.framework */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F766B4BF149073180070854C /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		F766B4C0149073180070854C /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		F7859DDB148AB63D00B1F94C /* Photoforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photoforce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7859DDF148AB63D00B1F94C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F7859DE1148AB63D00B1F94C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,12 +149,14 @@
 		F7859DE5148AB63D00B1F94C /* Photoforce */ = {
 			isa = PBXGroup;
 			children = (
+				F7859DE6148AB63D00B1F94C /* Supporting Files */,
 				F7859DEE148AB63D00B1F94C /* AppDelegate.h */,
 				F7859DEF148AB63D00B1F94C /* AppDelegate.m */,
 				F7859DF1148AB63D00B1F94C /* MainStoryboard.storyboard */,
-				F7859DE6148AB63D00B1F94C /* Supporting Files */,
 				F7EAE9F9148B59AC003187B8 /* HomeScreenViewController.h */,
 				F7EAE9FA148B59AC003187B8 /* HomeScreenViewController.m */,
+				F766B4BF149073180070854C /* AsyncImageView.h */,
+				F766B4C0149073180070854C /* AsyncImageView.m */,
 			);
 			path = Photoforce;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				F7EAE9F1148B0269003187B8 /* SBJsonParser.m in Sources */,
 				F7EAE9F2148B0269003187B8 /* SBJsonWriter.m in Sources */,
 				F7EAE9FB148B59AC003187B8 /* HomeScreenViewController.m in Sources */,
+				F766B4C1149073180070854C /* AsyncImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
