@@ -45,14 +45,11 @@
 - (void) displayLoggedInItems {
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    /*NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"name,picture",  @"fields",
-                                   nil];*/
     homeTableView.hidden = NO;
     photoFoceLabel.hidden = YES;
     
     //[[delegate facebook] requestWithGraphPath:@"me/friends" andParams:params andDelegate:self];
-    [[delegate facebook] requestWithGraphPath:@"me/feed" andDelegate:self];
+    [[delegate facebook] requestWithGraphPath:@"me/home" andDelegate:self];
      
      
     self.navigationItem.rightBarButtonItem = nil;

@@ -75,13 +75,14 @@ static UIFont* bold14 = nil;
 	[[UIColor whiteColor] set];
 	CGContextFillRect(context, rect);
 	
-	NSString* name = [info stringForKey:@"from_user"];
+	//NSString* name = [info stringForKey:@"from"];
+    NSString *name = [[info objectForKey:@"from"]objectForKey:@"name"];
 	NSString* text = [info stringForKey:@"text"];
 	
 	CGFloat widthr = self.frame.size.width - 70;
 	
 	[[UIColor blackColor] set];
-	[name drawInRect:CGRectMake(63.0, 5.0, widthr, 20.0) withFont:bold14 lineBreakMode:UILineBreakModeTailTruncation];
+	[name drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:bold14 lineBreakMode:UILineBreakModeTailTruncation];
 	[[UIColor grayColor] set];
 	[text drawInRect:CGRectMake(63.0, 25.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];
 	
