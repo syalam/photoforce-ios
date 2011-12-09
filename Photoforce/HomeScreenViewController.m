@@ -9,6 +9,7 @@
 #import "HomeScreenViewController.h"
 #import "AppDelegate.h"
 #import "AsyncImageView.h"
+#import "AsyncCell.h"
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -51,7 +52,7 @@
     photoFoceLabel.hidden = YES;
     
     //[[delegate facebook] requestWithGraphPath:@"me/friends" andParams:params andDelegate:self];
-    [[delegate facebook] requestWithGraphPath:@"me/home" andDelegate:self];
+    [[delegate facebook] requestWithGraphPath:@"me/feed" andDelegate:self];
      
      
     self.navigationItem.rightBarButtonItem = nil;
@@ -211,57 +212,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //static NSString *CellIdentifier = @"MainTableView";
+    static NSString *CellIdentifier = @"Cell";
     
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    
-    cell = nil;
+    AsyncCell *cell = (AsyncCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] init];
-        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    /*else {
-        AsyncImageView* oldImage = (AsyncImageView*)
-        [cell.contentView viewWithTag:imageTag];
-        [oldImage removeFromSuperview];
-    }*/
-    
-    CGRect frame;
-	frame.size.width=180; frame.size.height=180;
-	frame.origin.x=70; frame.origin.y=10;
-	AsyncImageView* asyncImage = [[AsyncImageView alloc]
-                                   initWithFrame:frame];
-	asyncImage.tag = imageTag;
-    
-    imageTag ++;
-    if (imageTag > 10) {
-        imageTag = 1;
+        cell = [[AsyncCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    NSURL *picURL;
-    
-    picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]];
-    
-    /*if ([[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]) {
-        picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"]];
-    }
-    else {
-        picURL = [NSURL URLWithString:[[facebookData objectAtIndex:indexPath.row] objectForKey:@"link"]];
-    }*/
-
-    [asyncImage loadImageFromURL:picURL];
-    
-    [cell.contentView addSubview:asyncImage];
-    
-    /*UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:picURL]];
-    UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(32.0, 10.0, 180.0, 180.0)];
-    photoImageView.image = image;
-    photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.contentView addSubview:photoImageView];*/
-
-    //cell.textLabel.text = [[facebookData objectAtIndex:indexPath.row] objectForKey:@"picture"];
-    
+    NSDictionary* obj = [facebookData objectAtIndex:indexPath.row];
+    [cell updateCellInfo:obj];
     return cell;
 }
 
