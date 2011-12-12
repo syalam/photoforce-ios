@@ -17,6 +17,7 @@
 #import "Facebook.h"
 #import "FBLoginDialog.h"
 #import "FBRequest.h"
+#import "LoginWebViewController.h"
 
 static NSString* kDialogBaseURL = @"https://m.facebook.com/dialog/";
 static NSString* kGraphBaseURL = @"https://graph.facebook.com/";
@@ -203,11 +204,18 @@ static NSString* kSDKVersion = @"2";
     }
 
     if (trySafariAuth && !didOpenOtherApp) {
-      NSString *nextUrl = [self getOwnBaseUrl];
-      [params setValue:nextUrl forKey:@"redirect_uri"];
-
-      NSString *fbAppUrl = [FBRequest serializeURL:loginDialogURL params:params];
-      didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
+        NSString *nextUrl = [self getOwnBaseUrl];
+        [params setValue:nextUrl forKey:@"redirect_uri"];
+        
+        NSString *fbAppUrl = [FBRequest serializeURL:loginDialogURL params:params];
+        didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
+        //LoginWebViewController *loginScreen = [[LoginWebViewController alloc]initWithTitle:@"Login To Facebook" URL:fbAppUrl];
+        /*UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
+        NSURL *url = [NSURL URLWithString:fbAppUrl];
+        NSURLRequest *requestURL = [NSURLRequest requestWithURL:url];
+        [webView loadRequest:requestURL];
+        [hsvc.view addSubview:webView];
+        didOpenOtherApp = YES;*/
     }
   }
 

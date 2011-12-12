@@ -52,15 +52,6 @@
             <point key="canvasLocation" x="305" y="78"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="HomeScreenViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeScreenViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="homeTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="photoFoceLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

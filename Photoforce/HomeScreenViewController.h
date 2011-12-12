@@ -10,15 +10,16 @@
 #import "Facebook.h"
 
 typedef enum apiCall {
-    kAPIGraphMe
+    kAPIGraphFeed,
+    kAPIGraphPhotos
 }apiCall;
 
 @interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate> {
     IBOutlet UITableView *homeTableView;
     IBOutlet UILabel *photoFoceLabel;
-    //IBOutlet UIButton *loginButton;
     int currentAPICall;
-    NSMutableArray *facebookData;
+    NSMutableArray *facebookFeedData;
+    NSMutableArray *facebookPhotosData;
     NSArray *permissions;
     NSUInteger imageTag;
 }

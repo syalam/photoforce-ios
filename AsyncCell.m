@@ -90,14 +90,14 @@ static UIFont* bold14 = nil;
         CGFloat width = image.size.width;
         CGFloat height = image.size.height;
         
-		CGRect r = CGRectMake(75.0, 35.0, width, height);
+		CGRect r = CGRectMake(40.0, 10.0, width/3, height/3);
 		[self.image drawInRect:r];
 	}
 }
 
 - (void) updateCellInfo:(NSDictionary*)_info {
 	self.info = _info;
-    NSString *urlString = [info stringForKey:@"picture"];
+    NSString *urlString = [info stringForKey:@"src_big"];
 	if (urlString) {
         AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]] success:^(UIImage *requestedImage) {
             self.image = requestedImage;

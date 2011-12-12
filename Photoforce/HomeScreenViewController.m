@@ -8,8 +8,8 @@
 
 #import "HomeScreenViewController.h"
 #import "AppDelegate.h"
-#import "AsyncImageView.h"
 #import "AsyncCell.h"
+#import "LoginWebViewController.h"
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -30,7 +30,7 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
-#pragma mark - View lifecycle
+#pragma mark - View Lifecycle
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -39,19 +39,18 @@
 }
 */
 
-
-#pragma mark - View Lifecycle
-
 - (void) displayLoggedInItems {
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     homeTableView.hidden = NO;
     photoFoceLabel.hidden = YES;
+    currentAPICall = kAPIGraphFeed;
     
-    //[[delegate facebook] requestWithGraphPath:@"me/friends" andParams:params andDelegate:self];
-    [[delegate facebook] requestWithGraphPath:@"me/home" andDelegate:self];
-     
-     
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 2000",@"q",nil];
+    
+    //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT uid2 from friend where uid1=me()",@"q",nil];
+    [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
+    
     self.navigationItem.rightBarButtonItem = nil;
     
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOutButtonClicked:)];
@@ -68,6 +67,7 @@
     
     imageTag = 1;
     
+
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -112,9 +112,10 @@
 #pragma mark - Button Clicks
 
 - (void)loginButtonClicked:(id)sender {
+    
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
-    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", nil];
+    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos", nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
@@ -126,11 +127,31 @@
         [delegate facebook].sessionDelegate = self;
         [[delegate facebook] authorize:permissions];
     }
+    
 }
 
 - (void)logOutButtonClicked:(id)sender {
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [[delegate facebook]logout:self];
+}
+
+#pragma mark - Facebook API Calls
+- (void)getTopThee {
+    NSString *currentUser = [[facebookFeedData objectAtIndex:0]objectForKey:@"owner"];
+    NSString *nextUser;
+    NSUInteger picCounter;
+    BOOL goToNextUser;
+    facebookPhotosData = [[NSMutableArray alloc]initWithCapacity:1];
+    for (NSUInteger i = 0; i < facebookFeedData.count; i++) {
+        if (![currentUser isEqualToString:nextUser]) {
+            if (picCounter < 3) {
+                [facebookPhotosData addObject:[facebookFeedData objectAtIndex:i]];
+            }
+            nextUser = [[facebookFeedData objectAtIndex:i+1]objectForKey:@"owner"];
+            
+        }
+    }
+    [homeTableView reloadData];
 }
 
 #pragma mark - Facebook Delegate Methods
@@ -153,27 +174,19 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-    facebookData = [[NSMutableArray alloc]initWithCapacity:1];
-    NSArray *resultData = [result objectForKey:@"data"];
-    if ([resultData count] > 0) {
-        for (NSUInteger i = 0; i < resultData.count; i++) {
-            if ([[resultData objectAtIndex:i]objectForKey:@"picture"]) {
-                [facebookData addObject:[resultData objectAtIndex:i]];
-            }
-        }
+    facebookFeedData = [[NSMutableArray alloc]initWithCapacity:1];
+    if ([result objectForKey:@"data"]) {
+        facebookFeedData = [result objectForKey:@"data"];
     }
-                    
-    [homeTableView reloadData];
+    [self getTopThee];
+    //[homeTableView reloadData];
 }
-
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
 }
-
-
 
 - (void) fbDidLogout {
     // Remove saved authorization information if it exists
@@ -199,7 +212,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return facebookData.count;
+    return facebookPhotosData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -216,8 +229,9 @@
         cell = [[AsyncCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    NSDictionary* obj = [facebookData objectAtIndex:indexPath.row];
+    NSDictionary* obj = [facebookPhotosData objectAtIndex:indexPath.row];
     [cell updateCellInfo:obj];
+    
     return cell;
 }
 
