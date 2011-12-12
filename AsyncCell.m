@@ -89,8 +89,17 @@ static UIFont* bold14 = nil;
 	if (self.image) {
         CGFloat width = image.size.width;
         CGFloat height = image.size.height;
+        CGRect r;
         
-		CGRect r = CGRectMake(40.0, 10.0, width/3, height/3);
+        if (width == 537) {
+            r = CGRectMake(70.0, 5.0, width/3.5, height/3.5);
+        }
+        else if (width == 720) {
+            r = CGRectMake(7.0, 5.0, width/2.5, height/2.5);
+        }
+        else {
+            r = CGRectMake(70.0, 5.0, width/3.5, height/3.5);
+        }
 		[self.image drawInRect:r];
 	}
 }
