@@ -46,7 +46,7 @@
     photoFoceLabel.hidden = YES;
     currentAPICall = kAPIGraphFeed;
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 2000",@"q",nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 1000",@"q",nil];
     
     //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT uid2 from friend where uid1=me()",@"q",nil];
     [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
@@ -135,25 +135,6 @@
     [[delegate facebook]logout:self];
 }
 
-#pragma mark - Facebook API Calls
-- (void)getTopThee {
-    NSString *currentUser = [[facebookFeedData objectAtIndex:0]objectForKey:@"owner"];
-    NSString *nextUser;
-    NSUInteger picCounter;
-    BOOL goToNextUser;
-    facebookPhotosData = [[NSMutableArray alloc]initWithCapacity:1];
-    for (NSUInteger i = 0; i < facebookFeedData.count; i++) {
-        if (![currentUser isEqualToString:nextUser]) {
-            if (picCounter < 3) {
-                [facebookPhotosData addObject:[facebookFeedData objectAtIndex:i]];
-            }
-            nextUser = [[facebookFeedData objectAtIndex:i+1]objectForKey:@"owner"];
-            
-        }
-    }
-    [homeTableView reloadData];
-}
-
 #pragma mark - Facebook Delegate Methods
 
 - (void)fbDidLogin {
@@ -174,12 +155,11 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-    facebookFeedData = [[NSMutableArray alloc]initWithCapacity:1];
+    facebookPhotosData = [[NSMutableArray alloc]initWithCapacity:1];
     if ([result objectForKey:@"data"]) {
-        facebookFeedData = [result objectForKey:@"data"];
+        facebookPhotosData = [result objectForKey:@"data"];
     }
-    [self getTopThee];
-    //[homeTableView reloadData];
+    [homeTableView reloadData];
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
@@ -217,7 +197,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 200.0;    
+    return 300.0;    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
