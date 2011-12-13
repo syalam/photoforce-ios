@@ -39,7 +39,7 @@
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) 
     {
-		self.backgroundColor = [UIColor whiteColor];
+		self.backgroundColor = [UIColor blackColor];
 		self.opaque = YES;
     }
     return self;
@@ -69,6 +69,16 @@ static UIFont* bold14 = nil;
     [super dealloc];
 }
 
+-(UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect
+{
+    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
+    
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    //CGImageRelease(imageRef);
+    
+    return cropped;
+}
+
 - (void) drawContentView:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
@@ -87,20 +97,16 @@ static UIFont* bold14 = nil;
 	[text drawInRect:CGRectMake(63.0, 25.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];
 	
 	if (self.image) {
-        CGFloat width = image.size.width;
-        CGFloat height = image.size.height;
+        UIImage *imageToDisplay;
+        imageToDisplay = self.image;
+        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(90, 80, 290, 290)];
+        CGFloat width = imageToDisplay.size.width;
+        CGFloat height = imageToDisplay.size.height;
         CGRect r;
         
-        if (width == 537) {
-            r = CGRectMake(70.0, 5.0, width/3.5, height/3.5);
-        }
-        else if (width == 720) {
-            r = CGRectMake(7.0, 5.0, width/2.5, height/2.5);
-        }
-        else {
-            r = CGRectMake(70.0, 5.0, width/3.5, height/3.5);
-        }
-		[self.image drawInRect:r];
+        r = CGRectMake(5.0, 4.0, width, height);
+        
+		[imageToDisplay drawInRect:r];
 	}
 }
 
