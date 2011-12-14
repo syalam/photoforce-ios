@@ -1,14 +1,16 @@
 //
-//  LoginWebViewController.m
+//  DetailViewController.m
 //  Photoforce
 //
-//  Created by Reyaad Sidique on 12/9/11.
+//  Created by Reyaad Sidique on 12/13/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "LoginWebViewController.h"
+#import "DetailViewController.h"
 
-@implementation LoginWebViewController
+@implementation DetailViewController
+
+
 
 /*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,9 +24,12 @@
 - (id)initWithTitle:(NSString *)title URL:(NSString *)URL
 {
     self = [super init];
-    loginURL = URL;
-    return  self;
+    self.title = title;
+    urlString = URL;
+    return self;
 }
+
+
 
 
 - (void)didReceiveMemoryWarning
@@ -37,16 +42,18 @@
 
 #pragma mark - View lifecycle
 
-/*
+
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 460)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)];
+    [view setBackgroundColor:[UIColor blackColor]];
     self.view = view;
-    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, 460)];
-    [self.view addSubview:webView];
+    fullImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
+    [fullImageView setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:fullImageView];
 
-}*/
+}
 
 
 
@@ -54,6 +61,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSURL* myURL = [NSURL URLWithString:urlString];
+    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
+    fullImageView.image = image;
+    fullImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [fullImageView setImage:fullImageView.image];
 
 }
 

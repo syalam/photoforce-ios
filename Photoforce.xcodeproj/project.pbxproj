@@ -19,6 +19,7 @@
 		F7859E03148AB63E00B1F94C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7859DE1148AB63D00B1F94C /* Foundation.framework */; };
 		F7859E0B148AB63E00B1F94C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7859E09148AB63E00B1F94C /* InfoPlist.strings */; };
 		F7859E0E148AB63E00B1F94C /* PhotoforceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7859E0D148AB63E00B1F94C /* PhotoforceTests.m */; };
+		F7899FEA149832C2001EFBE5 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7899FE9149832C2001EFBE5 /* DetailViewController.m */; };
 		F7CBBE941491CD9E003EC06E /* AsyncCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBE911491CD9E003EC06E /* AsyncCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7CBBE951491CD9E003EC06E /* FastCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBE931491CD9E003EC06E /* FastCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7CBBEB51491CE63003EC06E /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBEA11491CE63003EC06E /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -33,7 +34,6 @@
 		F7CBBEBE1491CE63003EC06E /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBEB41491CE63003EC06E /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7CBBEC11491CE73003EC06E /* DictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBEC01491CE73003EC06E /* DictionaryHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7CBBEC41491CEA3003EC06E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBEC31491CEA3003EC06E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		F7CBBECB1492D645003EC06E /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBECA1492D644003EC06E /* LoginWebViewController.m */; };
 		F7EAE9E8148B0269003187B8 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9CD148B0269003187B8 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7EAE9E9148B0269003187B8 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7EAE9D0148B0269003187B8 /* FBDialog.bundle */; };
 		F7EAE9EA148B0269003187B8 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9D2148B0269003187B8 /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -76,6 +76,8 @@
 		F7859E0A148AB63E00B1F94C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F7859E0C148AB63E00B1F94C /* PhotoforceTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoforceTests.h; sourceTree = "<group>"; };
 		F7859E0D148AB63E00B1F94C /* PhotoforceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoforceTests.m; sourceTree = "<group>"; };
+		F7899FE8149832C2001EFBE5 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		F7899FE9149832C2001EFBE5 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F7CBBE901491CD9E003EC06E /* AsyncCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncCell.h; sourceTree = "<group>"; };
 		F7CBBE911491CD9E003EC06E /* AsyncCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncCell.m; sourceTree = "<group>"; };
 		F7CBBE921491CD9E003EC06E /* FastCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastCell.h; sourceTree = "<group>"; };
@@ -105,8 +107,6 @@
 		F7CBBEC01491CE73003EC06E /* DictionaryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryHelper.m; sourceTree = "<group>"; };
 		F7CBBEC21491CEA3003EC06E /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		F7CBBEC31491CEA3003EC06E /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		F7CBBEC91492D644003EC06E /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebViewController.h; sourceTree = "<group>"; };
-		F7CBBECA1492D644003EC06E /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebViewController.m; sourceTree = "<group>"; };
 		F7EAE9CC148B0269003187B8 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		F7EAE9CD148B0269003187B8 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		F7EAE9CF148B0269003187B8 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 				F7859DF1148AB63D00B1F94C /* MainStoryboard.storyboard */,
 				F7EAE9F9148B59AC003187B8 /* HomeScreenViewController.h */,
 				F7EAE9FA148B59AC003187B8 /* HomeScreenViewController.m */,
-				F7CBBEC91492D644003EC06E /* LoginWebViewController.h */,
-				F7CBBECA1492D644003EC06E /* LoginWebViewController.m */,
+				F7899FE8149832C2001EFBE5 /* DetailViewController.h */,
+				F7899FE9149832C2001EFBE5 /* DetailViewController.m */,
 			);
 			path = Photoforce;
 			sourceTree = "<group>";
@@ -452,7 +452,7 @@
 				F7CBBEBE1491CE63003EC06E /* UIImageView+AFNetworking.m in Sources */,
 				F7CBBEC11491CE73003EC06E /* DictionaryHelper.m in Sources */,
 				F7CBBEC41491CEA3003EC06E /* JSONKit.m in Sources */,
-				F7CBBECB1492D645003EC06E /* LoginWebViewController.m in Sources */,
+				F7899FEA149832C2001EFBE5 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

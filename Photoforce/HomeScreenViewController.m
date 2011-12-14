@@ -9,7 +9,7 @@
 #import "HomeScreenViewController.h"
 #import "AppDelegate.h"
 #import "AsyncCell.h"
-#import "LoginWebViewController.h"
+#import "DetailViewController.h"
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -46,7 +46,14 @@
     photoFoceLabel.hidden = YES;
     currentAPICall = kAPIGraphFeed;
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100",@"q",nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100",@"q",nil];
+    
+    /*
+    NSString *getPictures = @"{'getPics':'SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100'";
+    NSString *getAlbumNames = @"'getAlbumNames':'SELECT name FROM album WHERE aid in (SELECT aid FROM #getPics)'}";
+    NSString *fql = [NSString stringWithFormat:@"%@,%@", getPictures, getAlbumNames];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"q", nil];
+     */
     [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
     
     self.navigationItem.rightBarButtonItem = nil;
@@ -212,6 +219,13 @@
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *url = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"src_big"];
+    DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url];
+    [self.navigationController pushViewController:dvc animated:YES];
+}
+
 
 
 

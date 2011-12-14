@@ -99,12 +99,12 @@ static UIFont* bold14 = nil;
 	if (self.image) {
         UIImage *imageToDisplay;
         imageToDisplay = self.image;
-        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(90, 80, 290, 290)];
+        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(80, 80, 290, 290)];
         CGFloat width = imageToDisplay.size.width;
         CGFloat height = imageToDisplay.size.height;
         CGRect r;
         
-        r = CGRectMake(5.0, 4.0, width, height);
+        r = CGRectMake(5.0, 5.0, width, height);
         
 		[imageToDisplay drawInRect:r];
 	}
