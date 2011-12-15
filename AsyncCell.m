@@ -69,6 +69,26 @@ static UIFont* bold14 = nil;
     [super dealloc];
 }
 
+
+- (UIImage*)imageWithImage:(UIImage*)imageToResize scaledToSize:(CGSize)size
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(size);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [imageToResize drawInRect:CGRectMake(0,0,size.width,size.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
+
 -(UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect
 {
     CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
@@ -99,7 +119,8 @@ static UIFont* bold14 = nil;
 	if (self.image) {
         UIImage *imageToDisplay;
         imageToDisplay = self.image;
-        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(80, 80, 290, 290)];
+        imageToDisplay = [self imageWithImage:imageToDisplay scaledToSize:CGSizeMake(imageToDisplay.size.width / 1.5, imageToDisplay.size.height / 1.5)];
+        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(55, 15, 290, 290)];
         CGFloat width = imageToDisplay.size.width;
         CGFloat height = imageToDisplay.size.height;
         CGRect r;
