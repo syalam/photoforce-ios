@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface DetailViewController : UIViewController {
-    IBOutlet UIImageView *fullImageView;
+@interface DetailViewController : UIViewController <UIScrollViewDelegate> {
+    UIView *view;
+    UIScrollView *scrollView;
+    UIImageView *fullImageView;
     UIImage *image;
     NSString *urlString;
 }
