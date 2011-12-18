@@ -57,17 +57,11 @@ static UIFont* bold14 = nil;
 {
 	if(self == [AsyncCell class])
 	{
-		system14 = [[UIFont systemFontOfSize:14] retain];
-		bold14 = [[UIFont boldSystemFontOfSize:14] retain];
+		system14 = [UIFont systemFontOfSize:14];
+		bold14 = [UIFont boldSystemFontOfSize:14];
 	}
 }
 
-- (void)dealloc {
-    [info release];
-    [image release];
-    
-    [super dealloc];
-}
 
 
 - (UIImage*)imageWithImage:(UIImage*)imageToResize scaledToSize:(CGSize)size
@@ -102,7 +96,7 @@ static UIFont* bold14 = nil;
 - (void) drawContentView:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
-	[[UIColor whiteColor] set];
+	[[UIColor blackColor] set];
 	CGContextFillRect(context, rect);
 	
 	//NSString* name = [info stringForKey:@"from"];

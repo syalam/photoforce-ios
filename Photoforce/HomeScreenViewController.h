@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 #import "Facebook.h"
 
 typedef enum apiCall {

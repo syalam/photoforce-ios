@@ -50,12 +50,12 @@
 {
     
     view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)];
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 415)];
+    imageScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 415)];
     self.view = view;
     fullImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
     [fullImageView setBackgroundColor:[UIColor blackColor]];
-    [self.view addSubview:scrollView];
-    [scrollView addSubview:fullImageView];
+    [self.view addSubview:imageScrollView];
+    [imageScrollView addSubview:fullImageView];
 
 }
 
@@ -66,20 +66,24 @@
 {
     [super viewDidLoad];
     
-    scrollView.minimumZoomScale = 1.0;
-    scrollView.maximumZoomScale = 6.0;
-    scrollView.contentSize=CGSizeMake(320, 416);
-    scrollView.delegate = self;
+    imageScrollView.minimumZoomScale = 1.0;
+    imageScrollView.maximumZoomScale = 6.0;
+    imageScrollView.contentSize=CGSizeMake(320, 416);
+    imageScrollView.delegate = self;
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
-    [scrollView addGestureRecognizer:doubleTap];
+    [imageScrollView addGestureRecognizer:doubleTap];
     
     NSURL* myURL = [NSURL URLWithString:urlString];
     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
     fullImageView.image = image;
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     [fullImageView setImage:fullImageView.image];
+    
+    float minimumScale = [imageScrollView frame].size.width  / [fullImageView frame].size.width;
+    [imageScrollView setMinimumZoomScale:minimumScale];
+    [imageScrollView setZoomScale:minimumScale];
 
 }
 
@@ -94,13 +98,19 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - SrollView Delegate Methods
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return fullImageView;
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
+    [imageScrollView setZoomScale:scale+0.01 animated:NO];
+    [imageScrollView setZoomScale:scale animated:NO];
 }
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
@@ -110,8 +120,8 @@
     // the zoom rect is in the content view's coordinates. 
     //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
     //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
-    zoomRect.size.height = [scrollView frame].size.height / scale;
-    zoomRect.size.width  = [scrollView frame].size.width  / scale;
+    zoomRect.size.height = [imageScrollView frame].size.height / scale;
+    zoomRect.size.width  = [imageScrollView frame].size.width  / scale;
     
     // choose an origin so as to get the right center.
     zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
@@ -122,10 +132,18 @@
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     // double tap zooms in
-    float newScale = [scrollView zoomScale] * ZOOM_STEP;
+    float newScale = [imageScrollView zoomScale] * ZOOM_STEP;
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
-    [scrollView zoomToRect:zoomRect animated:YES];
+    [imageScrollView zoomToRect:zoomRect animated:YES];
 }
 
+#pragma mark - Rotate Delegate Methods
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
+    [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
+    imageScrollView.contentSize=CGSizeMake(460, 280);
+    //fullImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [fullImageView setImage:fullImageView.image];
+}
 
 @end

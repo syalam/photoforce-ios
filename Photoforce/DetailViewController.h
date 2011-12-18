@@ -11,7 +11,7 @@
 
 @interface DetailViewController : UIViewController <UIScrollViewDelegate> {
     UIView *view;
-    UIScrollView *scrollView;
+    UIScrollView *imageScrollView;
     UIImageView *fullImageView;
     UIImage *image;
     NSString *urlString;

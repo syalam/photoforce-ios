@@ -39,6 +39,17 @@
 }
 */
 
+#pragma mark - ListViewController
+
+// This is the core method you should implement
+/*- (void)reloadTableViewDataSource {
+	_reloading = YES;
+    
+    // Here you would make an HTTP request or something like that
+    // Call [self doneLoadingTableViewData] when you are done
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+}*/
+
 - (void) displayLoggedInItems {
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -72,6 +83,10 @@
     
     imageTag = 1;
     
+    //[homeTableView setBackgroundColor:[UIColor blackColor]];
+    [homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"film_strip_gif.png"]]];
+    
+    
 
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -98,6 +113,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
 
 
 }
@@ -112,7 +128,9 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return YES;
 }
+
 
 #pragma mark - Button Clicks
 
