@@ -139,11 +139,31 @@
 
 #pragma mark - Rotate Delegate Methods
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
-    [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
-    imageScrollView.contentSize=CGSizeMake(460, 280);
-    //fullImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [fullImageView setImage:fullImageView.image];
+    if (fromInterfaceOrientation == UIInterfaceOrientationPortrait) {
+        [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
+        [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
+        imageScrollView.contentSize=CGSizeMake(460, 280);
+        [fullImageView setImage:fullImageView.image];
+    }
+    else if (fromInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+        [imageScrollView setFrame:CGRectMake(0, 0, 320, 416)];
+        [fullImageView setFrame:CGRectMake(0, 0, 320, 416)];
+        imageScrollView.contentSize=CGSizeMake(320, 416);
+        [fullImageView setImage:fullImageView.image];
+    }
+    else if (fromInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
+        [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
+        imageScrollView.contentSize=CGSizeMake(460, 280);
+        [fullImageView setImage:fullImageView.image];
+    }
+    else {
+        [imageScrollView setFrame:CGRectMake(0, 0, 320, 416)];
+        [fullImageView setFrame:CGRectMake(0, 0, 320, 416)];
+        imageScrollView.contentSize=CGSizeMake(320, 416);
+        [fullImageView setImage:fullImageView.image];
+    }
+
 }
 
 @end
