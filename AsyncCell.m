@@ -111,11 +111,21 @@ static UIFont* bold14 = nil;
         UIImage *imageToDisplay;
         imageToDisplay = self.image;
         imageToDisplay = [self imageWithImage:imageToDisplay scaledToSize:CGSizeMake(imageToDisplay.size.width / 1.5, imageToDisplay.size.height / 1.5)];
-        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 270)];
-        CGFloat width = imageToDisplay.size.width;
-        CGFloat height = imageToDisplay.size.height;
+        CGFloat width;
+        CGFloat height;
         CGRect r;
-        
+        if (imageToDisplay.size.width < 310 && imageToDisplay.size.height > 290) {
+            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(0, 20, imageToDisplay.size.width, 270)];
+
+        }
+        else if (imageToDisplay.size.width > 310 && imageToDisplay.size.height < 20) {
+            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, imageToDisplay.size.height)];
+        }
+        else {
+            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 270)];
+        }
+        width = imageToDisplay.size.width;
+        height = imageToDisplay.size.height;
         r = CGRectMake(5.0, 5.0, width, height);
         
 		[imageToDisplay drawInRect:r];
