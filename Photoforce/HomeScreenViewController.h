@@ -15,7 +15,7 @@ typedef enum apiCall {
     kAPIGraphPhotos
 }apiCall;
 
-@interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate> {
+@interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate, EGORefreshTableHeaderDelegate> {
     IBOutlet UITableView *homeTableView;
     IBOutlet UILabel *photoFoceLabel;
     int currentAPICall;
@@ -23,6 +23,9 @@ typedef enum apiCall {
     NSMutableArray *facebookPhotosData;
     NSArray *permissions;
     NSUInteger imageTag;
+    
+    EGORefreshTableHeaderView *_refreshHeaderView;
+    BOOL _reloading;
 }
 @property(nonatomic,retain) Facebook *facebook;
 

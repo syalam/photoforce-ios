@@ -8,7 +8,7 @@
 
 #import "DetailViewController.h"
 
-#define ZOOM_STEP 1.5
+#define ZOOM_STEP 2.0
 
 @implementation DetailViewController
 
@@ -50,7 +50,7 @@
 {
     
     view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)];
-    imageScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 415)];
+    imageScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
     self.view = view;
     fullImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
     [fullImageView setBackgroundColor:[UIColor blackColor]];
@@ -65,6 +65,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    tapCount = 0;
     
     imageScrollView.minimumZoomScale = 1.0;
     imageScrollView.maximumZoomScale = 6.0;
@@ -131,8 +133,16 @@
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
-    // double tap zooms in
-    float newScale = [imageScrollView zoomScale] * ZOOM_STEP;
+    float newScale;
+    if (tapCount > 0) {
+        newScale = [imageScrollView zoomScale] / ZOOM_STEP;
+        tapCount = 0;
+    }
+    else {
+        // double tap zooms in
+        newScale = [imageScrollView zoomScale] * ZOOM_STEP;
+        tapCount ++;
+    }
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
     [imageScrollView zoomToRect:zoomRect animated:YES];
 }
@@ -143,25 +153,21 @@
         [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
         [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
         imageScrollView.contentSize=CGSizeMake(460, 280);
-        [fullImageView setImage:fullImageView.image];
     }
     else if (fromInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         [imageScrollView setFrame:CGRectMake(0, 0, 320, 416)];
         [fullImageView setFrame:CGRectMake(0, 0, 320, 416)];
         imageScrollView.contentSize=CGSizeMake(320, 416);
-        [fullImageView setImage:fullImageView.image];
     }
     else if (fromInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
         [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
         imageScrollView.contentSize=CGSizeMake(460, 280);
-        [fullImageView setImage:fullImageView.image];
     }
     else {
         [imageScrollView setFrame:CGRectMake(0, 0, 320, 416)];
         [fullImageView setFrame:CGRectMake(0, 0, 320, 416)];
         imageScrollView.contentSize=CGSizeMake(320, 416);
-        [fullImageView setImage:fullImageView.image];
     }
 
 }

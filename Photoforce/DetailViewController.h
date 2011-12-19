@@ -15,6 +15,7 @@
     UIImageView *fullImageView;
     UIImage *image;
     NSString *urlString;
+    NSUInteger *tapCount;
 }
 
 - (id)initWithTitle:(NSString *)title URL:(NSString *)picURL;

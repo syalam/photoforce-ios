@@ -99,14 +99,11 @@ static UIFont* bold14 = nil;
 	[[UIColor blackColor] set];
 	CGContextFillRect(context, rect);
 	
-	//NSString* name = [info stringForKey:@"from"];
-    NSString *name = [[info objectForKey:@"from"]objectForKey:@"name"];
+    NSString* created = [NSString stringWithFormat:@"%@",[info objectForKey:@"created"]];
 	NSString* text = [info stringForKey:@"text"];
 	
 	CGFloat widthr = self.frame.size.width - 70;
-	
-	[[UIColor blackColor] set];
-	[name drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:bold14 lineBreakMode:UILineBreakModeTailTruncation];
+
 	[[UIColor grayColor] set];
 	[text drawInRect:CGRectMake(63.0, 25.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];
 	
@@ -122,6 +119,9 @@ static UIFont* bold14 = nil;
         r = CGRectMake(5.0, 5.0, width, height);
         
 		[imageToDisplay drawInRect:r];
+        
+        [[UIColor whiteColor] set];
+        [created drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];
 	}
 }
 

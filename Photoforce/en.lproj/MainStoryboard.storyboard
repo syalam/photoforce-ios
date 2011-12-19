@@ -44,7 +44,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Photoforce" id="Gxo-0u-hyW"/>
                     <connections>
-                        <outlet property="homeTableView" destination="cqf-6e-dsT" id="JGH-PR-ECG"/>
+                        <outlet property="homeTableView" destination="cqf-6e-dsT" id="5GY-Oc-zw6"/>
                         <outlet property="photoFoceLabel" destination="MlL-6P-dr6" id="CRi-0q-uwh"/>
                     </connections>
                 </viewController>
@@ -53,11 +53,17 @@
         </scene>
     </scenes>
     <classes>
-        <class className="HomeScreenViewController" superclassName="UIViewController">
+        <class className="HomeScreenViewController" superclassName="ListViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeScreenViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="homeTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="photoFoceLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
             </relationships>
         </class>
     </classes>

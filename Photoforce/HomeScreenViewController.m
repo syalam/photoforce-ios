@@ -39,17 +39,6 @@
 }
 */
 
-#pragma mark - ListViewController
-
-// This is the core method you should implement
-/*- (void)reloadTableViewDataSource {
-	_reloading = YES;
-    
-    // Here you would make an HTTP request or something like that
-    // Call [self doneLoadingTableViewData] when you are done
-    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
-}*/
-
 - (void) displayLoggedInItems {
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -57,7 +46,7 @@
     photoFoceLabel.hidden = YES;
     currentAPICall = kAPIGraphFeed;
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100",@"q",nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = me() or owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100",@"q",nil];
     
     /*
     NSString *getPictures = @"{'getPics':'SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100'";
@@ -77,6 +66,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (_refreshHeaderView == nil) {
+		
+		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height, self.view.frame.size.width, homeTableView.bounds.size.height)];
+		refreshView.delegate = self;
+        refreshView.backgroundColor = [UIColor blackColor];
+		[homeTableView addSubview:refreshView];
+		_refreshHeaderView = refreshView;
+    }
+    [_refreshHeaderView refreshLastUpdatedDate];
     
     homeTableView.dataSource = self;
     homeTableView.delegate = self;
@@ -183,6 +182,7 @@
         facebookPhotosData = [result objectForKey:@"data"];
     }
     [homeTableView reloadData];
+    
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
@@ -242,6 +242,57 @@
     NSString *url = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"src_big"];
     DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url];
     [self.navigationController pushViewController:dvc animated:YES];
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)doneLoadingTableViewData {
+	//  model should call this when its done loading
+	_reloading = NO;
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:homeTableView];
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+// This is the core method you should implement
+- (void)reloadTableViewDataSource {
+	_reloading = YES;
+    
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = me() or owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100",@"q",nil];
+    [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
+    
+    // Here you would make an HTTP request or something like that
+    // Call [self doneLoadingTableViewData] when you are done
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+}
+
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+	[self reloadTableViewDataSource];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
+	return _reloading; // should return if data source model is reloading
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view {
+	return [NSDate date]; // should return date data source was last changed
 }
 
 
