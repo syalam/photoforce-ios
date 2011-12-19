@@ -99,7 +99,7 @@ static UIFont* bold14 = nil;
 	[[UIColor blackColor] set];
 	CGContextFillRect(context, rect);
 	
-    NSString* created = [NSString stringWithFormat:@"%@",[info objectForKey:@"created"]];
+    //NSString* created = [NSString stringWithFormat:@"%@",[info objectForKey:@"created"]];
 	NSString* text = [info stringForKey:@"text"];
 	
 	CGFloat widthr = self.frame.size.width - 70;
@@ -111,7 +111,7 @@ static UIFont* bold14 = nil;
         UIImage *imageToDisplay;
         imageToDisplay = self.image;
         imageToDisplay = [self imageWithImage:imageToDisplay scaledToSize:CGSizeMake(imageToDisplay.size.width / 1.5, imageToDisplay.size.height / 1.5)];
-        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(55, 15, 290, 290)];
+        imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 270)];
         CGFloat width = imageToDisplay.size.width;
         CGFloat height = imageToDisplay.size.height;
         CGRect r;
@@ -120,8 +120,8 @@ static UIFont* bold14 = nil;
         
 		[imageToDisplay drawInRect:r];
         
-        [[UIColor whiteColor] set];
-        [created drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];
+        /*[[UIColor whiteColor] set];
+        [created drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];*/
 	}
 }
 
