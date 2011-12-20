@@ -10,14 +10,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface DetailViewController : UIViewController <UIScrollViewDelegate> {
-    UIView *view;
-    UIScrollView *imageScrollView;
-    UIImageView *fullImageView;
+    IBOutlet UIScrollView *imageScrollView;
+    IBOutlet UIImageView *fullImageView;
+    IBOutlet UITextView *captionTextView;
     UIImage *image;
-    UITextView *captionTextView;
     NSString *urlString;
     NSString *detailCaption;
-    NSUInteger *tapCount;
+    BOOL zoomed;
+    NSUInteger *captionTapCount;
 }
 
 - (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption;

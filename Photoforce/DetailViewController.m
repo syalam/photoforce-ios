@@ -15,13 +15,13 @@
 
 
 /*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}*/
+ {
+ self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+ if (self) {
+ // Custom initialization
+ }
+ return self;
+ }*/
 
 - (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption
 {
@@ -45,14 +45,11 @@
 
 #pragma mark - View lifecycle
 
-
+/*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    
-    view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)];
     imageScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
-    self.view = view;
     fullImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
     [fullImageView setBackgroundColor:[UIColor blackColor]];
     captionTextView = [[UITextView alloc]initWithFrame:CGRectMake(120, imageScrollView.frame.size.height - 60, 290, 25)];
@@ -62,22 +59,25 @@
     [self.view addSubview:imageScrollView];
     [imageScrollView addSubview:fullImageView];
     [imageScrollView addSubview:captionTextView];
-
+    
 }
-
+*/
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    tapCount = 0;
+    captionTapCount = 0;
     
     imageScrollView.minimumZoomScale = 1.0;
     imageScrollView.maximumZoomScale = 6.0;
     imageScrollView.contentSize=CGSizeMake(320, 416);
     imageScrollView.delegate = self;
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    [singleTap setNumberOfTapsRequired:1];
+    [imageScrollView addGestureRecognizer:singleTap];
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
@@ -85,6 +85,7 @@
     
     NSURL* myURL = [NSURL URLWithString:urlString];
     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
+    [fullImageView setBackgroundColor:[UIColor blackColor]];
     fullImageView.image = image;
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     [fullImageView setImage:fullImageView.image];
@@ -94,7 +95,7 @@
     float minimumScale = [imageScrollView frame].size.width  / [fullImageView frame].size.width;
     [imageScrollView setMinimumZoomScale:minimumScale];
     [imageScrollView setZoomScale:minimumScale];
-
+    
 }
 
 
@@ -115,6 +116,7 @@
 #pragma mark - SrollView Delegate Methods
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    captionTextView.hidden = YES;
     return fullImageView;
 }
 
@@ -140,16 +142,28 @@
     return zoomRect;
 }
 
+- (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer {
+    if (captionTapCount > 0 && !zoomed) {
+        captionTextView.hidden = NO;
+        captionTapCount = 0;
+    }
+    else {
+        captionTextView.hidden = YES;
+        captionTapCount ++;
+    }
+}
+
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     float newScale;
-    if (tapCount > 0) {
+    if (zoomed) {
         newScale = [imageScrollView zoomScale] / ZOOM_STEP;
-        tapCount = 0;
+        zoomed = NO;;
     }
     else {
         // double tap zooms in
         newScale = [imageScrollView zoomScale] * ZOOM_STEP;
-        tapCount ++;
+        captionTextView.hidden = YES;
+        zoomed = YES;
     }
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
     [imageScrollView zoomToRect:zoomRect animated:YES];
@@ -177,7 +191,7 @@
         [fullImageView setFrame:CGRectMake(0, 0, 320, 416)];
         imageScrollView.contentSize=CGSizeMake(320, 416);
     }
-
+    
 }
 
 @end
