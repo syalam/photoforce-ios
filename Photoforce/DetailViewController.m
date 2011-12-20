@@ -23,11 +23,12 @@
     return self;
 }*/
 
-- (id)initWithTitle:(NSString *)title URL:(NSString *)URL
+- (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption
 {
     self = [super init];
     self.title = title;
-    urlString = URL;
+    urlString = url;
+    detailCaption = caption;
     return self;
 }
 
@@ -54,8 +55,13 @@
     self.view = view;
     fullImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
     [fullImageView setBackgroundColor:[UIColor blackColor]];
+    captionTextView = [[UITextView alloc]initWithFrame:CGRectMake(120, imageScrollView.frame.size.height - 60, 290, 25)];
+    [captionTextView setFont:[UIFont boldSystemFontOfSize:15]];
+    [captionTextView setTextColor:[UIColor whiteColor]];
+    [captionTextView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:imageScrollView];
     [imageScrollView addSubview:fullImageView];
+    [imageScrollView addSubview:captionTextView];
 
 }
 
@@ -82,6 +88,8 @@
     fullImageView.image = image;
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     [fullImageView setImage:fullImageView.image];
+    
+    captionTextView.text = detailCaption;
     
     float minimumScale = [imageScrollView frame].size.width  / [fullImageView frame].size.width;
     [imageScrollView setMinimumZoomScale:minimumScale];

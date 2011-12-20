@@ -99,7 +99,7 @@ static UIFont* bold14 = nil;
 	[[UIColor blackColor] set];
 	CGContextFillRect(context, rect);
 	
-    //NSString* created = [NSString stringWithFormat:@"%@",[info objectForKey:@"created"]];
+    //NSString* caption = [NSString stringWithFormat:@"%@",[info objectForKey:@"caption"]];
 	NSString* text = [info stringForKey:@"text"];
 	
 	CGFloat widthr = self.frame.size.width - 70;
@@ -130,8 +130,8 @@ static UIFont* bold14 = nil;
         
 		[imageToDisplay drawInRect:r];
         
-        /*[[UIColor whiteColor] set];
-        [created drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];*/
+        //[[UIColor whiteColor] set];
+        //[caption drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];
 	}
 }
 

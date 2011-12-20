@@ -14,11 +14,13 @@
     UIScrollView *imageScrollView;
     UIImageView *fullImageView;
     UIImage *image;
+    UITextView *captionTextView;
     NSString *urlString;
+    NSString *detailCaption;
     NSUInteger *tapCount;
 }
 
-- (id)initWithTitle:(NSString *)title URL:(NSString *)picURL;
+- (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption;
 
 
 @end
