@@ -76,11 +76,13 @@
     imageScrollView.delegate = self;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    [singleTap setNumberOfTapsRequired:1];
+    //[singleTap setNumberOfTapsRequired:1];
+    [singleTap setNumberOfTouchesRequired:1];
     [imageScrollView addGestureRecognizer:singleTap];
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
+    //[doubleTap setNumberOfTouchesRequired:2];
     [imageScrollView addGestureRecognizer:doubleTap];
     
     NSURL* myURL = [NSURL URLWithString:urlString];
@@ -90,7 +92,7 @@
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     [fullImageView setImage:fullImageView.image];
     
-    captionTextView.text = detailCaption;
+    //captionTextView.text = detailCaption;
     
     float minimumScale = [imageScrollView frame].size.width  / [fullImageView frame].size.width;
     [imageScrollView setMinimumZoomScale:minimumScale];
@@ -143,14 +145,24 @@
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer {
-    if (captionTapCount > 0 && !zoomed) {
+    if (!tapped) {
+        [self.navigationController setNavigationBarHidden:YES];
+        tapped = YES;
+    }
+    else {
+        [self.navigationController setNavigationBarHidden:NO];
+        tapped = NO;
+    }
+    
+    
+    /*if (captionTapCount > 0 && !zoomed) {
         captionTextView.hidden = NO;
         captionTapCount = 0;
     }
     else {
         captionTextView.hidden = YES;
         captionTapCount ++;
-    }
+    }*/
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
@@ -172,23 +184,23 @@
 #pragma mark - Rotate Delegate Methods
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     if (fromInterfaceOrientation == UIInterfaceOrientationPortrait) {
-        [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
-        [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
-        imageScrollView.contentSize=CGSizeMake(460, 280);
+        [imageScrollView setFrame:CGRectMake(0, 0, 460, 320)];
+        [fullImageView setFrame:CGRectMake(0, 0, 460, 320)];
+        imageScrollView.contentSize=CGSizeMake(460, 320);
     }
     else if (fromInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        [imageScrollView setFrame:CGRectMake(0, 0, 320, 416)];
-        [fullImageView setFrame:CGRectMake(0, 0, 320, 416)];
-        imageScrollView.contentSize=CGSizeMake(320, 416);
+        [imageScrollView setFrame:CGRectMake(0, 0, 320, 460)];
+        [fullImageView setFrame:CGRectMake(0, 0, 320, 460)];
+        imageScrollView.contentSize=CGSizeMake(320, 460);
     }
     else if (fromInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        [imageScrollView setFrame:CGRectMake(0, 0, 460, 280)];
-        [fullImageView setFrame:CGRectMake(0, 0, 460, 280)];
-        imageScrollView.contentSize=CGSizeMake(460, 280);
+        [imageScrollView setFrame:CGRectMake(0, 0, 460, 320)];
+        [fullImageView setFrame:CGRectMake(0, 0, 460, 320)];
+        imageScrollView.contentSize=CGSizeMake(460, 320);
     }
     else {
-        [imageScrollView setFrame:CGRectMake(0, 0, 320, 416)];
-        [fullImageView setFrame:CGRectMake(0, 0, 320, 416)];
+        [imageScrollView setFrame:CGRectMake(0, 0, 320, 460)];
+        [fullImageView setFrame:CGRectMake(0, 0, 320, 460)];
         imageScrollView.contentSize=CGSizeMake(320, 416);
     }
     

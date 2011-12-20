@@ -99,7 +99,7 @@ static UIFont* bold14 = nil;
 	[[UIColor blackColor] set];
 	CGContextFillRect(context, rect);
 	
-    //NSString* caption = [NSString stringWithFormat:@"%@",[info objectForKey:@"caption"]];
+    NSString* caption = [NSString stringWithFormat:@"%@",[info objectForKey:@"caption"]];
 	NSString* text = [info stringForKey:@"text"];
 	
 	CGFloat widthr = self.frame.size.width - 70;
@@ -122,7 +122,12 @@ static UIFont* bold14 = nil;
             imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, imageToDisplay.size.height)];
         }
         else {
+            if (![caption isEqualToString:@""]) {
+                imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 230)];
+            }
+            else {
             imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 270)];
+            }
         }
         width = imageToDisplay.size.width;
         height = imageToDisplay.size.height;
@@ -130,9 +135,9 @@ static UIFont* bold14 = nil;
         
 		[imageToDisplay drawInRect:r];
         
-        //[[UIColor whiteColor] set];
-        //[caption drawInRect:CGRectMake(10.0, 5.0, widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeTailTruncation];
-	}
+        [[UIColor whiteColor] set];
+        [caption drawInRect:CGRectMake(10.0, height + 20 , widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+    }
 }
 
 - (void) updateCellInfo:(NSDictionary*)_info {

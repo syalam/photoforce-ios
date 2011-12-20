@@ -17,6 +17,7 @@
     NSString *urlString;
     NSString *detailCaption;
     BOOL zoomed;
+    BOOL tapped;
     NSUInteger *captionTapCount;
 }
 
