@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */; };
+		8C1F673214A7E4C000B475D8 /* FlurryAnalytics.h in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */; };
 		F714E14514A0611700E24956 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F714E14314A0611700E24956 /* DetailViewController.m */; };
 		F714E14614A0611700E24956 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F714E14414A0611700E24956 /* DetailViewController.xib */; };
 		F731E167149DBE4500F2DB5C /* film_strip_gif.png in Resources */ = {isa = PBXBuildFile; fileRef = F731E166149DBE4500F2DB5C /* film_strip_gif.png */; };
@@ -70,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
+		8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		F714E14214A0611700E24956 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F714E14314A0611700E24956 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F714E14414A0611700E24956 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				F7859DE0148AB63D00B1F94C /* UIKit.framework in Frameworks */,
 				F7859DE2148AB63D00B1F94C /* Foundation.framework in Frameworks */,
 				F7859DE4148AB63D00B1F94C /* CoreGraphics.framework in Frameworks */,
+				8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +188,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C1F672514A7E43D00B475D8 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */,
+				8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */,
+			);
+			name = Flurry;
+			sourceTree = "<group>";
+		};
 		F731E164149DBE2100F2DB5C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +320,7 @@
 		F7CBBE891491CD12003EC06E /* Boilerplate Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8C1F672514A7E43D00B475D8 /* Flurry */,
 				F731E187149DCF2800F2DB5C /* Pull To Refresh */,
 				F731E16D149DC73700F2DB5C /* Async Cells */,
 				F7CBBE9F1491CE63003EC06E /* AFNetworking */,
@@ -525,6 +540,7 @@
 				F731E191149DD09400F2DB5C /* EGORefreshTableHeaderView.m in Sources */,
 				F731E192149DD09400F2DB5C /* ListViewController.m in Sources */,
 				F714E14514A0611700E24956 /* DetailViewController.m in Sources */,
+				8C1F673214A7E4C000B475D8 /* FlurryAnalytics.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +643,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
 				INFOPLIST_FILE = "Photoforce/Photoforce-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -638,6 +658,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
 				INFOPLIST_FILE = "Photoforce/Photoforce-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

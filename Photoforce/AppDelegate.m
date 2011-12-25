@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import "HomeScreenViewController.h"
+#import "FlurryAnalytics.h"
 
 static NSString* kAppId = @"266617523389474";
+static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
 
 @implementation AppDelegate
 
@@ -19,7 +21,9 @@ static NSString* kAppId = @"266617523389474";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    
+    [FlurryAnalytics startSession:flurryID];
+    
     HomeScreenViewController *hsvc = [[HomeScreenViewController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
     facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:hsvc];
     

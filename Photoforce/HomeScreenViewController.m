@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "AsyncCell.h"
 #import "DetailViewController.h"
+#import "FlurryAnalytics.h"
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -67,6 +68,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [FlurryAnalytics logAllPageViews:self.navigationController];
     
     if (_refreshHeaderView == nil) {
 		
