@@ -86,8 +86,8 @@
     
     imageTag = 1;
     
-    //[homeTableView setBackgroundColor:[UIColor blackColor]];
-    [homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"film_strip_gif.png"]]];
+    [homeTableView setBackgroundColor:[UIColor blackColor]];
+    //[homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"film_strip_gif.png"]]];
     
     
 
