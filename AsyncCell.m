@@ -95,8 +95,7 @@ static UIFont* bold14 = nil;
 
 - (void) drawContentView:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	
-	[[UIColor blackColor] set];
+	[[UIColor whiteColor] set];
 	CGContextFillRect(context, rect);
 	
     NSString* caption = [NSString stringWithFormat:@"%@",[info objectForKey:@"caption"]];
@@ -135,7 +134,7 @@ static UIFont* bold14 = nil;
         
 		[imageToDisplay drawInRect:r];
         
-        [[UIColor whiteColor] set];
+        [[UIColor blackColor] set];
         [caption drawInRect:CGRectMake(10.0, height + 20 , widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
     }
 }
