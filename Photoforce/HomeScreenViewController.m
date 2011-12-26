@@ -95,6 +95,7 @@
     
     //[homeTableView setBackgroundColor:[UIColor blackColor]];
     [homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone-linen"]]];
     
     
 
