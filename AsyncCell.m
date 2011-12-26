@@ -119,19 +119,15 @@ static UIFont* bold14 = nil;
         CGFloat height;
         CGRect r;
         if (imageToDisplay.size.width < 310 && imageToDisplay.size.height > 290) {
-            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(0, 20, imageToDisplay.size.width, 270)];
+            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(0, 20, imageToDisplay.size.width, 250)];
 
         }
         else if (imageToDisplay.size.width > 310 && imageToDisplay.size.height < 20) {
-            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, imageToDisplay.size.height)];
+            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
         }
         else {
-            if (![caption isEqualToString:@""]) {
-                imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 230)];
-            }
-            else {
-            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 270)];
-            }
+            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
+
         }
         
         width = imageToDisplay.size.width;
@@ -167,7 +163,7 @@ static UIFont* bold14 = nil;
         [self bezierPathWithCurvedShadowForRect:layer.bounds];*/
         
         [[UIColor blackColor] set];
-        [caption drawInRect:CGRectMake(10.0, height + 20 , widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+        [caption drawInRect:CGRectMake(0, 270 , 298, 20.0) withFont:system14 lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
     }
 }
 

@@ -27,7 +27,7 @@
 #import "EGORefreshTableHeaderView.h"
 
 
-#define TEXT_COLOR	 [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
+#define TEXT_COLOR	 [UIColor whiteColor] //[UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
 #define FLIP_ANIMATION_DURATION 0.18f
 
 
@@ -49,10 +49,10 @@
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)];
 		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		label.font = [UIFont systemFontOfSize:12.0f];
-        //label.textColor = [UIColor whiteColor];
+        label.textColor = [UIColor whiteColor];
 		label.textColor = TEXT_COLOR;
-		//label.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
-		//label.shadowOffset = CGSizeMake(0.0f, 1.0f);
+		label.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+		label.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		label.backgroundColor = [UIColor clearColor];
 		label.textAlignment = UITextAlignmentCenter;
 		[self addSubview:label];
@@ -62,10 +62,10 @@
 		label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)];
 		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		label.font = [UIFont boldSystemFontOfSize:13.0f];
-        //label.textColor = [UIColor whiteColor];
+        label.textColor = [UIColor whiteColor];
 		label.textColor = TEXT_COLOR;
-		//label.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
-		//label.shadowOffset = CGSizeMake(0.0f, 1.0f);
+		label.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+		label.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		label.backgroundColor = [UIColor clearColor];
 		label.textAlignment = UITextAlignmentCenter;
 		[self addSubview:label];
@@ -114,7 +114,7 @@
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		[formatter setAMSymbol:@"AM"];
 		[formatter setPMSymbol:@"PM"];
-		[formatter setDateFormat:@"MM/dd/yyyy hh:mm:a"];
+		[formatter setDateFormat:@"MM/dd/yyyy hh:mm a"];
 		_lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:date]];
 		[[NSUserDefaults standardUserDefaults] setObject:_lastUpdatedLabel.text forKey:@"EGORefreshTableView_LastRefresh"];
 		[[NSUserDefaults standardUserDefaults] synchronize];

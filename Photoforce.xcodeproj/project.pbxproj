@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */; };
-		8C1F673214A7E4C000B475D8 /* FlurryAnalytics.h in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */; };
-		8C1F673914A7EAC700B475D8 /* JBKenBurnsView.h in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */; };
 		8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */; };
 		8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673D14A7EC8D00B475D8 /* image1.jpeg */; };
 		8C1F674314A7EC8D00B475D8 /* image2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673E14A7EC8D00B475D8 /* image2.jpeg */; };
@@ -591,8 +589,6 @@
 				F731E191149DD09400F2DB5C /* EGORefreshTableHeaderView.m in Sources */,
 				F731E192149DD09400F2DB5C /* ListViewController.m in Sources */,
 				F714E14514A0611700E24956 /* DetailViewController.m in Sources */,
-				8C1F673214A7E4C000B475D8 /* FlurryAnalytics.h in Sources */,
-				8C1F673914A7EAC700B475D8 /* JBKenBurnsView.h in Sources */,
 				8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
