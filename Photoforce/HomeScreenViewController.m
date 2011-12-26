@@ -11,6 +11,7 @@
 #import "AsyncCell.h"
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
+#import "JBKenBurnsView.h"
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -103,7 +104,7 @@
     }
     else {
         homeTableView.hidden = YES;
-        
+        [self setupKenBurnsView];
         self.navigationItem.rightBarButtonItem = nil;
         
         UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
@@ -113,6 +114,25 @@
 }
 
 
+-(void)setupKenBurnsView
+{
+    kenView = [[KenBurnsView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    kenView.layer.borderWidth = 1;
+    kenView.layer.borderColor = [UIColor blackColor].CGColor;  
+    [self.view addSubview:kenView];
+    
+    NSArray *myImages = [NSArray arrayWithObjects:
+                         [UIImage imageNamed:@"image1.jpeg"],
+                         [UIImage imageNamed:@"image2.jpeg"],
+                         [UIImage imageNamed:@"image3.jpeg"],
+                         [UIImage imageNamed:@"image4.png"],
+                         [UIImage imageNamed:@"image5.png"], nil];
+    
+    [kenView animateWithImages:myImages 
+                 transitionDuration:15
+                               loop:YES 
+                        isLandscape:YES];
+}
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -172,6 +192,7 @@
     [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
     homeTableView.hidden = NO;
+    [kenView removeFromSuperview];
     [self displayLoggedInItems];
 }
 
@@ -208,6 +229,8 @@
         
         UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
         self.navigationItem.rightBarButtonItem = loginButton;
+        
+        [self setupKenBurnsView];
     }
 }
 

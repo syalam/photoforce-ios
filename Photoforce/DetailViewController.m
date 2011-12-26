@@ -146,11 +146,11 @@
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer {
     if (!tapped) {
-        [self.navigationController setNavigationBarHidden:YES];
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
         tapped = YES;
     }
     else {
-        [self.navigationController setNavigationBarHidden:NO];
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
         tapped = NO;
     }
     

@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */; };
 		8C1F673214A7E4C000B475D8 /* FlurryAnalytics.h in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */; };
+		8C1F673914A7EAC700B475D8 /* JBKenBurnsView.h in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */; };
+		8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */; };
+		8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673D14A7EC8D00B475D8 /* image1.jpeg */; };
+		8C1F674314A7EC8D00B475D8 /* image2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673E14A7EC8D00B475D8 /* image2.jpeg */; };
+		8C1F674414A7EC8D00B475D8 /* image3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673F14A7EC8D00B475D8 /* image3.jpeg */; };
+		8C1F674514A7EC8D00B475D8 /* image4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F674014A7EC8D00B475D8 /* image4.png */; };
+		8C1F674614A7EC8D00B475D8 /* image5.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F674114A7EC8D00B475D8 /* image5.png */; };
 		F714E14514A0611700E24956 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F714E14314A0611700E24956 /* DetailViewController.m */; };
 		F714E14614A0611700E24956 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F714E14414A0611700E24956 /* DetailViewController.xib */; };
 		F731E167149DBE4500F2DB5C /* film_strip_gif.png in Resources */ = {isa = PBXBuildFile; fileRef = F731E166149DBE4500F2DB5C /* film_strip_gif.png */; };
@@ -74,6 +81,13 @@
 /* Begin PBXFileReference section */
 		8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
+		8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
+		8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBKenBurnsView.m; sourceTree = "<group>"; };
+		8C1F673D14A7EC8D00B475D8 /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
+		8C1F673E14A7EC8D00B475D8 /* image2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpeg; sourceTree = "<group>"; };
+		8C1F673F14A7EC8D00B475D8 /* image3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3.jpeg; sourceTree = "<group>"; };
+		8C1F674014A7EC8D00B475D8 /* image4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.png; sourceTree = "<group>"; };
+		8C1F674114A7EC8D00B475D8 /* image5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image5.png; sourceTree = "<group>"; };
 		F714E14214A0611700E24956 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F714E14314A0611700E24956 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F714E14414A0611700E24956 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -195,11 +209,40 @@
 				8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */,
 			);
 			name = Flurry;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8C1F673B14A7EACA00B475D8 /* KenBurnsView */ = {
+			isa = PBXGroup;
+			children = (
+				8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */,
+				8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */,
+			);
+			name = KenBurnsView;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8C1F673C14A7EAE100B475D8 /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8C1F673B14A7EACA00B475D8 /* KenBurnsView */,
+				F7EAE9C8148B0269003187B8 /* Facebook SDK */,
+				8C1F672514A7E43D00B475D8 /* Flurry */,
+				F731E187149DCF2800F2DB5C /* Pull To Refresh */,
+				F731E16D149DC73700F2DB5C /* Async Cells */,
+				F7CBBE9F1491CE63003EC06E /* AFNetworking */,
+			);
+			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
 		F731E164149DBE2100F2DB5C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C1F673D14A7EC8D00B475D8 /* image1.jpeg */,
+				8C1F673E14A7EC8D00B475D8 /* image2.jpeg */,
+				8C1F673F14A7EC8D00B475D8 /* image3.jpeg */,
+				8C1F674014A7EC8D00B475D8 /* image4.png */,
+				8C1F674114A7EC8D00B475D8 /* image5.png */,
 				F731E193149DD16100F2DB5C /* blackArrow.png */,
 				F731E194149DD16100F2DB5C /* blackArrow@2x.png */,
 				F731E195149DD16100F2DB5C /* blueArrow.png */,
@@ -224,6 +267,7 @@
 				F7CBBE931491CD9E003EC06E /* FastCell.m */,
 			);
 			name = "Async Cells";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F731E187149DCF2800F2DB5C /* Pull To Refresh */ = {
@@ -235,13 +279,12 @@
 				F731E190149DD09400F2DB5C /* ListViewController.m */,
 			);
 			name = "Pull To Refresh";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F7859DD0148AB63D00B1F94C = {
 			isa = PBXGroup;
 			children = (
-				F7CBBE891491CD12003EC06E /* Boilerplate Classes */,
-				F7EAE9C8148B0269003187B8 /* Facebook SDK */,
 				F7859DE5148AB63D00B1F94C /* Photoforce */,
 				F7859E06148AB63E00B1F94C /* PhotoforceTests */,
 				F731E164149DBE2100F2DB5C /* Resources */,
@@ -274,6 +317,7 @@
 		F7859DE5148AB63D00B1F94C /* Photoforce */ = {
 			isa = PBXGroup;
 			children = (
+				8C1F673C14A7EAE100B475D8 /* Helper Classes */,
 				F7859DE6148AB63D00B1F94C /* Supporting Files */,
 				F7859DEE148AB63D00B1F94C /* AppDelegate.h */,
 				F7859DEF148AB63D00B1F94C /* AppDelegate.m */,
@@ -317,17 +361,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F7CBBE891491CD12003EC06E /* Boilerplate Classes */ = {
-			isa = PBXGroup;
-			children = (
-				8C1F672514A7E43D00B475D8 /* Flurry */,
-				F731E187149DCF2800F2DB5C /* Pull To Refresh */,
-				F731E16D149DC73700F2DB5C /* Async Cells */,
-				F7CBBE9F1491CE63003EC06E /* AFNetworking */,
-			);
-			name = "Boilerplate Classes";
-			sourceTree = "<group>";
-		};
 		F7CBBE9F1491CE63003EC06E /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,7 +386,8 @@
 				F7CBBEB31491CE63003EC06E /* UIImageView+AFNetworking.h */,
 				F7CBBEB41491CE63003EC06E /* UIImageView+AFNetworking.m */,
 			);
-			path = AFNetworking;
+			name = AFNetworking;
+			path = ../AFNetworking;
 			sourceTree = "<group>";
 		};
 		F7EAE9C8148B0269003187B8 /* Facebook SDK */ = {
@@ -372,7 +406,7 @@
 				F7EAE9D7148B0269003187B8 /* JSON */,
 			);
 			name = "Facebook SDK";
-			path = Photoforce/src;
+			path = src;
 			sourceTree = "<group>";
 		};
 		F7EAE9D7148B0269003187B8 /* JSON */ = {
@@ -476,6 +510,11 @@
 				F731E19D149DD16100F2DB5C /* grayArrow.png in Resources */,
 				F731E19E149DD16100F2DB5C /* grayArrow@2x.png in Resources */,
 				F714E14614A0611700E24956 /* DetailViewController.xib in Resources */,
+				8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */,
+				8C1F674314A7EC8D00B475D8 /* image2.jpeg in Resources */,
+				8C1F674414A7EC8D00B475D8 /* image3.jpeg in Resources */,
+				8C1F674514A7EC8D00B475D8 /* image4.png in Resources */,
+				8C1F674614A7EC8D00B475D8 /* image5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +580,8 @@
 				F731E192149DD09400F2DB5C /* ListViewController.m in Sources */,
 				F714E14514A0611700E24956 /* DetailViewController.m in Sources */,
 				8C1F673214A7E4C000B475D8 /* FlurryAnalytics.h in Sources */,
+				8C1F673914A7EAC700B475D8 /* JBKenBurnsView.h in Sources */,
+				8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

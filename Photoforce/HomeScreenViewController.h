@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ListViewController.h"
 #import "Facebook.h"
+#import "JBKenBurnsView.h"
 
 typedef enum apiCall {
     kAPIGraphFeed,
@@ -23,12 +24,13 @@ typedef enum apiCall {
     NSMutableArray *facebookPhotosData;
     NSArray *permissions;
     NSUInteger imageTag;
+    KenBurnsView *kenView;
     
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
 }
 @property(nonatomic,retain) Facebook *facebook;
 
-//- (IBAction)loginButtonClicked:(id)sender;
+-(void)setupKenBurnsView;
 
 @end
