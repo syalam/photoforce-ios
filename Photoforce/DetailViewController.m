@@ -78,7 +78,8 @@
     imageScrollView.contentSize=CGSizeMake(320, 416);
     imageScrollView.delegate = self;
     
-    [imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    //[imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    [imageScrollView setBackgroundColor:[UIColor clearColor]];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     //[singleTap setNumberOfTapsRequired:1];
@@ -97,8 +98,8 @@
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     [fullImageView setImage:fullImageView.image];
     
-    captionTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]];
-    captionTextView.text = detailCaption;
+    //captionTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]];
+    //captionTextView.text = detailCaption;
     
     float minimumScale = [imageScrollView frame].size.width  / [fullImageView frame].size.width;
     [imageScrollView setMinimumZoomScale:minimumScale];
@@ -189,12 +190,12 @@
 
 #pragma mark - Rotate Delegate Methods
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    if (fromInterfaceOrientation == UIInterfaceOrientationPortrait) {
-        [imageScrollView setFrame:CGRectMake(0, 0, 460, 320)];
-        [fullImageView setFrame:CGRectMake(0, 0, 460, 320)];
-        imageScrollView.contentSize=CGSizeMake(460, 320);
-    }
-    else if (fromInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+    //if (fromInterfaceOrientation == UIInterfaceOrientationPortrait) {
+    [imageScrollView setFrame:self.view.frame];
+    [fullImageView setFrame:self.view.frame];
+    imageScrollView.contentSize=self.view.frame.size;
+    //}
+    /*else if (fromInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         [imageScrollView setFrame:CGRectMake(0, 0, 320, 460)];
         [fullImageView setFrame:CGRectMake(0, 0, 320, 460)];
         imageScrollView.contentSize=CGSizeMake(320, 460);
@@ -208,7 +209,7 @@
         [imageScrollView setFrame:CGRectMake(0, 0, 320, 460)];
         [fullImageView setFrame:CGRectMake(0, 0, 320, 460)];
         imageScrollView.contentSize=CGSizeMake(320, 416);
-    }
+    }*/
     
 }
 
