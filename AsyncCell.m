@@ -149,6 +149,9 @@ static UIFont* bold14 = nil;
         sublayer.frame = CGRectMake(5.0, 5.0, imageToDisplay.size.width, imageToDisplay.size.height);
         [self.layer addSublayer:sublayer];
         
+        [self.layer setNeedsDisplay];
+        //[super layoutSublayersOfLayer:self.layer];
+        
         //Experimental shadow stuff with images
         /*CALayer *layer = [CALayer layer];
         layer = [CALayer layer];
