@@ -68,6 +68,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+
     captionTapCount = 0;
     
     imageScrollView.minimumZoomScale = 1.0;
