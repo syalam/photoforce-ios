@@ -78,6 +78,8 @@
     imageScrollView.contentSize=CGSizeMake(320, 416);
     imageScrollView.delegate = self;
     
+    [imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     //[singleTap setNumberOfTapsRequired:1];
     [singleTap setNumberOfTouchesRequired:1];
@@ -90,12 +92,13 @@
     
     NSURL* myURL = [NSURL URLWithString:urlString];
     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
-    [fullImageView setBackgroundColor:[UIColor blackColor]];
+    [fullImageView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
     fullImageView.image = image;
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     [fullImageView setImage:fullImageView.image];
     
-    //captionTextView.text = detailCaption;
+    captionTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]];
+    captionTextView.text = detailCaption;
     
     float minimumScale = [imageScrollView frame].size.width  / [fullImageView frame].size.width;
     [imageScrollView setMinimumZoomScale:minimumScale];
@@ -121,7 +124,7 @@
 #pragma mark - SrollView Delegate Methods
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    captionTextView.hidden = YES;
+    //captionTextView.hidden = YES;
     return fullImageView;
 }
 
@@ -177,7 +180,7 @@
     else {
         // double tap zooms in
         newScale = [imageScrollView zoomScale] * ZOOM_STEP;
-        captionTextView.hidden = YES;
+        //captionTextView.hidden = YES;
         zoomed = YES;
     }
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
