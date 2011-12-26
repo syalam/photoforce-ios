@@ -25,7 +25,7 @@ typedef enum apiCall {
     NSArray *permissions;
     NSUInteger imageTag;
     KenBurnsView *kenView;
-    
+    UIActivityIndicatorView* activityIndicator;
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
 }

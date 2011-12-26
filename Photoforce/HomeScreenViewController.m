@@ -48,6 +48,11 @@
     photoFoceLabel.hidden = YES;
     currentAPICall = kAPIGraphFeed;
     
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicator.frame = CGRectMake(120, 200, 100, 100);
+    [activityIndicator startAnimating];
+    [self.view addSubview:activityIndicator];
+    
     //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = me() or owner IN (SELECT uid2 FROM friend WHERE uid1=me())) ORDER BY created DESC LIMIT 30",@"q",nil];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me())order by modified desc) ORDER BY created DESC LIMIT 30",@"q",nil];
     
@@ -76,7 +81,7 @@
 		
 		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height, self.view.frame.size.width, homeTableView.bounds.size.height)];
 		refreshView.delegate = self;
-        refreshView.backgroundColor = [UIColor blackColor];
+        refreshView.backgroundColor = [UIColor clearColor];
 		[homeTableView addSubview:refreshView];
 		_refreshHeaderView = refreshView;
     }
@@ -87,8 +92,8 @@
     
     imageTag = 1;
     
-    [homeTableView setBackgroundColor:[UIColor blackColor]];
-    //[homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"film_strip_gif.png"]]];
+    //[homeTableView setBackgroundColor:[UIColor blackColor]];
+    [homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
     
     
 
@@ -202,6 +207,8 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
+    [activityIndicator stopAnimating];
+    
     facebookPhotosData = [[NSMutableArray alloc]initWithCapacity:1];
     if ([result objectForKey:@"data"]) {
         facebookPhotosData = [result objectForKey:@"data"];

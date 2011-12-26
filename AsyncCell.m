@@ -39,7 +39,7 @@
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) 
     {
-		self.backgroundColor = [UIColor blackColor];
+		self.backgroundColor = [UIColor whiteColor];
 		self.opaque = YES;
     }
     return self;
