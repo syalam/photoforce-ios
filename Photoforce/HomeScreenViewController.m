@@ -312,7 +312,11 @@
 	_reloading = YES;
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me())order by modified desc) ORDER BY created DESC LIMIT 30",@"q",nil];
+    //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me())order by modified desc) ORDER BY created DESC LIMIT 30",@"q",nil];
+    
+    //optimized join query
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo JOIN album ON photo.aid = album.aid JOIN friend ON album.owner = friend.uid2 WHERE friend.uid1 = me() OR friend.uid2 = me() ORDER BY created DESC LIMIT 30",@"q",nil];
+    
     [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
     
     // Here you would make an HTTP request or something like that
