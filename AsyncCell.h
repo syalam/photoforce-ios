@@ -34,5 +34,6 @@
 @property (nonatomic, retain) UIImage* image;
 
 - (void) updateCellInfo:(NSDictionary*)_info;
+- (UIBezierPath*)bezierPathWithCurvedShadowForRect:(CGRect)rect;
 
 @end

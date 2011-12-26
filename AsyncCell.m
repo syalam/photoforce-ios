@@ -30,11 +30,16 @@
 #import "DictionaryHelper.h"
 
 #import "UIImageView+AFNetworking.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @implementation AsyncCell
 
 @synthesize info;
 @synthesize image;
+
+static const CGFloat offset = 10.0;
+static const CGFloat curve = 5.0;
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) 
@@ -128,11 +133,25 @@ static UIFont* bold14 = nil;
             imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 270)];
             }
         }
+        
         width = imageToDisplay.size.width;
         height = imageToDisplay.size.height;
         r = CGRectMake(5.0, 5.0, width, height);
         
 		[imageToDisplay drawInRect:r];
+        
+        //Experimental shadow stuff with images
+        /*CALayer *layer = [CALayer layer];
+        layer = [CALayer layer];
+        layer.bounds = CGRectMake(5.0, 5.0, imageToDisplay.size.width, imageToDisplay.size.height);
+        layer.position = CGPointMake(160, 200);
+        layer.contents = (id)imageToDisplay.CGImage;	
+        
+        layer.shadowOffset = CGSizeMake(0, 2);
+        layer.shadowOpacity = 0.70;
+        
+        [self.layer addSublayer:layer];
+        [self bezierPathWithCurvedShadowForRect:layer.bounds];*/
         
         [[UIColor blackColor] set];
         [caption drawInRect:CGRectMake(10.0, height + 20 , widthr, 20.0) withFont:system14 lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
@@ -149,6 +168,26 @@ static UIFont* bold14 = nil;
         }];
         [operation start];
     }
+}
+
+- (UIBezierPath*)bezierPathWithCurvedShadowForRect:(CGRect)rect {
+	
+	UIBezierPath *path = [UIBezierPath bezierPath];	
+	
+	CGPoint topLeft		 = rect.origin;
+	CGPoint bottomLeft	 = CGPointMake(0.0, CGRectGetHeight(rect) + offset);
+	CGPoint bottomMiddle = CGPointMake(CGRectGetWidth(rect)/2, CGRectGetHeight(rect) - curve);	
+	CGPoint bottomRight	 = CGPointMake(CGRectGetWidth(rect), CGRectGetHeight(rect) + offset);
+	CGPoint topRight	 = CGPointMake(CGRectGetWidth(rect), 0.0);
+	
+	[path moveToPoint:topLeft];	
+	[path addLineToPoint:bottomLeft];
+	[path addQuadCurveToPoint:bottomRight controlPoint:bottomMiddle];
+	[path addLineToPoint:topRight];
+	[path addLineToPoint:topLeft];
+	[path closePath];
+	
+	return path;
 }
 
 @end
