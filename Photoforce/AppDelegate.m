@@ -24,6 +24,12 @@ static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
     
     [FlurryAnalytics startSession:flurryID];
     
+    //Custom navbar
+    /*if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"header"] forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    }*/
+
     HomeScreenViewController *hsvc = [[HomeScreenViewController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
     facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:hsvc];
     
