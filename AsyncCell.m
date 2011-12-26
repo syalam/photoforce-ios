@@ -138,19 +138,29 @@ static UIFont* bold14 = nil;
         height = imageToDisplay.size.height;
         r = CGRectMake(5.0, 5.0, width, height);
         
-		[imageToDisplay drawInRect:r];
+		//[imageToDisplay drawInRect:r];
+        
+        CALayer *sublayer = [CALayer layer];
+        sublayer.contents = (id)imageToDisplay.CGImage;
+        sublayer.shadowOffset = CGSizeMake(0, 3);
+        sublayer.shadowRadius = 5.0;
+        sublayer.shadowColor = [UIColor blackColor].CGColor;
+        sublayer.shadowOpacity = 0.8;
+        sublayer.frame = CGRectMake(5.0, 5.0, imageToDisplay.size.width, imageToDisplay.size.height);
+        [self.layer addSublayer:sublayer];
         
         //Experimental shadow stuff with images
         /*CALayer *layer = [CALayer layer];
         layer = [CALayer layer];
         layer.bounds = CGRectMake(5.0, 5.0, imageToDisplay.size.width, imageToDisplay.size.height);
-        layer.position = CGPointMake(160, 200);
+        layer.position = CGPointMake(150, 140);
         layer.contents = (id)imageToDisplay.CGImage;	
         
         layer.shadowOffset = CGSizeMake(0, 2);
         layer.shadowOpacity = 0.70;
         
         [self.layer addSublayer:layer];
+        
         [self bezierPathWithCurvedShadowForRect:layer.bounds];*/
         
         [[UIColor blackColor] set];
