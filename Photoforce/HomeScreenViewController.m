@@ -93,8 +93,8 @@
     
     imageTag = 1;
     
-    //[homeTableView setBackgroundColor:[UIColor blackColor]];
-    [homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    homeTableView.hidden = YES;
+    [homeTableView setBackgroundColor:[UIColor clearColor]];
     
     
 
@@ -104,12 +104,14 @@
     [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
     [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+
+    
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
         [self displayLoggedInItems];
     }
     else {
-        homeTableView.hidden = YES;
         [self setupKenBurnsView];
         self.navigationItem.rightBarButtonItem = nil;
         
