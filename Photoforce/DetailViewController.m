@@ -96,6 +96,7 @@
     [fullImageView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
     fullImageView.image = image;
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
+    //fullImageView.contentMode = UIViewContentModeScaleAspectFill;
     [fullImageView setImage:fullImageView.image];
     
     //captionTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]];
