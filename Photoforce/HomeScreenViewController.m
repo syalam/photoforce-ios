@@ -68,7 +68,7 @@
      */
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
     NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
-    NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 100'}";
+    NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 1000'}";
     
     NSString *fql = [NSString stringWithFormat:@"%@,%@,%@", getUsers, getAlbums, getPics];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"q", nil];
@@ -245,8 +245,9 @@
     if ([result objectForKey:@"data"]) {
         NSMutableDictionary *resultSetDictionary = [[NSMutableDictionary alloc]initWithDictionary:result];
         facebookPhotosData = [[NSMutableArray alloc]initWithCapacity:1];
+        facebookFeedData = [[NSMutableArray alloc]initWithCapacity:1];
         for (id key in resultSetDictionary) {
-            facebookPhotosData = [[resultSetDictionary objectForKey:key]objectAtIndex:2];
+            facebookPhotosData = [[[resultSetDictionary objectForKey:key]objectAtIndex:2] objectForKey:@"fql_result_set"];
         }
         
     }
