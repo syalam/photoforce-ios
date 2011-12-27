@@ -296,12 +296,17 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 #pragma mark -
 #pragma mark EGORefreshTableHeaderDelegate Methods
