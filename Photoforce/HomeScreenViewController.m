@@ -81,6 +81,19 @@
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
+    UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    customTitleView.backgroundColor = [UIColor clearColor];
+    UILabel* logo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    logo.text = @"Photoforce";
+    logo.textColor = [UIColor whiteColor];
+    logo.shadowColor = [UIColor blackColor];
+    logo.shadowOffset = CGSizeMake(1, 1);
+    logo.backgroundColor = [UIColor clearColor];
+    logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
+    [customTitleView addSubview:logo];
+    
+    self.navigationItem.titleView = customTitleView;
+    
     if (_refreshHeaderView == nil) {
 		
 		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height - 20, self.view.frame.size.width, homeTableView.bounds.size.height)];
