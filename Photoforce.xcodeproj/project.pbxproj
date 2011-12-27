@@ -343,6 +343,9 @@
 		F7859DE5148AB63D00B1F94C /* Photoforce */ = {
 			isa = PBXGroup;
 			children = (
+				F7C51C1E14AA566000C6BC29 /* Detail Screen */,
+				F7C51C1D14AA565800C6BC29 /* Home Screen */,
+				F7C51C1B14AA563800C6BC29 /* Login Screen */,
 				8C1F673C14A7EAE100B475D8 /* Helper Classes */,
 				F7859DE6148AB63D00B1F94C /* Supporting Files */,
 				F7859DEE148AB63D00B1F94C /* AppDelegate.h */,
@@ -385,6 +388,27 @@
 				F7859E09148AB63E00B1F94C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F7C51C1B14AA563800C6BC29 /* Login Screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Login Screen";
+			sourceTree = "<group>";
+		};
+		F7C51C1D14AA565800C6BC29 /* Home Screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Home Screen";
+			sourceTree = "<group>";
+		};
+		F7C51C1E14AA566000C6BC29 /* Detail Screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Detail Screen";
 			sourceTree = "<group>";
 		};
 		F7CBBE9F1491CE63003EC06E /* AFNetworking */ = {
