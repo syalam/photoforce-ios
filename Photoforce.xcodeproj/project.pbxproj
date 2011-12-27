@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C05992814A95CCC00242950 /* bgtexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992614A95CCC00242950 /* bgtexture.png */; };
+		8C05992914A95CCC00242950 /* bgtexture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992714A95CCC00242950 /* bgtexture@2x.png */; };
 		8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */; };
 		8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */; };
 		8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673D14A7EC8D00B475D8 /* image1.jpeg */; };
@@ -80,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C05992614A95CCC00242950 /* bgtexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgtexture.png; sourceTree = "<group>"; };
+		8C05992714A95CCC00242950 /* bgtexture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgtexture@2x.png"; sourceTree = "<group>"; };
 		8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
@@ -242,6 +246,8 @@
 		F731E164149DBE2100F2DB5C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C05992614A95CCC00242950 /* bgtexture.png */,
+				8C05992714A95CCC00242950 /* bgtexture@2x.png */,
 				8CD3B08614A82B9A00C55AAB /* header.png */,
 				8CD3B08714A82B9A00C55AAB /* header@2x.png */,
 				8CD3B07714A81B7100C55AAB /* iphone-linen.png */,
@@ -525,6 +531,8 @@
 				8CD3B07814A81B7100C55AAB /* iphone-linen.png in Resources */,
 				8CD3B08814A82B9A00C55AAB /* header.png in Resources */,
 				8CD3B08914A82B9A00C55AAB /* header@2x.png in Resources */,
+				8C05992814A95CCC00242950 /* bgtexture.png in Resources */,
+				8C05992914A95CCC00242950 /* bgtexture@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

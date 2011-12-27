@@ -80,7 +80,7 @@
     
     if (_refreshHeaderView == nil) {
 		
-		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height, self.view.frame.size.width, homeTableView.bounds.size.height)];
+		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height - 20, self.view.frame.size.width, homeTableView.bounds.size.height)];
 		refreshView.delegate = self;
         refreshView.backgroundColor = [UIColor clearColor];
 		[homeTableView addSubview:refreshView];
@@ -91,13 +91,32 @@
     homeTableView.dataSource = self;
     homeTableView.delegate = self;
     [homeTableView setSeparatorColor:[UIColor grayColor]];
+    homeTableView.center = self.view.center;
+    homeTableView.layer.shadowColor = [UIColor blackColor].CGColor;
+    homeTableView.layer.shadowOpacity = 0.7f;
+    homeTableView.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    homeTableView.layer.shadowRadius = 5.0f;
+    homeTableView.layer.masksToBounds = NO;
+    CGSize size = homeTableView.bounds.size;
+    CGFloat curlFactor = 15.0f;
+    CGFloat shadowDepth = 5.0f;
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0f, 0.0f)];
+    [path addLineToPoint:CGPointMake(size.width, 0.0f)];
+    [path addLineToPoint:CGPointMake(size.width, size.height + shadowDepth)];
+    [path addCurveToPoint:CGPointMake(0.0f, size.height + shadowDepth)
+            controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
+            controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
+
     
     imageTag = 1;
     
     //[homeTableView setBackgroundColor:[UIColor blackColor]];
-    [homeTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone-linen"]]];
-    
+    [homeTableView setBackgroundColor:[UIColor clearColor]];
+    //[self.view setBackgroundColor:[UIColor whiteColor]];
+    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
+
     
 
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -158,8 +177,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return YES;
 }
 
 
