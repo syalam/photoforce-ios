@@ -304,7 +304,6 @@
 		F7859DD0148AB63D00B1F94C = {
 			isa = PBXGroup;
 			children = (
-				8C05993814A98D9900242950 /* AudioToolbox.framework */,
 				F7859DE5148AB63D00B1F94C /* Photoforce */,
 				F7859E06148AB63E00B1F94C /* PhotoforceTests */,
 				F731E164149DBE2100F2DB5C /* Resources */,
@@ -325,6 +324,7 @@
 		F7859DDE148AB63D00B1F94C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C05993814A98D9900242950 /* AudioToolbox.framework */,
 				F731E18B149DD05D00F2DB5C /* QuartzCore.framework */,
 				F7859DDF148AB63D00B1F94C /* UIKit.framework */,
 				F7859DE1148AB63D00B1F94C /* Foundation.framework */,
