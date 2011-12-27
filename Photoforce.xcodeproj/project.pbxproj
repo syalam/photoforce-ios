@@ -13,6 +13,7 @@
 		8C05993614A98D2800242950 /* page-flip-4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C05993514A98D2800242950 /* page-flip-4.wav */; };
 		8C05993914A98D9900242950 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C05993814A98D9900242950 /* AudioToolbox.framework */; };
 		8C05993B14A9963D00242950 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05993A14A9963D00242950 /* icon.png */; };
+		8C05994714A9A62100242950 /* embossed-poloroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05994614A9A62100242950 /* embossed-poloroid.png */; };
 		8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */; };
 		8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */; };
 		8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673D14A7EC8D00B475D8 /* image1.jpeg */; };
@@ -91,6 +92,7 @@
 		8C05993514A98D2800242950 /* page-flip-4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "page-flip-4.wav"; sourceTree = "<group>"; };
 		8C05993814A98D9900242950 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8C05993A14A9963D00242950 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		8C05994614A9A62100242950 /* embossed-poloroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "embossed-poloroid.png"; sourceTree = "<group>"; };
 		8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		F731E164149DBE2100F2DB5C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C05994614A9A62100242950 /* embossed-poloroid.png */,
 				8C05993A14A9963D00242950 /* icon.png */,
 				8C05993514A98D2800242950 /* page-flip-4.wav */,
 				8C05992B14A9860600242950 /* image3.png */,
@@ -545,6 +548,7 @@
 				8C05992C14A9860600242950 /* image3.png in Resources */,
 				8C05993614A98D2800242950 /* page-flip-4.wav in Resources */,
 				8C05993B14A9963D00242950 /* icon.png in Resources */,
+				8C05994714A9A62100242950 /* embossed-poloroid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

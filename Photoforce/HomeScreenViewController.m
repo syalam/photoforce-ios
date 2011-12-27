@@ -88,6 +88,19 @@
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
+    UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    customTitleView.backgroundColor = [UIColor clearColor];
+    UILabel* logo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    logo.text = @"Photoforce";
+    logo.textColor = [UIColor whiteColor];
+    logo.shadowColor = [UIColor blackColor];
+    logo.shadowOffset = CGSizeMake(1, 1);
+    logo.backgroundColor = [UIColor clearColor];
+    logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
+    [customTitleView addSubview:logo];
+    
+    self.navigationItem.titleView = customTitleView;
+    
     if (_refreshHeaderView == nil) {
 		
 		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height - 20, self.view.frame.size.width, homeTableView.bounds.size.height)];
@@ -356,7 +369,10 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    if (_reloading) 
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    else
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark -
@@ -365,6 +381,8 @@
 // This is the core method you should implement
 - (void)reloadTableViewDataSource {
 	_reloading = YES;
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me())order by modified desc) ORDER BY created DESC LIMIT 1000",@"q",nil];
@@ -381,6 +399,7 @@
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 	return _reloading; // should return if data source model is reloading
 }
 
