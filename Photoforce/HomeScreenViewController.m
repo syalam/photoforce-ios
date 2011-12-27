@@ -278,7 +278,10 @@
     NSString *url = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"src_big"];
     NSString *caption = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"caption"];
     DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
-    [self.navigationController pushViewController:dvc animated:YES];
+    //[self.navigationController pushViewController:dvc animated:YES];
+    
+    dvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+    [self.navigationController presentModalViewController:dvc animated:YES];
 }
 
 #pragma mark -
