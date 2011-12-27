@@ -340,7 +340,10 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    if (_reloading) 
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    else
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark -
@@ -349,6 +352,8 @@
 // This is the core method you should implement
 - (void)reloadTableViewDataSource {
 	_reloading = YES;
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me())order by modified desc) ORDER BY created DESC LIMIT 1000",@"q",nil];
@@ -365,6 +370,7 @@
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 	return _reloading; // should return if data source model is reloading
 }
 
