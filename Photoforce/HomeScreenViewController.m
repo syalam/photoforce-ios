@@ -54,8 +54,10 @@
     [self.view addSubview:activityIndicator];
     homeTableView.hidden = YES;
     
-    //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = me() or owner IN (SELECT uid2 FROM friend WHERE uid1=me())) ORDER BY created DESC LIMIT 30",@"q",nil];
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me())order by modified desc) ORDER BY created DESC LIMIT 1000",@"q",nil];
+    
+    //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid,caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me()) ORDER by modified desc) OR pid IN (SELECT pid FROM photo_tag WHERE subject IN (SELECT uid2 FROM friend WHERE uid1=me() OR uid2 = me())) ORDER BY created DESC LIMIT 100",@"q",nil];
     
     /*
     NSString *getPictures = @"{'getPics':'SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100'";
