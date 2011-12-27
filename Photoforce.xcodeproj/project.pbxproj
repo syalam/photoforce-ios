@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		8C05992814A95CCC00242950 /* bgtexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992614A95CCC00242950 /* bgtexture.png */; };
 		8C05992914A95CCC00242950 /* bgtexture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992714A95CCC00242950 /* bgtexture@2x.png */; };
+		8C05992C14A9860600242950 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992B14A9860600242950 /* image3.png */; };
+		8C05993614A98D2800242950 /* page-flip-4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C05993514A98D2800242950 /* page-flip-4.wav */; };
+		8C05993914A98D9900242950 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C05993814A98D9900242950 /* AudioToolbox.framework */; };
 		8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */; };
 		8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */; };
 		8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673D14A7EC8D00B475D8 /* image1.jpeg */; };
 		8C1F674314A7EC8D00B475D8 /* image2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673E14A7EC8D00B475D8 /* image2.jpeg */; };
-		8C1F674414A7EC8D00B475D8 /* image3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673F14A7EC8D00B475D8 /* image3.jpeg */; };
 		8C1F674514A7EC8D00B475D8 /* image4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F674014A7EC8D00B475D8 /* image4.png */; };
 		8C1F674614A7EC8D00B475D8 /* image5.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F674114A7EC8D00B475D8 /* image5.png */; };
 		8CD3B07814A81B7100C55AAB /* iphone-linen.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD3B07714A81B7100C55AAB /* iphone-linen.png */; };
@@ -84,13 +86,15 @@
 /* Begin PBXFileReference section */
 		8C05992614A95CCC00242950 /* bgtexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgtexture.png; sourceTree = "<group>"; };
 		8C05992714A95CCC00242950 /* bgtexture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgtexture@2x.png"; sourceTree = "<group>"; };
+		8C05992B14A9860600242950 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
+		8C05993514A98D2800242950 /* page-flip-4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "page-flip-4.wav"; sourceTree = "<group>"; };
+		8C05993814A98D9900242950 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
 		8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBKenBurnsView.m; sourceTree = "<group>"; };
 		8C1F673D14A7EC8D00B475D8 /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
 		8C1F673E14A7EC8D00B475D8 /* image2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpeg; sourceTree = "<group>"; };
-		8C1F673F14A7EC8D00B475D8 /* image3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3.jpeg; sourceTree = "<group>"; };
 		8C1F674014A7EC8D00B475D8 /* image4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.png; sourceTree = "<group>"; };
 		8C1F674114A7EC8D00B475D8 /* image5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image5.png; sourceTree = "<group>"; };
 		8CD3B07714A81B7100C55AAB /* iphone-linen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-linen.png"; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C05993914A98D9900242950 /* AudioToolbox.framework in Frameworks */,
 				F731E18C149DD05D00F2DB5C /* QuartzCore.framework in Frameworks */,
 				F7859DE0148AB63D00B1F94C /* UIKit.framework in Frameworks */,
 				F7859DE2148AB63D00B1F94C /* Foundation.framework in Frameworks */,
@@ -246,6 +251,8 @@
 		F731E164149DBE2100F2DB5C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C05993514A98D2800242950 /* page-flip-4.wav */,
+				8C05992B14A9860600242950 /* image3.png */,
 				8C05992614A95CCC00242950 /* bgtexture.png */,
 				8C05992714A95CCC00242950 /* bgtexture@2x.png */,
 				8CD3B08614A82B9A00C55AAB /* header.png */,
@@ -253,7 +260,6 @@
 				8CD3B07714A81B7100C55AAB /* iphone-linen.png */,
 				8C1F673D14A7EC8D00B475D8 /* image1.jpeg */,
 				8C1F673E14A7EC8D00B475D8 /* image2.jpeg */,
-				8C1F673F14A7EC8D00B475D8 /* image3.jpeg */,
 				8C1F674014A7EC8D00B475D8 /* image4.png */,
 				8C1F674114A7EC8D00B475D8 /* image5.png */,
 				F731E193149DD16100F2DB5C /* blackArrow.png */,
@@ -298,6 +304,7 @@
 		F7859DD0148AB63D00B1F94C = {
 			isa = PBXGroup;
 			children = (
+				8C05993814A98D9900242950 /* AudioToolbox.framework */,
 				F7859DE5148AB63D00B1F94C /* Photoforce */,
 				F7859E06148AB63E00B1F94C /* PhotoforceTests */,
 				F731E164149DBE2100F2DB5C /* Resources */,
@@ -525,7 +532,6 @@
 				F714E14614A0611700E24956 /* DetailViewController.xib in Resources */,
 				8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */,
 				8C1F674314A7EC8D00B475D8 /* image2.jpeg in Resources */,
-				8C1F674414A7EC8D00B475D8 /* image3.jpeg in Resources */,
 				8C1F674514A7EC8D00B475D8 /* image4.png in Resources */,
 				8C1F674614A7EC8D00B475D8 /* image5.png in Resources */,
 				8CD3B07814A81B7100C55AAB /* iphone-linen.png in Resources */,
@@ -533,6 +539,8 @@
 				8CD3B08914A82B9A00C55AAB /* header@2x.png in Resources */,
 				8C05992814A95CCC00242950 /* bgtexture.png in Resources */,
 				8C05992914A95CCC00242950 /* bgtexture@2x.png in Resources */,
+				8C05992C14A9860600242950 /* image3.png in Resources */,
+				8C05993614A98D2800242950 /* page-flip-4.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

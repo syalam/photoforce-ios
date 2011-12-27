@@ -32,5 +32,6 @@ typedef enum apiCall {
 @property(nonatomic,retain) Facebook *facebook;
 
 -(void)setupKenBurnsView;
+-(void)playTransitionSoundEffect;
 
 @end

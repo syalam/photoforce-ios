@@ -12,6 +12,7 @@
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
 #import "JBKenBurnsView.h"
+#include <AudioToolbox/AudioToolbox.h>
 
 @implementation HomeScreenViewController
 @synthesize facebook;
@@ -153,7 +154,7 @@
     NSArray *myImages = [NSArray arrayWithObjects:
                          [UIImage imageNamed:@"image1.jpeg"],
                          [UIImage imageNamed:@"image2.jpeg"],
-                         [UIImage imageNamed:@"image3.jpeg"],
+                         [UIImage imageNamed:@"image3.png"],
                          [UIImage imageNamed:@"image4.png"],
                          [UIImage imageNamed:@"image5.png"], nil];
     
@@ -304,8 +305,17 @@
     
     dvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
     [self.navigationController presentModalViewController:dvc animated:YES];
+    [self playTransitionSoundEffect];
 }
 
+-(void)playTransitionSoundEffect
+{
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, CFSTR("page-flip-4"), CFSTR("wav"), NULL);
+    SystemSoundID soundId;
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundId);
+    AudioServicesPlaySystemSound(soundId);
+}
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
