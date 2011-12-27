@@ -296,7 +296,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    [self.navigationController.navigationBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -305,7 +305,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-     [self.navigationController.navigationBar setHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark -
