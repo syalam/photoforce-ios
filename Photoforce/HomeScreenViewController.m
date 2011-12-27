@@ -90,6 +90,7 @@
     
     homeTableView.dataSource = self;
     homeTableView.delegate = self;
+    [homeTableView setSeparatorColor:[UIColor grayColor]];
     
     imageTag = 1;
     
