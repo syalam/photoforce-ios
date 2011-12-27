@@ -93,7 +93,9 @@
     
     NSURL* myURL = [NSURL URLWithString:urlString];
     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
-    [fullImageView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    //[fullImageView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
+    
+    [fullImageView setBackgroundColor:[UIColor clearColor]];
     fullImageView.image = image;
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     //fullImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -191,26 +193,9 @@
 
 #pragma mark - Rotate Delegate Methods
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    //if (fromInterfaceOrientation == UIInterfaceOrientationPortrait) {
     [imageScrollView setFrame:self.view.frame];
     [fullImageView setFrame:self.view.frame];
-    imageScrollView.contentSize=self.view.frame.size;
-    //}
-    /*else if (fromInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        [imageScrollView setFrame:CGRectMake(0, 0, 320, 460)];
-        [fullImageView setFrame:CGRectMake(0, 0, 320, 460)];
-        imageScrollView.contentSize=CGSizeMake(320, 460);
-    }
-    else if (fromInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        [imageScrollView setFrame:CGRectMake(0, 0, 460, 320)];
-        [fullImageView setFrame:CGRectMake(0, 0, 460, 320)];
-        imageScrollView.contentSize=CGSizeMake(460, 320);
-    }
-    else {
-        [imageScrollView setFrame:CGRectMake(0, 0, 320, 460)];
-        [fullImageView setFrame:CGRectMake(0, 0, 320, 460)];
-        imageScrollView.contentSize=CGSizeMake(320, 416);
-    }*/
+    imageScrollView.contentSize = self.view.frame.size;
     
 }
 
