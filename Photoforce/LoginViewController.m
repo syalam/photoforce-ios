@@ -36,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    /*UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     customTitleView.backgroundColor = [UIColor clearColor];
     UILabel* logo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     logo.text = @"Photoforce";
@@ -48,12 +48,22 @@
     [customTitleView addSubview:logo];
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-    self.navigationItem.titleView = customTitleView;
+    self.navigationItem.titleView = customTitleView;*/
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [self setupKenBurnsView];
+    
+    logo.text = @"Photoforce";
+    logo.textColor = [UIColor whiteColor];
+    logo.shadowColor = [UIColor blackColor];
+    logo.shadowOffset = CGSizeMake(1, 1);
+    logo.backgroundColor = [UIColor clearColor];
+    logo.font = [UIFont fontWithName:@"Zapfino" size:30.0];
+    
+    [self.view addSubview:logo];
     
     [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
     [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];

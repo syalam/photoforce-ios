@@ -12,6 +12,7 @@
 #import "SlideToCancelViewController.h"
 
 @interface LoginViewController : UIViewController <FBSessionDelegate, FBRequestDelegate,FBDialogDelegate, SlideToCancelDelegate> {
+    IBOutlet UILabel *logo;
     KenBurnsView *kenView;
     NSArray *permissions;
     SlideToCancelViewController *slideToCancel;
