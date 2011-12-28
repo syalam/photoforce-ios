@@ -66,11 +66,32 @@
         //[self.navigationController pushViewController:homeScreen animated:YES];
     }
         
-    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
-    self.navigationItem.rightBarButtonItem = loginButton;
-
+    /*UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
+    self.navigationItem.rightBarButtonItem = loginButton;*/
     
+    slideToCancel = [[SlideToCancelViewController alloc] init];
+    slideToCancel.delegate = self;
+    CGRect sliderFrame = slideToCancel.view.frame;
+    sliderFrame.origin.y = self.view.frame.size.height;
+    slideToCancel.view.frame = sliderFrame;
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Add slider to the view
+    [self.view addSubview:slideToCancel.view];
+    
+    slideToCancel.enabled = YES;
+    
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.5];
+	CGPoint sliderCenter = slideToCancel.view.center;
+	//sliderCenter.y -= slideToCancel.view.bounds.size.height;
+    sliderCenter.y = self.view.frame.size.height - 40;
+	slideToCancel.view.center = sliderCenter;
+	[UIView commitAnimations];
 }
 
 - (void)viewDidUnload
@@ -144,6 +165,25 @@
     //[self.navigationController pushViewController:homeScreen animated:YES];
     
 }
+
+#pragma mark - Slider Delegate Method
+- (void) cancelled {
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos", nil];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![[delegate facebook] isSessionValid]) {
+        [delegate facebook].sessionDelegate = self;
+        [[delegate facebook] authorize:permissions];
+    }
+}
+
 
 
 @end

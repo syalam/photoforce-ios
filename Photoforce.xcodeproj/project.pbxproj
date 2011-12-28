@@ -63,6 +63,10 @@
 		F7CBBEC11491CE73003EC06E /* DictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBEC01491CE73003EC06E /* DictionaryHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7CBBEC41491CEA3003EC06E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CBBEC31491CEA3003EC06E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7CDD71614AAAD7B0038FE6B /* HomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7CDD71514AAAD7B0038FE6B /* HomeScreenViewController.xib */; };
+		F7CDD72514AAD3730038FE6B /* SlideToCancelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CDD72414AAD3730038FE6B /* SlideToCancelViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F7CDD72C14AADC0E0038FE6B /* sliderMaxMin-02.png in Resources */ = {isa = PBXBuildFile; fileRef = F7CDD72914AADC0E0038FE6B /* sliderMaxMin-02.png */; };
+		F7CDD72D14AADC0E0038FE6B /* sliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = F7CDD72A14AADC0E0038FE6B /* sliderThumb.png */; };
+		F7CDD72E14AADC0E0038FE6B /* sliderTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = F7CDD72B14AADC0E0038FE6B /* sliderTrack.png */; };
 		F7EAE9E8148B0269003187B8 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9CD148B0269003187B8 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7EAE9E9148B0269003187B8 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7EAE9D0148B0269003187B8 /* FBDialog.bundle */; };
 		F7EAE9EA148B0269003187B8 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EAE9D2148B0269003187B8 /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -170,6 +174,11 @@
 		F7CBBEC21491CEA3003EC06E /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		F7CBBEC31491CEA3003EC06E /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		F7CDD71514AAAD7B0038FE6B /* HomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeScreenViewController.xib; sourceTree = "<group>"; };
+		F7CDD72314AAD3730038FE6B /* SlideToCancelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideToCancelViewController.h; sourceTree = "<group>"; };
+		F7CDD72414AAD3730038FE6B /* SlideToCancelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideToCancelViewController.m; sourceTree = "<group>"; };
+		F7CDD72914AADC0E0038FE6B /* sliderMaxMin-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderMaxMin-02.png"; sourceTree = "<group>"; };
+		F7CDD72A14AADC0E0038FE6B /* sliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderThumb.png; sourceTree = "<group>"; };
+		F7CDD72B14AADC0E0038FE6B /* sliderTrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderTrack.png; sourceTree = "<group>"; };
 		F7EAE9CC148B0269003187B8 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		F7EAE9CD148B0269003187B8 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		F7EAE9CF148B0269003187B8 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
@@ -247,6 +256,7 @@
 		8C1F673C14A7EAE100B475D8 /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F7CDD72114AAD34A0038FE6B /* Slide to Login */,
 				8C1F673B14A7EACA00B475D8 /* KenBurnsView */,
 				F7EAE9C8148B0269003187B8 /* Facebook SDK */,
 				8C1F672514A7E43D00B475D8 /* Flurry */,
@@ -260,6 +270,9 @@
 		F731E164149DBE2100F2DB5C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F7CDD72914AADC0E0038FE6B /* sliderMaxMin-02.png */,
+				F7CDD72A14AADC0E0038FE6B /* sliderThumb.png */,
+				F7CDD72B14AADC0E0038FE6B /* sliderTrack.png */,
 				8C05994614A9A62100242950 /* embossed-poloroid.png */,
 				8C05993A14A9963D00242950 /* icon.png */,
 				8C05993514A98D2800242950 /* page-flip-4.wav */,
@@ -448,6 +461,15 @@
 			path = ../AFNetworking;
 			sourceTree = "<group>";
 		};
+		F7CDD72114AAD34A0038FE6B /* Slide to Login */ = {
+			isa = PBXGroup;
+			children = (
+				F7CDD72314AAD3730038FE6B /* SlideToCancelViewController.h */,
+				F7CDD72414AAD3730038FE6B /* SlideToCancelViewController.m */,
+			);
+			name = "Slide to Login";
+			sourceTree = "<group>";
+		};
 		F7EAE9C8148B0269003187B8 /* Facebook SDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +604,9 @@
 				8C05994714A9A62100242950 /* embossed-poloroid.png in Resources */,
 				F7C51C3414AA58D300C6BC29 /* LoginViewController.xib in Resources */,
 				F7CDD71614AAAD7B0038FE6B /* HomeScreenViewController.xib in Resources */,
+				F7CDD72C14AADC0E0038FE6B /* sliderMaxMin-02.png in Resources */,
+				F7CDD72D14AADC0E0038FE6B /* sliderThumb.png in Resources */,
+				F7CDD72E14AADC0E0038FE6B /* sliderTrack.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +673,7 @@
 				F714E14514A0611700E24956 /* DetailViewController.m in Sources */,
 				8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */,
 				F7C51C3314AA58D300C6BC29 /* LoginViewController.m in Sources */,
+				F7CDD72514AAD3730038FE6B /* SlideToCancelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
