@@ -18,7 +18,7 @@ typedef enum apiCall {
 
 @interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate, EGORefreshTableHeaderDelegate> {
     IBOutlet UITableView *homeTableView;
-    IBOutlet UILabel *photoForceLabel;
+    //IBOutlet UILabel *photoFoceLabel;
     int currentAPICall;
     NSMutableArray *facebookFeedData;
     NSMutableArray *facebookPhotosData;

@@ -58,7 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    photoForceLabel.hidden = YES;
+    //photoFoceLabel.hidden = YES;
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
