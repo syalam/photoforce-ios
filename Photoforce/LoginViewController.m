@@ -1,0 +1,149 @@
+//
+//  LoginViewController.m
+//  Photoforce
+//
+//  Created by Reyaad Sidique on 12/27/11.
+//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "LoginViewController.h"
+#import "AppDelegate.h"
+#import "JBKenBurnsView.h"
+#import "HomeScreenViewController.h"
+
+@implementation LoginViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    customTitleView.backgroundColor = [UIColor clearColor];
+    UILabel* logo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    logo.text = @"Photoforce";
+    logo.textColor = [UIColor whiteColor];
+    logo.shadowColor = [UIColor blackColor];
+    logo.shadowOffset = CGSizeMake(1, 1);
+    logo.backgroundColor = [UIColor clearColor];
+    logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
+    [customTitleView addSubview:logo];
+    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    self.navigationItem.titleView = customTitleView;
+    
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [self setupKenBurnsView];
+    
+    [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+    [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        HomeScreenViewController *homeScreen = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
+        UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:homeScreen];
+        [self.navigationController presentModalViewController:navc animated:NO];
+        //[self.navigationController pushViewController:homeScreen animated:YES];
+    }
+        
+    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
+    self.navigationItem.rightBarButtonItem = loginButton;
+
+    
+
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void)setupKenBurnsView
+{
+    kenView = [[KenBurnsView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    kenView.layer.borderWidth = 1;
+    kenView.layer.borderColor = [UIColor blackColor].CGColor;  
+    [self.view addSubview:kenView];
+    
+    NSArray *myImages = [NSArray arrayWithObjects:
+                         [UIImage imageNamed:@"image1.jpeg"],
+                         [UIImage imageNamed:@"image2.jpeg"],
+                         [UIImage imageNamed:@"image3.png"],
+                         [UIImage imageNamed:@"image4.png"],
+                         [UIImage imageNamed:@"image5.png"], nil];
+    
+    [kenView animateWithImages:myImages 
+            transitionDuration:15
+                          loop:YES 
+                   isLandscape:YES];
+}
+
+#pragma mark - Button Clicks
+
+- (void)loginButtonClicked:(id)sender {
+    
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos", nil];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![[delegate facebook] isSessionValid]) {
+        [delegate facebook].sessionDelegate = self;
+        [[delegate facebook] authorize:permissions];
+    }
+    
+}
+
+#pragma mark - Facebook Delegate Methods
+
+- (void)fbDidLogin {
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    // Save updated authorization information
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    
+    HomeScreenViewController *homeScreen = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
+    UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:homeScreen];
+    [self.navigationController presentModalViewController:navc animated:NO];
+    //[self.navigationController pushViewController:homeScreen animated:YES];
+    
+}
+
+
+@end

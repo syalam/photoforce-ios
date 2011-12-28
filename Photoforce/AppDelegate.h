@@ -17,5 +17,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) NSMutableDictionary *userPermissions;
+@property (strong, nonatomic) UINavigationController *navigationController;
 
 @end

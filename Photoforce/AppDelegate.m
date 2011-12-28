@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeScreenViewController.h"
 #import "FlurryAnalytics.h"
+#import "LoginViewController.h"
+#import "HomeScreenViewController.h"
 
 static NSString* kAppId = @"266617523389474";
 static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
@@ -18,21 +19,22 @@ static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
 @synthesize window = _window;
 @synthesize facebook;
 @synthesize userPermissions;
+@synthesize navigationController = _navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
     [FlurryAnalytics startSession:flurryID];
     
-    //Custom navbar
-    /*if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"header"] forBarMetrics:UIBarMetricsDefault];
-        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-    }*/
-
-    HomeScreenViewController *hsvc = [[HomeScreenViewController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
-    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:hsvc];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
     
+    LoginViewController *loginScreen = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    
+    
+    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:loginScreen];
+    
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:loginScreen];
+    self.window.rootViewController = self.navigationController;
     
     userPermissions = [[NSMutableDictionary alloc] initWithCapacity:1];
     

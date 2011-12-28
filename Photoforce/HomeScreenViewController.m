@@ -11,10 +11,10 @@
 #import "AsyncCell.h"
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
-#import "JBKenBurnsView.h"
 #include <AudioToolbox/AudioToolbox.h>
 
 @implementation HomeScreenViewController
+
 @synthesize facebook;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,37 +35,15 @@
 }
 #pragma mark - View Lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-- (void) displayLoggedInItems {
+- (void) sendFacebookRequest {
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    homeTableView.hidden = NO;
-    photoFoceLabel.hidden = YES;
-    currentAPICall = kAPIGraphFeed;
     
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     activityIndicator.frame = CGRectMake(120, 200, 100, 100);
     [activityIndicator startAnimating];
     [self.view addSubview:activityIndicator];
-    homeTableView.hidden = YES;
-    
-    //WORKING QUERY
-    //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid, caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me())order by modified desc) ORDER BY created DESC LIMIT 1000",@"q",nil];
-    
-    //NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"SELECT src_big, created, modified, owner, aid,caption FROM photo WHERE aid IN (SELECT aid, modified FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me() or uid2 = me()) ORDER by modified desc) OR pid IN (SELECT pid FROM photo_tag WHERE subject IN (SELECT uid2 FROM friend WHERE uid1=me() OR uid2 = me())) ORDER BY created DESC LIMIT 100",@"q",nil];
-    
-    /*
-    NSString *getPictures = @"{'getPics':'SELECT src_big, created, owner, aid FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner IN (SELECT uid2 FROM friend WHERE uid1=me())ORDER BY created DESC) ORDER BY created DESC LIMIT 100'";
-    NSString *getAlbumNames = @"'getAlbumNames':'SELECT name FROM album WHERE aid in (SELECT aid FROM #getPics)'}";
-    NSString *fql = [NSString stringWithFormat:@"%@,%@", getPictures, getAlbumNames];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"q", nil];
-     */
+
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
     NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
     NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 1000'}";
@@ -74,17 +52,13 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"q", nil];
     
     [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
-    
-    self.navigationItem.rightBarButtonItem = nil;
-    
-    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOutButtonClicked:)];
-    self.navigationItem.rightBarButtonItem = logOutButton;
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    photoForceLabel.hidden = YES;
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
@@ -99,6 +73,7 @@
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
     
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationItem.titleView = customTitleView;
     
     if (_refreshHeaderView == nil) {
@@ -134,13 +109,9 @@
     
     imageTag = 1;
     
-    //[homeTableView setBackgroundColor:[UIColor blackColor]];
     [homeTableView setBackgroundColor:[UIColor clearColor]];
-    //[self.view setBackgroundColor:[UIColor whiteColor]];
-    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
 
-    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
 
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -150,38 +121,15 @@
     
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        [self displayLoggedInItems];
+        homeTableView.hidden = YES;
+        [self sendFacebookRequest];
+        UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOutButtonClicked:)];
+        self.navigationItem.rightBarButtonItem = logOutButton;
     }
     else {
-        homeTableView.hidden = YES;
-        [self setupKenBurnsView];
-        self.navigationItem.rightBarButtonItem = nil;
-        
-        UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
-        self.navigationItem.rightBarButtonItem = loginButton;
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
-}
-
-
--(void)setupKenBurnsView
-{
-    kenView = [[KenBurnsView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    kenView.layer.borderWidth = 1;
-    kenView.layer.borderColor = [UIColor blackColor].CGColor;  
-    [self.view addSubview:kenView];
-    
-    NSArray *myImages = [NSArray arrayWithObjects:
-                         [UIImage imageNamed:@"image1.jpeg"],
-                         [UIImage imageNamed:@"image2.jpeg"],
-                         [UIImage imageNamed:@"image3.png"],
-                         [UIImage imageNamed:@"image4.png"],
-                         [UIImage imageNamed:@"image5.png"], nil];
-    
-    [kenView animateWithImages:myImages 
-                 transitionDuration:15
-                               loop:YES 
-                        isLandscape:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -204,28 +152,6 @@
     //return YES;
 }
 
-
-#pragma mark - Button Clicks
-
-- (void)loginButtonClicked:(id)sender {
-    
-    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    
-    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos", nil];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    if (![[delegate facebook] isSessionValid]) {
-        [delegate facebook].sessionDelegate = self;
-        [[delegate facebook] authorize:permissions];
-    }
-    
-}
-
 - (void)logOutButtonClicked:(id)sender {
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [[delegate facebook]logout:self];
@@ -241,9 +167,6 @@
     [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    homeTableView.hidden = NO;
-    [kenView removeFromSuperview];
-    [self displayLoggedInItems];
 }
 
 
@@ -285,14 +208,7 @@
         [defaults removeObjectForKey:@"FBAccessTokenKey"];
         [defaults removeObjectForKey:@"FBExpirationDateKey"];
         [defaults synchronize];
-        homeTableView.hidden = YES;
-        photoFoceLabel.hidden = NO;
-        self.navigationItem.rightBarButtonItem = nil;
-        
-        UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
-        self.navigationItem.rightBarButtonItem = loginButton;
-        
-        [self setupKenBurnsView];
+        [self.navigationController dismissModalViewControllerAnimated:YES];
     }
 }
 
@@ -384,15 +300,7 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
-    NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
-    NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 1000'}";
-    
-    NSString *fql = [NSString stringWithFormat:@"%@,%@,%@", getUsers, getAlbums, getPics];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"q", nil];
-    
-    [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
+    [self sendFacebookRequest];
     
     // Here you would make an HTTP request or something like that
     // Call [self doneLoadingTableViewData] when you are done

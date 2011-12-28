@@ -126,7 +126,8 @@ static UIFont* bold14 = nil;
         }
         width = imageToDisplay.size.width;
         height = imageToDisplay.size.height;
-        r = CGRectMake(self.center.x - width/2, 130 - height/2, width, height);
+        r = CGRectMake(self.center.x - width/2 - 10, 130 - height/2, width, height);
+        //r = CGRectMake(5.0, 5.0, width, height);
         
 		[imageToDisplay drawInRect:r];
         

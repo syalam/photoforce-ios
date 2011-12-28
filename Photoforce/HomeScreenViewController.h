@@ -18,20 +18,17 @@ typedef enum apiCall {
 
 @interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate, EGORefreshTableHeaderDelegate> {
     IBOutlet UITableView *homeTableView;
-    IBOutlet UILabel *photoFoceLabel;
+    IBOutlet UILabel *photoForceLabel;
     int currentAPICall;
     NSMutableArray *facebookFeedData;
     NSMutableArray *facebookPhotosData;
-    NSArray *permissions;
     NSUInteger imageTag;
-    KenBurnsView *kenView;
     UIActivityIndicatorView* activityIndicator;
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
 }
 @property(nonatomic,retain) Facebook *facebook;
 
--(void)setupKenBurnsView;
 -(void)playTransitionSoundEffect;
 
 @end
