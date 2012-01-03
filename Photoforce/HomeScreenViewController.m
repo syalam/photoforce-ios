@@ -56,10 +56,11 @@
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationItem.titleView = customTitleView;
+    self.wantsFullScreenLayout = YES;
     
     if (_refreshHeaderView == nil) {
 		
-		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height - 20, self.view.frame.size.width, homeTableView.bounds.size.height)];
+		EGORefreshTableHeaderView *refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - homeTableView.bounds.size.height, self.view.frame.size.width, homeTableView.bounds.size.height)];
 		refreshView.delegate = self;
         refreshView.backgroundColor = [UIColor clearColor];
 		[homeTableView addSubview:refreshView];
@@ -229,19 +230,24 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 260.0;    
+    if (indexPath.row == 0) {
+        return 300.0;
+    }
+    else {
+        return 260.0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     AsyncCell *cell = (AsyncCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[AsyncCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    NSDictionary* obj = [facebookPhotosData objectAtIndex:indexPath.row];
-    [cell updateCellInfo:obj];
+    //if (cell == nil) {
+        //cell = [[AsyncCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell = [[AsyncCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier cellIndex:indexPath.row];
+        NSDictionary* obj = [facebookPhotosData objectAtIndex:indexPath.row];
+        [cell updateCellInfo:obj];
+    //}
     
     return cell;
 }

@@ -45,6 +45,18 @@
     return self;
 }
 
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier cellIndex:(NSUInteger)cellIndex {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) 
+    {
+		self.backgroundColor = [UIColor whiteColor];
+		self.opaque = YES;
+        if (cellIndex == 0) {
+            firstCell = YES;
+        }
+    }
+    return self;
+}
+
 - (void) prepareForReuse {
 	[super prepareForReuse];
     self.image = nil;
@@ -126,8 +138,12 @@ static UIFont* bold14 = nil;
         }
         width = imageToDisplay.size.width;
         height = imageToDisplay.size.height;
-        r = CGRectMake(self.center.x - width/2, 130 - height/2, width, height);
-        //r = CGRectMake(5.0, 5.0, width, height);
+        if (firstCell) {
+            r = CGRectMake(self.center.x - width/2, self.center.y - height/2, width, height);
+        }
+        else {
+            r = CGRectMake(self.center.x - width/2, 130 - height/2, width, height);
+        }
         
 		[imageToDisplay drawInRect:r];
         

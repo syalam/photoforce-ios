@@ -28,11 +28,15 @@
 
 #import "FastCell.h"
 
-@interface AsyncCell : FastCell
+@interface AsyncCell : FastCell {
+    BOOL firstCell;
+}
 
 @property (nonatomic, retain) NSDictionary* info;
 @property (nonatomic, retain) UIImage* image;
 
 - (void) updateCellInfo:(NSDictionary*)_info;
+
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier cellIndex:(NSUInteger)cellIndex;
 
 @end
