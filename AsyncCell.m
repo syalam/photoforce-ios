@@ -139,7 +139,7 @@ static UIFont* bold14 = nil;
         width = imageToDisplay.size.width;
         height = imageToDisplay.size.height;
         if (firstCell) {
-            r = CGRectMake(self.center.x - width/2, self.center.y - height/2, width, height);
+            r = CGRectMake(self.center.x - width/2, 325 - height - 5, width, height);
         }
         else {
             r = CGRectMake(self.center.x - width/2, 130 - height/2, width, height);

@@ -231,7 +231,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        return 300.0;
+        return 325.0;
     }
     else {
         return 260.0;
