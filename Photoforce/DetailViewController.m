@@ -123,7 +123,13 @@
     controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
     
     //captionTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]];
-    //captionTextView.text = detailCaption;
+    if (![detailCaption isEqualToString:@""]) {
+        captionTextView.text = detailCaption;
+    }
+    else {
+        captionTextView.hidden = YES;
+    }
+    
     
     float minimumScale = [imageScrollView frame].size.width  / [fullImageView frame].size.width;
     [imageScrollView setMinimumZoomScale:minimumScale];

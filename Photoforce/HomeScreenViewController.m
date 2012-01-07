@@ -153,7 +153,7 @@
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
     NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
     //NSString *getTagged = @"'getTagged':'select pid from photo_tag where subject in (select uid2 from #getUsers) order by created desc limit 100'";
-    NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 300'}";
+    NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 300'}";
     //NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) or pid in (select pid from #getTagged) order by created desc limit 300'}";
     
     
