@@ -101,11 +101,11 @@
     [fullImageView setImage:fullImageView.image];
     
     fullImageView.center = self.view.center;
-    fullImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    /*fullImageView.layer.shadowColor = [UIColor blackColor].CGColor;
     fullImageView.layer.shadowOpacity = 0.7f;
     fullImageView.layer.shadowOffset = CGSizeMake(10.0f, 10.0f);
     fullImageView.layer.shadowRadius = 5.0f;
-    fullImageView.layer.masksToBounds = NO;
+    fullImageView.layer.masksToBounds = NO;*/
     CGSize size = fullImageView.bounds.size;
     CGFloat curlFactor = 15.0f;
     CGFloat shadowDepth = 5.0f;
@@ -119,20 +119,20 @@
     
     if (![self.captionToDisplay isEqualToString:@""]) {
         NSLog(@"%d", captionToDisplay.length);
-        if (captionToDisplay.length > 295) {
+        if (captionToDisplay.length > 250) {
+            [captionTextView setFrame:CGRectMake(0, 380, 320, 80)];
+        }
+        else if (captionToDisplay.length > 200) {
+            [captionTextView setFrame:CGRectMake(0, 390, 320, 70)];
+        }
+        else if (captionToDisplay.length > 150) {
             [captionTextView setFrame:CGRectMake(0, 400, 320, 60)];
         }
-        else if (captionToDisplay.length > 236) {
-            [captionTextView setFrame:CGRectMake(0, 405, 320, 50)];
+        else if (captionToDisplay.length > 100) {
+            [captionTextView setFrame:CGRectMake(0, 410, 320, 50)];
         }
-        else if (captionToDisplay.length > 177) {
+        else if (captionToDisplay.length > 50) {
             [captionTextView setFrame:CGRectMake(0, 420, 320, 40)];
-        }
-        else if (captionToDisplay.length > 118) {
-            [captionTextView setFrame:CGRectMake(0, 425, 320, 35)];
-        }
-        else if (captionToDisplay.length > 59) {
-            [captionTextView setFrame:CGRectMake(0, 430, 320, 30)];
         }
         captionTextView.text = self.captionToDisplay;
     }
