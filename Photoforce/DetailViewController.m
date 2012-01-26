@@ -11,17 +11,17 @@
 #define ZOOM_STEP 2.0
 
 @implementation DetailViewController
+@synthesize imageToDisplay;
+@synthesize captionToDisplay;
 
-
-
-/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
  {
  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
  if (self) {
  // Custom initialization
  }
  return self;
- }*/
+ }
 
 - (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption
 {
@@ -31,9 +31,6 @@
     detailCaption = caption;
     return self;
 }
-
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -95,8 +92,9 @@
     [swipeDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [self.view addGestureRecognizer:swipeDown];
     
-    NSURL* myURL = [NSURL URLWithString:urlString];
-    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
+    //NSURL* myURL = [NSURL URLWithString:urlString];
+    //image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
+    image = self.imageToDisplay;
     //[fullImageView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
     
     [fullImageView setBackgroundColor:[UIColor clearColor]];
@@ -123,8 +121,8 @@
     controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
     
     //captionTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]];
-    if (![detailCaption isEqualToString:@""]) {
-        captionTextView.text = detailCaption;
+    if (![self.captionToDisplay isEqualToString:@""]) {
+        captionTextView.text = self.captionToDisplay;
     }
     else {
         captionTextView.hidden = YES;

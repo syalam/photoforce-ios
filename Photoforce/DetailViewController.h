@@ -21,7 +21,10 @@
     NSUInteger *captionTapCount;
 }
 
-- (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption;
+@property (nonatomic, copy) UIImage* imageToDisplay;
+@property (nonatomic, copy) NSString* captionToDisplay;
 
+- (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 @end

@@ -43,6 +43,9 @@
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
+    imageQueue_ = dispatch_queue_create("com.company.app.imageQueue", NULL);
+    imagesArray = [[NSMutableArray alloc]initWithCapacity:1];
+    
     UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     customTitleView.backgroundColor = [UIColor clearColor];
     UILabel* logo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
@@ -91,7 +94,7 @@
     
     imageTag = 1;
     
-    [homeTableView setBackgroundColor:[UIColor clearColor]];
+    [homeTableView setBackgroundColor:[UIColor whiteColor]];
 
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
 
@@ -192,10 +195,6 @@
         }
         
     }
-
-
-    
-
     [homeTableView reloadData];
     
 }
@@ -241,21 +240,53 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
-    AsyncCell *cell = (AsyncCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //if (cell == nil) {
-        //cell = [[AsyncCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    cell = [[AsyncCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier cellIndex:indexPath.row];
-        NSDictionary* obj = [facebookPhotosData objectAtIndex:indexPath.row];
-        [cell updateCellInfo:obj];
-    //}
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    NSMutableDictionary *images = [facebookPhotosData objectAtIndex:[indexPath row]];
+    UIImageView *imageView;
+    if (indexPath.row == 0) {
+        imageView  = [[UIImageView alloc]initWithFrame:CGRectMake(5, 70, 290, 250)];
+    }
+    else {
+        imageView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 290, 250)];
+    }
+    
+    if ([images objectForKey:@"image"]) {
+        //[[cell imageView] setImage:[images objectForKey:@"image"]];
+        UIImage *imageToDisplay = [images objectForKey:@"image"];
+        [imageView setImage:imageToDisplay];
+        [cell addSubview:imageView];
+
+    }
+    else {
+        dispatch_async(imageQueue_, ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[images valueForKey:@"src_big"]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *imageToDisplay = [UIImage imageWithData:imageData];
+                imageToDisplay = [self imageWithImage:imageToDisplay scaledToSize:CGSizeMake(imageToDisplay.size.width/1.5, imageToDisplay.size.height/1.5)];
+                imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
+                [images setValue:imageToDisplay forKey:@"image"];
+                [imageView setImage:imageToDisplay];
+                [cell addSubview:imageView];
+                [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                [imagesArray addObject:[images objectForKey:@"image"]];
+            });
+        });
+    }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *url = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"src_big"];
+    //NSString *url = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"src_big"];
+    UIImage *imageToDisplay = [imagesArray objectAtIndex:indexPath.row];
     NSString *caption = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"caption"];
-    DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
+    DetailViewController *dvc = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
+    dvc.imageToDisplay = imageToDisplay;
+    dvc.captionToDisplay = caption;
+    //DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
     //[self.navigationController pushViewController:dvc animated:YES];
     
     dvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
@@ -331,7 +362,36 @@
 	return [NSDate date]; // should return date data source was last changed
 }
 
+#pragma mark - Image resizing and cropping
 
+- (UIImage*)imageWithImage:(UIImage*)imageToResize scaledToSize:(CGSize)size
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(size);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [imageToResize drawInRect:CGRectMake(0,0,size.width,size.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
+
+- (UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect
+{
+    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
+    
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    //CGImageRelease(imageRef);
+    
+    return cropped;
+}
 
 
 @end

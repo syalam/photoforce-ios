@@ -132,19 +132,20 @@ static UIFont* bold14 = nil;
         else if (imageToDisplay.size.width > 310 && imageToDisplay.size.height < 20) {
             imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
         }
-        else {
-            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
+       else {
+            imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 291, 251)];
 
         }
         width = imageToDisplay.size.width;
         height = imageToDisplay.size.height;
+        
         if (firstCell) {
-            r = CGRectMake(self.center.x - width/2, 325 - height - 5, width, height);
+            //r = CGRectMake(self.center.x - width/2, 325 - height - 5, width, height);
+            r = CGRectMake(self.center.x - imageToDisplay.size.width/2, 325 - imageToDisplay.size.height - 5, imageToDisplay.size.width, imageToDisplay.size.height);
         }
         else {
             r = CGRectMake(self.center.x - width/2, 130 - height/2, width, height);
         }
-        
 		[imageToDisplay drawInRect:r];
         
         /*[[UIColor blackColor] set];

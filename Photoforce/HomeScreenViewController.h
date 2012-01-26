@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "ListViewController.h"
 #import "Facebook.h"
@@ -18,7 +19,6 @@ typedef enum apiCall {
 
 @interface HomeScreenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate,FBDialogDelegate, EGORefreshTableHeaderDelegate> {
     IBOutlet UITableView *homeTableView;
-    //IBOutlet UILabel *photoFoceLabel;
     int currentAPICall;
     NSMutableArray *facebookFeedData;
     NSMutableArray *facebookPhotosData;
@@ -26,10 +26,16 @@ typedef enum apiCall {
     UIActivityIndicatorView* activityIndicator;
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
+    
+    NSMutableArray *imagesArray;
+    
+    dispatch_queue_t imageQueue_;
 }
 @property(nonatomic,retain) Facebook *facebook;
 
--(void)playTransitionSoundEffect;
+- (void)playTransitionSoundEffect;
 - (void) sendFacebookRequest;
+- (UIImage*)imageWithImage:(UIImage*)imageToResize scaledToSize:(CGSize)size;
+- (UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect;
 
 @end
