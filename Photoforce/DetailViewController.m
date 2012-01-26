@@ -68,6 +68,21 @@
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
 
+    UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    customTitleView.backgroundColor = [UIColor clearColor];
+    UILabel* logo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    logo.text = @"Photoforce";
+    logo.textColor = [UIColor whiteColor];
+    logo.shadowColor = [UIColor blackColor];
+    logo.shadowOffset = CGSizeMake(1, 1);
+    logo.backgroundColor = [UIColor clearColor];
+    logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
+    [customTitleView addSubview:logo];
+    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    self.navigationItem.titleView = customTitleView;
+    self.wantsFullScreenLayout = YES;
+    
     captionTapCount = 0;
     
     imageScrollView.minimumZoomScale = 1.0;
@@ -120,19 +135,22 @@
     if (![self.captionToDisplay isEqualToString:@""]) {
         NSLog(@"%d", captionToDisplay.length);
         if (captionToDisplay.length > 250) {
-            [captionTextView setFrame:CGRectMake(0, 380, 320, 80)];
+            [captionTextView setFrame:CGRectMake(0, 400, 320, 80)];
         }
         else if (captionToDisplay.length > 200) {
-            [captionTextView setFrame:CGRectMake(0, 390, 320, 70)];
+            [captionTextView setFrame:CGRectMake(0, 410, 320, 70)];
         }
         else if (captionToDisplay.length > 150) {
-            [captionTextView setFrame:CGRectMake(0, 400, 320, 60)];
+            [captionTextView setFrame:CGRectMake(0, 420, 320, 60)];
         }
         else if (captionToDisplay.length > 100) {
-            [captionTextView setFrame:CGRectMake(0, 410, 320, 50)];
+            [captionTextView setFrame:CGRectMake(0, 430, 320, 50)];
         }
         else if (captionToDisplay.length > 50) {
-            [captionTextView setFrame:CGRectMake(0, 420, 320, 40)];
+            [captionTextView setFrame:CGRectMake(0, 440, 320, 40)];
+        }
+        else {
+            [captionTextView setFrame:CGRectMake(0, 450, 320, 30)];
         }
         captionTextView.text = self.captionToDisplay;
     }

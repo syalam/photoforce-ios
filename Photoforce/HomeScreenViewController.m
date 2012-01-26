@@ -290,11 +290,12 @@
     dvc.imageToDisplay = imageToDisplay;
     dvc.captionToDisplay = caption;
     //DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
-    //[self.navigationController pushViewController:dvc animated:YES];
     
-    dvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-    [self.navigationController presentModalViewController:dvc animated:YES];
-    [self playTransitionSoundEffect];
+    [self.navigationController pushViewController:dvc animated:YES];
+    
+    //dvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+    //[self.navigationController presentModalViewController:dvc animated:YES];
+    //[self playTransitionSoundEffect];
 }
 
 -(void)playTransitionSoundEffect
