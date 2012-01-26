@@ -44,7 +44,7 @@
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
     imageQueue_ = dispatch_queue_create("com.company.app.imageQueue", NULL);
-    imagesArray = [[NSMutableArray alloc]initWithCapacity:1];
+    imagesDictionary = [[NSMutableDictionary alloc]initWithCapacity:1];
     
     UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     customTitleView.backgroundColor = [UIColor clearColor];
@@ -156,7 +156,9 @@
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
     NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
     //NSString *getTagged = @"'getTagged':'select pid from photo_tag where subject in (select uid2 from #getUsers) order by created desc limit 100'";
-    NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 300'}";
+    
+    NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 100'}";
+    
     //NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) or pid in (select pid from #getTagged) order by created desc limit 300'}";
     
     
@@ -195,6 +197,7 @@
         }
         
     }
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [homeTableView reloadData];
     
 }
@@ -203,6 +206,7 @@
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
+    [self sendFacebookRequest];
 }
 
 - (void) fbDidLogout {
@@ -266,12 +270,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIImage *imageToDisplay = [UIImage imageWithData:imageData];
                 imageToDisplay = [self imageWithImage:imageToDisplay scaledToSize:CGSizeMake(imageToDisplay.size.width/1.5, imageToDisplay.size.height/1.5)];
+                [imagesDictionary setObject:imageToDisplay forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
                 imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
                 [images setValue:imageToDisplay forKey:@"image"];
                 [imageView setImage:imageToDisplay];
                 [cell addSubview:imageView];
                 [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                [imagesArray addObject:[images objectForKey:@"image"]];
             });
         });
     }
@@ -281,7 +285,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //NSString *url = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"src_big"];
-    UIImage *imageToDisplay = [imagesArray objectAtIndex:indexPath.row];
+    UIImage *imageToDisplay = [imagesDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
     NSString *caption = [[facebookPhotosData objectAtIndex:indexPath.row]objectForKey:@"caption"];
     DetailViewController *dvc = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
     dvc.imageToDisplay = imageToDisplay;
@@ -317,7 +321,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    //[self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -326,10 +330,10 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (_reloading) 
+    /*if (_reloading) 
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     else
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        [self.navigationController setNavigationBarHidden:NO animated:YES];*/
 }
 
 #pragma mark -
@@ -354,7 +358,7 @@
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    //[self.navigationController setNavigationBarHidden:YES animated:YES];
 	return _reloading; // should return if data source model is reloading
 }
 

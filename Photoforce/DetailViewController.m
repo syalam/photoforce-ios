@@ -91,11 +91,8 @@
     UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDown:)];
     [swipeDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [self.view addGestureRecognizer:swipeDown];
-    
-    //NSURL* myURL = [NSURL URLWithString:urlString];
-    //image = [UIImage imageWithData:[NSData dataWithContentsOfURL:myURL]];
+
     image = self.imageToDisplay;
-    //[fullImageView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
     
     [fullImageView setBackgroundColor:[UIColor clearColor]];
     fullImageView.image = image;
@@ -120,8 +117,23 @@
     controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
     controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
     
-    //captionTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]];
     if (![self.captionToDisplay isEqualToString:@""]) {
+        NSLog(@"%d", captionToDisplay.length);
+        if (captionToDisplay.length > 295) {
+            [captionTextView setFrame:CGRectMake(0, 400, 320, 60)];
+        }
+        else if (captionToDisplay.length > 236) {
+            [captionTextView setFrame:CGRectMake(0, 405, 320, 50)];
+        }
+        else if (captionToDisplay.length > 177) {
+            [captionTextView setFrame:CGRectMake(0, 420, 320, 40)];
+        }
+        else if (captionToDisplay.length > 118) {
+            [captionTextView setFrame:CGRectMake(0, 425, 320, 35)];
+        }
+        else if (captionToDisplay.length > 59) {
+            [captionTextView setFrame:CGRectMake(0, 430, 320, 30)];
+        }
         captionTextView.text = self.captionToDisplay;
     }
     else {
