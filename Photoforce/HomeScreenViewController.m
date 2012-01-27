@@ -8,7 +8,6 @@
 
 #import "HomeScreenViewController.h"
 #import "AppDelegate.h"
-#import "AsyncCell.h"
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
 #include <AudioToolbox/AudioToolbox.h>
@@ -43,7 +42,7 @@
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
-    imageQueue_ = dispatch_queue_create("com.company.app.imageQueue", NULL);
+    imageQueue_ = dispatch_queue_create("com.tappforce.photoforce.imageQueue", NULL);
     imagesDictionary = [[NSMutableDictionary alloc]initWithCapacity:1];
     
     UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
@@ -245,8 +244,7 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSMutableDictionary *images = [facebookPhotosData objectAtIndex:[indexPath row]];
     UIImageView *imageView;
@@ -259,6 +257,7 @@
     
     if ([images objectForKey:@"image"]) {
         UIImage *imageToDisplay = [images objectForKey:@"image"];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
         [imageView setImage:imageToDisplay];
         [cell addSubview:imageView];
 
@@ -273,6 +272,7 @@
                     [imagesDictionary setObject:imageToDisplay forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
                     imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
                     [images setValue:imageToDisplay forKey:@"image"];
+                    imageView.contentMode = UIViewContentModeScaleAspectFill;
                     [imageView setImage:imageToDisplay];
                     [cell addSubview:imageView];
                     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
