@@ -192,7 +192,7 @@
         facebookPhotosData = [[NSMutableArray alloc]initWithCapacity:1];
         facebookFeedData = [[NSMutableArray alloc]initWithCapacity:1];
         for (id key in resultSetDictionary) {
-            facebookPhotosData = [[[resultSetDictionary objectForKey:key]objectAtIndex:2] objectForKey:@"fql_result_set"];
+            facebookPhotosData = [[[resultSetDictionary objectForKey:key]objectAtIndex:3] objectForKey:@"fql_result_set"];
         }
         
     }
