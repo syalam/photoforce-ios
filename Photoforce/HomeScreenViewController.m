@@ -257,7 +257,7 @@
     
     if ([images objectForKey:@"image"]) {
         UIImage *imageToDisplay = [images objectForKey:@"image"];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [imageView setImage:imageToDisplay];
         [cell addSubview:imageView];
 
@@ -272,7 +272,7 @@
                     [imagesDictionary setObject:imageToDisplay forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
                     imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
                     [images setValue:imageToDisplay forKey:@"image"];
-                    imageView.contentMode = UIViewContentModeScaleAspectFill;
+                    imageView.contentMode = UIViewContentModeScaleAspectFit;
                     [imageView setImage:imageToDisplay];
                     [cell addSubview:imageView];
                     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
