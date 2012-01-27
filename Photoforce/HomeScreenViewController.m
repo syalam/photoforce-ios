@@ -268,13 +268,15 @@
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[images valueForKey:@"src_big"]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIImage *imageToDisplay = [UIImage imageWithData:imageData];
-                imageToDisplay = [self imageWithImage:imageToDisplay scaledToSize:CGSizeMake(imageToDisplay.size.width/1.5, imageToDisplay.size.height/1.5)];
-                [imagesDictionary setObject:imageToDisplay forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
-                imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
-                [images setValue:imageToDisplay forKey:@"image"];
-                [imageView setImage:imageToDisplay];
-                [cell addSubview:imageView];
-                [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                if (imageToDisplay) {
+                    imageToDisplay = [self imageWithImage:imageToDisplay scaledToSize:CGSizeMake(imageToDisplay.size.width/1.5, imageToDisplay.size.height/1.5)];
+                    [imagesDictionary setObject:imageToDisplay forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+                    imageToDisplay = [self imageByCropping:imageToDisplay toRect:CGRectMake(30, 0, 290, 250)];
+                    [images setValue:imageToDisplay forKey:@"image"];
+                    [imageView setImage:imageToDisplay];
+                    [cell addSubview:imageView];
+                    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
             });
         });
     }
