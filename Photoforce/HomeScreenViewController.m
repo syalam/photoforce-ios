@@ -111,7 +111,7 @@
         self.navigationItem.rightBarButtonItem = logOutButton;
     }
     else {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController dismissModalViewControllerAnimated:YES];
     }
     
 }
@@ -205,7 +205,7 @@
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
-    [self sendFacebookRequest];
+    //[self sendFacebookRequest];
 }
 
 - (void) fbDidLogout {
