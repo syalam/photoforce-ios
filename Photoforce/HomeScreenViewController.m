@@ -56,7 +56,7 @@
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
     
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationItem.titleView = customTitleView;
     self.wantsFullScreenLayout = YES;
     
@@ -232,12 +232,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    /*if (indexPath.row == 0) {
         return 325.0;
     }
     else {
         return 260.0;
-    }
+    }*/
+    return 260.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -248,12 +249,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSMutableDictionary *images = [facebookPhotosData objectAtIndex:[indexPath row]];
     UIImageView *imageView;
-    if (indexPath.row == 0) {
-        imageView  = [[UIImageView alloc]initWithFrame:CGRectMake(5, 70, 290, 250)];
-    }
-    else {
-        imageView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 290, 250)];
-    }
+
+    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 290, 250)];
     
     if ([images objectForKey:@"image"]) {
         UIImage *imageToDisplay = [images objectForKey:@"image"];
@@ -345,7 +342,7 @@
 - (void)reloadTableViewDataSource {
 	_reloading = YES;
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    //[self.navigationController setNavigationBarHidden:YES animated:YES];
     
     [self sendFacebookRequest];
     
