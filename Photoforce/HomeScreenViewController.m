@@ -106,7 +106,8 @@
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
         homeTableView.hidden = YES;
-        [self sendFacebookRequest];
+        [self reloadTableViewDataSource];
+        //[self sendFacebookRequest];
         UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOutButtonClicked:)];
         self.navigationItem.rightBarButtonItem = logOutButton;
     }
@@ -147,11 +148,6 @@
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityIndicator.frame = CGRectMake(120, 200, 100, 100);
-    [activityIndicator startAnimating];
-    [self.view addSubview:activityIndicator];
-    
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
     NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
     //NSString *getTagged = @"'getTagged':'select pid from photo_tag where subject in (select uid2 from #getUsers) order by created desc limit 100'";
@@ -184,7 +180,6 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-    [activityIndicator stopAnimating];
     homeTableView.hidden = NO;
 
     if ([result objectForKey:@"data"]) {
@@ -205,7 +200,6 @@
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
-    //[self sendFacebookRequest];
 }
 
 - (void) fbDidLogout {

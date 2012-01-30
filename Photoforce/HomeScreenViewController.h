@@ -39,5 +39,6 @@ typedef enum apiCall {
 - (void) sendFacebookRequest;
 - (UIImage*)imageWithImage:(UIImage*)imageToResize scaledToSize:(CGSize)size;
 - (UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect;
+- (void)reloadTableViewDataSource;
 
 @end
