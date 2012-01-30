@@ -260,7 +260,7 @@
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         [imageView setImage:imageToDisplay];
         [cell addSubview:imageView];
-
+        
     }
     else {
         dispatch_async(imageQueue_, ^{

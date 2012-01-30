@@ -27,6 +27,8 @@ typedef enum apiCall {
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
     
+    BOOL doneLoading;
+    
     NSMutableDictionary *imagesDictionary;
     
     dispatch_queue_t imageQueue_;

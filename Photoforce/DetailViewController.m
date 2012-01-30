@@ -103,9 +103,9 @@
     //[doubleTap setNumberOfTouchesRequired:2];
     [imageScrollView addGestureRecognizer:doubleTap];
     
-    /*UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDown:)];
-    [swipeDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    [self.view addGestureRecognizer:swipeDown];*/
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
+    [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:swipeRight];
 
     image = self.imageToDisplay;
     
@@ -246,9 +246,9 @@
     [imageScrollView zoomToRect:zoomRect animated:YES];
 }
 
-/*- (void)handleSwipeDown:(UIGestureRecognizer *)gestureRecognizer {
-    [self dismissModalViewControllerAnimated:YES];
-}*/
+- (void)handleSwipeRight:(UIGestureRecognizer *)gestureRecognizer {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 #pragma mark - Rotate Delegate Methods
