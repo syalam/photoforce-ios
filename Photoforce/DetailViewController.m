@@ -88,7 +88,7 @@
     
     imageScrollView.minimumZoomScale = 1.0;
     imageScrollView.maximumZoomScale = 6.0;
-    imageScrollView.contentSize=CGSizeMake(330, 460);
+    imageScrollView.contentSize=CGSizeMake(320, 460);
     imageScrollView.delegate = self;
     
     //[imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
