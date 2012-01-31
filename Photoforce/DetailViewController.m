@@ -94,10 +94,11 @@
     //[imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
     [imageScrollView setBackgroundColor:[UIColor clearColor]];
     
+    /*
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     //[singleTap setNumberOfTapsRequired:1];
     [singleTap setNumberOfTouchesRequired:1];
-    [imageScrollView addGestureRecognizer:singleTap];
+    [imageScrollView addGestureRecognizer:singleTap];*/
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
@@ -209,7 +210,7 @@
     
     return zoomRect;
 }
-
+/*
 - (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer {
     if (!tapped) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -220,16 +221,7 @@
         tapped = NO;
     }
     
-    
-    /*if (captionTapCount > 0 && !zoomed) {
-        captionTextView.hidden = NO;
-        captionTapCount = 0;
-    }
-    else {
-        captionTextView.hidden = YES;
-        captionTapCount ++;
-    }*/
-}
+}*/
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     float newScale;
