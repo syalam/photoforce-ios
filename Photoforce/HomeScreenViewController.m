@@ -56,7 +56,7 @@
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
     
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
     self.navigationItem.titleView = customTitleView;
     self.wantsFullScreenLayout = YES;
     
@@ -119,9 +119,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-
-
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 - (void)viewDidUnload
 {
