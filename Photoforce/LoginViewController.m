@@ -54,7 +54,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [self setupKenBurnsView];
     
@@ -67,20 +66,18 @@
     
     [self.view addSubview:logo];
     
-    [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-    [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    PFUser *user = [PFUser currentUser];
     
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+    [delegate facebook].accessToken = [user facebookAccessToken];
+    [delegate facebook].expirationDate = [user facebookExpirationDate];
+    
+    if ([user facebookAccessToken] 
+        && [user facebookExpirationDate]) {
         HomeScreenViewController *homeScreen = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
         UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:homeScreen];
         [self.navigationController presentModalViewController:navc animated:NO];
-        //[self.navigationController pushViewController:homeScreen animated:YES];
     }
         
-    /*UIBarButtonItem *loginButton = [[UIBarButtonItem alloc]initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonClicked:)];
-    self.navigationItem.rightBarButtonItem = loginButton;*/
-    
     slideToCancel = [[SlideToCancelViewController alloc] init];
     slideToCancel.delegate = self;
     CGRect sliderFrame = slideToCancel.view.frame;

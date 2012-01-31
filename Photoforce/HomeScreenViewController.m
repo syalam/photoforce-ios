@@ -136,8 +136,10 @@
 }
 
 - (void)logOutButtonClicked:(id)sender {
-    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [[delegate facebook]logout:self];
+    [PFUser logOut];
+    [self.navigationController dismissModalViewControllerAnimated:YES];
+    /*AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[delegate facebook]logout:self];*/
 }
 
 #pragma mark - Facebook Methods
