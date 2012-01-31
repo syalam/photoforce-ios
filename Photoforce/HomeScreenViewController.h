@@ -26,7 +26,7 @@ typedef enum apiCall {
     UIActivityIndicatorView* activityIndicator;
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
-    
+    BOOL initialLoad;
     BOOL doneLoading;
     
     NSMutableDictionary *imagesDictionary;

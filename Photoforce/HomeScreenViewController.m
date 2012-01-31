@@ -42,6 +42,13 @@
     [super viewDidLoad];
     //photoFoceLabel.hidden = YES;
     
+    initialLoad = YES;
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.center = CGPointMake(160, 240);
+    //activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+    
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
     imageQueue_ = dispatch_queue_create("com.tappforce.photoforce.imageQueue", NULL);
@@ -74,13 +81,6 @@
     
     homeTableView.dataSource = self;
     homeTableView.delegate = self;
-    /*[homeTableView setSeparatorColor:[UIColor grayColor]];
-    homeTableView.center = self.view.center;
-    homeTableView.layer.shadowColor = [UIColor blackColor].CGColor;
-    homeTableView.layer.shadowOpacity = 0.7f;
-    homeTableView.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
-    homeTableView.layer.shadowRadius = 5.0f;
-    homeTableView.layer.masksToBounds = NO;*/
     CGSize size = homeTableView.bounds.size;
     CGFloat curlFactor = 15.0f;
     CGFloat shadowDepth = 5.0f;
@@ -147,6 +147,11 @@
 #pragma mark - Facebook Methods
 
 - (void) sendFacebookRequest {
+    if (initialLoad) {
+        [activityIndicator stopAnimating];
+        activityIndicator.hidden = YES;
+        initialLoad = NO;
+    }
     [SVProgressHUD showWithStatus:@"Refreshing Photos"];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];

@@ -68,6 +68,8 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
+    
+    
 
     UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     customTitleView.backgroundColor = [UIColor clearColor];
@@ -227,7 +229,7 @@
     float newScale;
     if (zoomed) {
         newScale = [imageScrollView zoomScale] / ZOOM_STEP;
-        zoomed = NO;;
+        zoomed = NO;
     }
     else {
         // double tap zooms in
