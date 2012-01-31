@@ -40,6 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     initialLoad = YES;    
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
@@ -97,11 +98,7 @@
     
     [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
     [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityIndicator.frame = CGRectMake(120, 200, 100, 100);
-    [activityIndicator startAnimating];
-    [self.view addSubview:activityIndicator];
+
     
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
@@ -146,9 +143,10 @@
 
 - (void) sendFacebookRequest {
     if (initialLoad) {
-        [activityIndicator stopAnimating];
-        activityIndicator.hidden = YES;
-        initialLoad = NO;
+        activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        activityIndicator.frame = CGRectMake(120, 115, 100, 100);
+        [activityIndicator startAnimating];
+        [self.view addSubview:activityIndicator];
     }
     [SVProgressHUD showWithStatus:@"Refreshing Photos"];
     
@@ -186,6 +184,12 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
+    if (initialLoad) {
+        [activityIndicator stopAnimating];
+        [activityIndicator setHidden:YES];
+        initialLoad = NO;
+    }
+    
     homeTableView.hidden = NO;
     [SVProgressHUD dismiss];
 

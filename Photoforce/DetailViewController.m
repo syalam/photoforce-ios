@@ -67,7 +67,7 @@
 {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
+    [imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
     
     
 
@@ -90,11 +90,11 @@
     
     imageScrollView.minimumZoomScale = 1.0;
     imageScrollView.maximumZoomScale = 6.0;
-    imageScrollView.contentSize=CGSizeMake(320, 460);
+    imageScrollView.contentSize=CGSizeMake(imageToDisplay.size.width, imageToDisplay.size.height);
     imageScrollView.delegate = self;
     
     //[imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
-    [imageScrollView setBackgroundColor:[UIColor clearColor]];
+    //[imageScrollView setBackgroundColor:[UIColor clearColor]];
     
     /*
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
@@ -112,14 +112,14 @@
     [self.view addGestureRecognizer:swipeRight];
 
     image = self.imageToDisplay;
-    
+
     [fullImageView setBackgroundColor:[UIColor clearColor]];
     fullImageView.image = image;
     fullImageView.contentMode = UIViewContentModeScaleAspectFit;
     //fullImageView.contentMode = UIViewContentModeScaleAspectFill;
     [fullImageView setImage:fullImageView.image];
     
-    fullImageView.center = self.view.center;
+    fullImageView.center = imageScrollView.center;
     /*fullImageView.layer.shadowColor = [UIColor blackColor].CGColor;
     fullImageView.layer.shadowOpacity = 0.7f;
     fullImageView.layer.shadowOffset = CGSizeMake(10.0f, 10.0f);
@@ -229,6 +229,7 @@
     float newScale;
     if (zoomed) {
         newScale = [imageScrollView zoomScale] / ZOOM_STEP;
+        [imageScrollView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
         zoomed = NO;
     }
     else {
