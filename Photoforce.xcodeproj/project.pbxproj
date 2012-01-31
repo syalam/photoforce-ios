@@ -302,11 +302,6 @@
 		F7859DD0148AB63D00B1F94C = {
 			isa = PBXGroup;
 			children = (
-				F722475714D7BD1600487D07 /* Security.framework */,
-				F722475514D7BD0900487D07 /* libz.1.1.3.dylib */,
-				F722475314D7BCFB00487D07 /* MobileCoreServices.framework */,
-				F722475114D7BCF000487D07 /* SystemConfiguration.framework */,
-				F722474F14D7BCE400487D07 /* CFNetwork.framework */,
 				F7859DE5148AB63D00B1F94C /* Photoforce */,
 				F7859E06148AB63E00B1F94C /* PhotoforceTests */,
 				F731E164149DBE2100F2DB5C /* Resources */,
@@ -327,6 +322,11 @@
 		F7859DDE148AB63D00B1F94C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F722475714D7BD1600487D07 /* Security.framework */,
+				F722475514D7BD0900487D07 /* libz.1.1.3.dylib */,
+				F722475314D7BCFB00487D07 /* MobileCoreServices.framework */,
+				F722475114D7BCF000487D07 /* SystemConfiguration.framework */,
+				F722474F14D7BCE400487D07 /* CFNetwork.framework */,
 				F722474C14D7BC7B00487D07 /* Parse.framework */,
 				8C05993814A98D9900242950 /* AudioToolbox.framework */,
 				F731E18B149DD05D00F2DB5C /* QuartzCore.framework */,

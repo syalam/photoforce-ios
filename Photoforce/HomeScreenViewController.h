@@ -11,6 +11,7 @@
 #import "ListViewController.h"
 #import "Facebook.h"
 #import "JBKenBurnsView.h"
+#import <Parse/Parse.h>
 
 typedef enum apiCall {
     kAPIGraphFeed,

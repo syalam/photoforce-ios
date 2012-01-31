@@ -11,6 +11,7 @@
 #import "JBKenBurnsView.h"
 #import "HomeScreenViewController.h"
 #import "FlurryAnalytics.h"
+#import <Parse/Parse.h>
 
 @implementation LoginViewController
 
@@ -184,15 +185,23 @@
     permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos", nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    if (![[delegate facebook] isSessionValid]) {
-        [delegate facebook].sessionDelegate = self;
-        [[delegate facebook] authorize:permissions];
-    }
+
+    [PFUser logInWithFacebook:permissions block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Invalid Login" message:@"Please Try Again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        else {
+            [defaults setObject:[user facebookAccessToken] forKey:@"FBAccessTokenKey"];
+            [defaults setObject:[user facebookExpirationDate] forKey:@"FBExpirationDateKey"];
+            [delegate facebook].accessToken = [user facebookAccessToken];
+            [delegate facebook].expirationDate = [user facebookExpirationDate];
+            
+            HomeScreenViewController *homeScreen = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
+            UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:homeScreen];
+            [self.navigationController presentModalViewController:navc animated:NO];
+        }
+    }];
 }
 
 

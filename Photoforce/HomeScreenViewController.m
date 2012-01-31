@@ -14,6 +14,7 @@
 #include "FlurryAnalytics.h"
 #include "SVProgressHUD.h"
 
+
 @implementation HomeScreenViewController
 
 @synthesize facebook;
@@ -94,14 +95,14 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
 
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-    [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-
+    PFUser *user = [PFUser currentUser];
+    [delegate facebook].accessToken = [user facebookAccessToken];
+    [delegate facebook].expirationDate = [user facebookExpirationDate];
     
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+    
+    if ([user facebookAccessToken] 
+        && [user facebookExpirationDate]) {
         homeTableView.hidden = YES;
         [self reloadTableViewDataSource];
         //[self sendFacebookRequest];
@@ -198,7 +199,9 @@
         facebookPhotosData = [[NSMutableArray alloc]initWithCapacity:1];
         facebookFeedData = [[NSMutableArray alloc]initWithCapacity:1];
         for (id key in resultSetDictionary) {
-            facebookPhotosData = [[[resultSetDictionary objectForKey:key]objectAtIndex:2] objectForKey:@"fql_result_set"];
+            //facebookPhotosData = [[[resultSetDictionary valueForKey:key] objectAtIndex:2] valueForKey:@"fql_result_set"];
+            facebookFeedData = [resultSetDictionary valueForKey:key];
+            facebookPhotosData = [[facebookFeedData objectAtIndex:2]valueForKey:@"fql_result_set"];
         }
         
     }

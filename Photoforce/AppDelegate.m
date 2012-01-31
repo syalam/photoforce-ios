@@ -10,6 +10,7 @@
 #import "FlurryAnalytics.h"
 #import "LoginViewController.h"
 #import "HomeScreenViewController.h"
+#import <Parse/Parse.h>
 
 static NSString* kAppId = @"266617523389474";
 static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
@@ -30,8 +31,9 @@ static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
     
     LoginViewController *loginScreen = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     
-    
     facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:loginScreen];
+    
+    [Parse setFacebookApplicationId:@"266617523389474"];
     
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:loginScreen];
     self.window.rootViewController = self.navigationController;
@@ -98,13 +100,13 @@ static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
 
 // Pre 4.2 support
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [facebook handleOpenURL:url]; 
+    return [[PFUser facebook] handleOpenURL:url];
 }
 
 // For 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [facebook handleOpenURL:url]; 
+    return [[PFUser facebook] handleOpenURL:url];
 }
 
 - (void)fbDidLogin {

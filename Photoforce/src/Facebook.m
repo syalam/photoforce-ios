@@ -199,7 +199,7 @@ static NSString* kSDKVersion = @"2";
       }
       NSString *urlPrefix = [NSString stringWithFormat:@"%@://%@", scheme, kFBAppAuthURLPath];
       NSString *fbAppUrl = [FBRequest serializeURL:urlPrefix params:params];
-      //didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
+      didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
     }
 
     if (trySafariAuth && !didOpenOtherApp) {
