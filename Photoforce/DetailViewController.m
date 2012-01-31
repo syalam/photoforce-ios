@@ -80,7 +80,7 @@
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
     
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationItem.titleView = customTitleView;
     self.wantsFullScreenLayout = YES;
     
@@ -88,7 +88,7 @@
     
     imageScrollView.minimumZoomScale = 1.0;
     imageScrollView.maximumZoomScale = 6.0;
-    imageScrollView.contentSize=CGSizeMake(320, 416);
+    imageScrollView.contentSize=CGSizeMake(320, 480);
     imageScrollView.delegate = self;
     
     //[imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
@@ -112,7 +112,7 @@
     
     [fullImageView setBackgroundColor:[UIColor clearColor]];
     fullImageView.image = image;
-    fullImageView.contentMode = UIViewContentModeScaleAspectFit;
+    fullImageView.contentMode = UIViewContentModeScaleAspectFill; //UIViewContentModeScaleAspectFit;
     //fullImageView.contentMode = UIViewContentModeScaleAspectFill;
     [fullImageView setImage:fullImageView.image];
     

@@ -57,7 +57,7 @@
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
     
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationItem.titleView = customTitleView;
     self.wantsFullScreenLayout = YES;
     
