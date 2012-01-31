@@ -146,7 +146,6 @@
 #pragma mark - Facebook Methods
 
 - (void) sendFacebookRequest {
-    
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
