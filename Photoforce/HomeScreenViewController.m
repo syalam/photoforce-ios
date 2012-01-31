@@ -148,7 +148,7 @@
         [activityIndicator startAnimating];
         [self.view addSubview:activityIndicator];
     }
-    [SVProgressHUD showWithStatus:@"Refreshing Photos"];
+    //[SVProgressHUD showWithStatus:@"Refreshing Photos"];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
@@ -191,7 +191,7 @@
     }
     
     homeTableView.hidden = NO;
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
 
     if ([result objectForKey:@"data"]) {
         NSMutableDictionary *resultSetDictionary = [[NSMutableDictionary alloc]initWithDictionary:result];
