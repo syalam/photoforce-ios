@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "FlurryAnalytics.h"
 
 #define ZOOM_STEP 2.0
 
@@ -79,8 +80,7 @@
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
     
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.navigationController.navigationBar.tintColor = [UIColor clearColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationItem.titleView = customTitleView;
     self.wantsFullScreenLayout = YES;
     
@@ -88,16 +88,16 @@
     
     imageScrollView.minimumZoomScale = 1.0;
     imageScrollView.maximumZoomScale = 6.0;
-    imageScrollView.contentSize=CGSizeMake(320, 460);
+    imageScrollView.contentSize=CGSizeMake(320, 480);
     imageScrollView.delegate = self;
     
     //[imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
     [imageScrollView setBackgroundColor:[UIColor clearColor]];
     
-    /*UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     //[singleTap setNumberOfTapsRequired:1];
     [singleTap setNumberOfTouchesRequired:1];
-    [imageScrollView addGestureRecognizer:singleTap];*/
+    [imageScrollView addGestureRecognizer:singleTap];
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
@@ -112,7 +112,7 @@
     
     [fullImageView setBackgroundColor:[UIColor clearColor]];
     fullImageView.image = image;
-    fullImageView.contentMode = UIViewContentModeScaleAspectFit;
+    fullImageView.contentMode = UIViewContentModeScaleAspectFill; //UIViewContentModeScaleAspectFit;
     //fullImageView.contentMode = UIViewContentModeScaleAspectFill;
     [fullImageView setImage:fullImageView.image];
     
@@ -136,22 +136,22 @@
     if (![self.captionToDisplay isEqualToString:@""]) {
         NSLog(@"%d", captionToDisplay.length);
         if (captionToDisplay.length > 250) {
-            [captionTextView setFrame:CGRectMake(0, 341, 320, 80)];
+            [captionTextView setFrame:CGRectMake(0, 400, 320, 80)];
         }
         else if (captionToDisplay.length > 200) {
-            [captionTextView setFrame:CGRectMake(0, 351, 320, 70)];
+            [captionTextView setFrame:CGRectMake(0, 410, 320, 70)];
         }
         else if (captionToDisplay.length > 150) {
-            [captionTextView setFrame:CGRectMake(0, 361, 320, 60)];
+            [captionTextView setFrame:CGRectMake(0, 420, 320, 60)];
         }
         else if (captionToDisplay.length > 100) {
-            [captionTextView setFrame:CGRectMake(0, 371, 320, 50)];
+            [captionTextView setFrame:CGRectMake(0, 430, 320, 50)];
         }
         else if (captionToDisplay.length > 50) {
-            [captionTextView setFrame:CGRectMake(0, 381, 320, 40)];
+            [captionTextView setFrame:CGRectMake(0, 440, 320, 40)];
         }
         else {
-            [captionTextView setFrame:CGRectMake(0, 391, 320, 30)];
+            [captionTextView setFrame:CGRectMake(0, 450, 320, 30)];
         }
         captionTextView.text = self.captionToDisplay;
     }
@@ -210,7 +210,7 @@
     return zoomRect;
 }
 
-/*- (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer {
+- (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer {
     if (!tapped) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         tapped = YES;
@@ -219,7 +219,17 @@
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         tapped = NO;
     }
-}*/
+    
+    
+    /*if (captionTapCount > 0 && !zoomed) {
+        captionTextView.hidden = NO;
+        captionTapCount = 0;
+    }
+    else {
+        captionTextView.hidden = YES;
+        captionTapCount ++;
+    }*/
+}
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     float newScale;
@@ -238,6 +248,8 @@
 }
 
 - (void)handleSwipeRight:(UIGestureRecognizer *)gestureRecognizer {
+    [FlurryAnalytics logEvent:@"USER_SWIPED_TO_GO_BACK"];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

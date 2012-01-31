@@ -11,6 +11,8 @@
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
 #include <AudioToolbox/AudioToolbox.h>
+#include "FlurryAnalytics.h"
+#include "SVProgressHUD.h"
 
 @implementation HomeScreenViewController
 
@@ -56,7 +58,7 @@
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
     
-    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationItem.titleView = customTitleView;
     self.wantsFullScreenLayout = YES;
     
@@ -119,7 +121,9 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
+
+
 }
 - (void)viewDidUnload
 {
@@ -143,6 +147,7 @@
 #pragma mark - Facebook Methods
 
 - (void) sendFacebookRequest {
+    [SVProgressHUD showWithStatus:@"Refreshing Photos"];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
@@ -179,6 +184,7 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
     homeTableView.hidden = NO;
+    [SVProgressHUD dismiss];
 
     if ([result objectForKey:@"data"]) {
         NSMutableDictionary *resultSetDictionary = [[NSMutableDictionary alloc]initWithDictionary:result];
@@ -190,11 +196,13 @@
         
     }
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.0];
     [homeTableView reloadData];
     
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+   [SVProgressHUD dismissWithError:[[error userInfo] objectForKey:@"error_msg"]];
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
@@ -207,6 +215,9 @@
         [defaults removeObjectForKey:@"FBAccessTokenKey"];
         [defaults removeObjectForKey:@"FBExpirationDateKey"];
         [defaults synchronize];
+        
+        [FlurryAnalytics logEvent:@"USER_LOGGED_OUT"];
+        
         [self.navigationController dismissModalViewControllerAnimated:YES];
     }
 }
@@ -282,6 +293,8 @@
     dvc.captionToDisplay = caption;
     //DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
     
+    [FlurryAnalytics logEvent:@"USER_CLICKED_PHOTO"];
+    
     [self.navigationController pushViewController:dvc animated:YES];
     
     //dvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
@@ -340,7 +353,6 @@
     
     // Here you would make an HTTP request or something like that
     // Call [self doneLoadingTableViewData] when you are done
-    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
 }
 
 
