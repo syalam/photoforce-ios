@@ -23,6 +23,9 @@
 		8CD3B07814A81B7100C55AAB /* iphone-linen.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD3B07714A81B7100C55AAB /* iphone-linen.png */; };
 		8CD3B08814A82B9A00C55AAB /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD3B08614A82B9A00C55AAB /* header.png */; };
 		8CD3B08914A82B9A00C55AAB /* header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CD3B08714A82B9A00C55AAB /* header@2x.png */; };
+		8CF819D414D78100009D0263 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8CF819D114D78100009D0263 /* SVProgressHUD.bundle */; };
+		8CF819D514D78100009D0263 /* SVProgressHUD.h in Sources */ = {isa = PBXBuildFile; fileRef = 8CF819D214D78100009D0263 /* SVProgressHUD.h */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8CF819D614D78100009D0263 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF819D314D78100009D0263 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F714E14514A0611700E24956 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F714E14314A0611700E24956 /* DetailViewController.m */; };
 		F714E14614A0611700E24956 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F714E14414A0611700E24956 /* DetailViewController.xib */; };
 		F731E167149DBE4500F2DB5C /* film_strip_gif.png in Resources */ = {isa = PBXBuildFile; fileRef = F731E166149DBE4500F2DB5C /* film_strip_gif.png */; };
@@ -96,6 +99,9 @@
 		8CD3B07714A81B7100C55AAB /* iphone-linen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-linen.png"; sourceTree = "<group>"; };
 		8CD3B08614A82B9A00C55AAB /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		8CD3B08714A82B9A00C55AAB /* header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header@2x.png"; sourceTree = "<group>"; };
+		8CF819D114D78100009D0263 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		8CF819D214D78100009D0263 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		8CF819D314D78100009D0263 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		F714E14214A0611700E24956 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		F714E14314A0611700E24956 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F714E14414A0611700E24956 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -213,6 +219,7 @@
 		8C1F673C14A7EAE100B475D8 /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8CF819D814D78107009D0263 /* SVProgressHUD */,
 				F7CDD72114AAD34A0038FE6B /* Slide to Login */,
 				8C1F673B14A7EACA00B475D8 /* KenBurnsView */,
 				F7EAE9C8148B0269003187B8 /* Facebook SDK */,
@@ -220,6 +227,16 @@
 				F731E187149DCF2800F2DB5C /* Pull To Refresh */,
 			);
 			name = "Helper Classes";
+			sourceTree = "<group>";
+		};
+		8CF819D814D78107009D0263 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8CF819D114D78100009D0263 /* SVProgressHUD.bundle */,
+				8CF819D214D78100009D0263 /* SVProgressHUD.h */,
+				8CF819D314D78100009D0263 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		F731E164149DBE2100F2DB5C /* Resources */ = {
@@ -517,6 +534,7 @@
 				F7CDD72E14AADC0E0038FE6B /* sliderTrack.png in Resources */,
 				F7E38E7114D74563004EE4C0 /* blackArrow.png in Resources */,
 				F7E38E7214D74563004EE4C0 /* blackArrow@2x.png in Resources */,
+				8CF819D414D78100009D0263 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +588,8 @@
 				8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */,
 				F7C51C3314AA58D300C6BC29 /* LoginViewController.m in Sources */,
 				F7CDD72514AAD3730038FE6B /* SlideToCancelViewController.m in Sources */,
+				8CF819D514D78100009D0263 /* SVProgressHUD.h in Sources */,
+				8CF819D614D78100009D0263 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

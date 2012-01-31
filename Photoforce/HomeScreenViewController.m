@@ -12,6 +12,7 @@
 #import "FlurryAnalytics.h"
 #include <AudioToolbox/AudioToolbox.h>
 #include "FlurryAnalytics.h"
+#include "SVProgressHUD.h"
 
 @implementation HomeScreenViewController
 
@@ -146,6 +147,8 @@
 #pragma mark - Facebook Methods
 
 - (void) sendFacebookRequest {
+    [SVProgressHUD showWithStatus:@"Refreshing Photos"];
+    
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
@@ -181,6 +184,7 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
     homeTableView.hidden = NO;
+    [SVProgressHUD dismiss];
 
     if ([result objectForKey:@"data"]) {
         NSMutableDictionary *resultSetDictionary = [[NSMutableDictionary alloc]initWithDictionary:result];
@@ -192,11 +196,13 @@
         
     }
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.0];
     [homeTableView reloadData];
     
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+   [SVProgressHUD dismissWithError:[[error userInfo] objectForKey:@"error_msg"]];
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"Token: %@", [defaults objectForKey:@"FBAccessTokenKey"]);
@@ -347,7 +353,6 @@
     
     // Here you would make an HTTP request or something like that
     // Call [self doneLoadingTableViewData] when you are done
-    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
 }
 
 
