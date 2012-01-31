@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "JBKenBurnsView.h"
 #import "HomeScreenViewController.h"
+#import "FlurryAnalytics.h"
 
 @implementation LoginViewController
 
@@ -168,7 +169,7 @@
     [defaults setObject:[[delegate facebook] accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[[delegate facebook] expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    
+        
     HomeScreenViewController *homeScreen = [[HomeScreenViewController alloc]initWithNibName:@"HomeScreenViewController" bundle:nil];
     UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:homeScreen];
     [self.navigationController presentModalViewController:navc animated:NO];

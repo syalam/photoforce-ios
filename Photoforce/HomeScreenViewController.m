@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
 #include <AudioToolbox/AudioToolbox.h>
+#include "FlurryAnalytics.h"
 
 @implementation HomeScreenViewController
 
@@ -209,6 +210,9 @@
         [defaults removeObjectForKey:@"FBAccessTokenKey"];
         [defaults removeObjectForKey:@"FBExpirationDateKey"];
         [defaults synchronize];
+        
+        [FlurryAnalytics logEvent:@"USER_LOGGED_OUT"];
+        
         [self.navigationController dismissModalViewControllerAnimated:YES];
     }
 }
@@ -283,6 +287,8 @@
     dvc.imageToDisplay = imageToDisplay;
     dvc.captionToDisplay = caption;
     //DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
+    
+    [FlurryAnalytics logEvent:@"USER_CLICKED_PHOTO"];
     
     [self.navigationController pushViewController:dvc animated:YES];
     

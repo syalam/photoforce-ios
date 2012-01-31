@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "FlurryAnalytics.h"
 
 #define ZOOM_STEP 2.0
 
@@ -247,6 +248,8 @@
 }
 
 - (void)handleSwipeRight:(UIGestureRecognizer *)gestureRecognizer {
+    [FlurryAnalytics logEvent:@"USER_SWIPED_TO_GO_BACK"];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
