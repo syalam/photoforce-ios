@@ -67,8 +67,8 @@
 {
     [super viewDidLoad];
     
-    [imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
-    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bgtexture"]]];
+    [imageScrollView setBackgroundColor:[UIColor clearColor]];
     
 
     UIView* customTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
