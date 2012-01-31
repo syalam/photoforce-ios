@@ -40,14 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //photoFoceLabel.hidden = YES;
-    
-    initialLoad = YES;
-    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicator.center = CGPointMake(160, 240);
-    //activityIndicator.hidesWhenStopped = YES;
-    [self.view addSubview:activityIndicator];
-    [activityIndicator startAnimating];
+    initialLoad = YES;    
     
     [FlurryAnalytics logAllPageViews:self.navigationController];
     
@@ -104,6 +97,11 @@
     
     [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
     [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicator.frame = CGRectMake(120, 200, 100, 100);
+    [activityIndicator startAnimating];
+    [self.view addSubview:activityIndicator];
     
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
