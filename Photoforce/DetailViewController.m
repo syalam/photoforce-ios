@@ -9,7 +9,6 @@
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
 #import "ASIFormDataRequest.h"
-#import "Facebook.h"
 #import "AppDelegate.h"
 
 #define ZOOM_STEP 2.0
