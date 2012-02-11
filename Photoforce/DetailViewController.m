@@ -12,8 +12,10 @@
 #define ZOOM_STEP 2.0
 
 @implementation DetailViewController
+@synthesize likeButton;
 @synthesize imageToDisplay;
 @synthesize captionToDisplay;
+@synthesize photoObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
  {
@@ -23,6 +25,10 @@
  }
  return self;
  }
+
+- (IBAction)likeButtonClicked:(id)sender {
+}
+
 
 - (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption
 {
@@ -81,6 +87,8 @@
     logo.backgroundColor = [UIColor clearColor];
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
+    
+    NSLog(@"%@", photoObject);
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationItem.titleView = customTitleView;
@@ -172,6 +180,9 @@
 
 - (void)viewDidUnload
 {
+    likeButton = nil;
+    [self setLikeButton:nil];
+    [self setLikeButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

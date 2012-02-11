@@ -20,11 +20,13 @@
     BOOL tapped;
     NSUInteger *captionTapCount;
 }
-
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *likeButton;
 @property (nonatomic, copy) UIImage* imageToDisplay;
 @property (nonatomic, copy) NSString* captionToDisplay;
+@property (nonatomic, retain) NSDictionary* photoObject;
 
 - (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+- (IBAction)likeButtonClicked:(id)sender;
 
 @end

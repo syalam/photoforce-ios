@@ -159,7 +159,7 @@
     NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
     //NSString *getTagged = @"'getTagged':'select pid from photo_tag where subject in (select uid2 from #getUsers) order by created desc limit 100'";
     
-    NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 100'}";
+    NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid, pid from photo where aid in (select aid from #getAlbums) order by created desc limit 100'}";
     
     //NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) or pid in (select pid from #getTagged) order by created desc limit 200'}";
     
@@ -303,6 +303,7 @@
     DetailViewController *dvc = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
     dvc.imageToDisplay = imageToDisplay;
     dvc.captionToDisplay = caption;
+    dvc.photoObject = [facebookPhotosData objectAtIndex:indexPath.row];
     //DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
     
     [FlurryAnalytics logEvent:@"USER_CLICKED_PHOTO"];
