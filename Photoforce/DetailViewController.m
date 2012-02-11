@@ -30,12 +30,25 @@
 
 - (IBAction)likeButtonClicked:(id)sender {
    
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
-    NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
-    [request setDelegate:self];
-    [request startAsynchronous];
+    if ([[[likeButton titleLabel] text] isEqualToString:@"Like"]) {
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
+        NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+        [request setDelegate:self];
+        [request startAsynchronous];
+    }
+    else
+    {
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
+        NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"DELETE"];
+        [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+        [request setDelegate:self];
+        [request startAsynchronous]; 
+    }
+    
 }
 
 
@@ -280,6 +293,15 @@
 #pragma mark - ASIHTTPRequest Delegate Methods
 - (void)requestFinished:(ASIHTTPRequest *)request {
     NSLog(@"Response %d ==> %@", request.responseStatusCode, [request responseString]);
+    
+    if ([[[likeButton titleLabel] text] isEqualToString:@"Like"]) 
+    {
+        [likeButton setTitle:@"Unlike" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [likeButton setTitle:@"Like" forState:UIControlStateNormal];
+    }
 }
 
 
