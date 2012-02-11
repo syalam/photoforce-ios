@@ -142,7 +142,7 @@
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
-    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos", nil];
+    permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos",@"publish_stream", nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] 

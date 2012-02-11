@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
+#import "ASIFormDataRequest.h"
 
 #define ZOOM_STEP 2.0
 
@@ -27,6 +28,11 @@
  }
 
 - (IBAction)likeButtonClicked:(id)sender {
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
+    NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    [request startAsynchronous];
 }
 
 
@@ -266,6 +272,11 @@
     [fullImageView setFrame:self.view.frame];
     imageScrollView.contentSize = self.view.frame.size;
     
+}
+
+#pragma mark - ASIHTTPRequest Delegate Methods
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSLog(@"Response %d ==> %@", request.responseStatusCode, [request responseString]);
 }
 
 @end
