@@ -33,7 +33,7 @@ static NSString* flurryID = @"66PNUQK8BJBNVD2VPZKD";
     
     facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:loginScreen];
     
-    [Parse setFacebookApplicationId:@"266617523389474"];
+    [Parse setFacebookApplicationId:kAppId];
     
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:loginScreen];
     self.window.rootViewController = self.navigationController;

@@ -9,6 +9,8 @@
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
 #import "ASIFormDataRequest.h"
+#import "Facebook.h"
+#import "AppDelegate.h"
 
 #define ZOOM_STEP 2.0
 
@@ -28,9 +30,11 @@
  }
 
 - (IBAction)likeButtonClicked:(id)sender {
+   
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
     NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
     [request setDelegate:self];
     [request startAsynchronous];
 }
@@ -278,5 +282,6 @@
 - (void)requestFinished:(ASIHTTPRequest *)request {
     NSLog(@"Response %d ==> %@", request.responseStatusCode, [request responseString]);
 }
+
 
 @end
