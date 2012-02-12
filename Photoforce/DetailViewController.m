@@ -14,7 +14,6 @@
 #define ZOOM_STEP 2.0
 
 @implementation DetailViewController
-@synthesize likeButton;
 @synthesize imageToDisplay;
 @synthesize captionToDisplay;
 @synthesize photoObject;
@@ -28,9 +27,9 @@
  return self;
  }
 
-- (IBAction)likeButtonClicked:(id)sender {
+- (IBAction)likeBarButtonItemClicked:(id)sender {
    
-    if ([[[likeButton titleLabel] text] isEqualToString:@"Like"]) {
+    if ([[sender title] isEqualToString:@"Like"]) {
         NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
         NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -178,18 +177,17 @@
     [imageScrollView setMinimumZoomScale:minimumScale];
     [imageScrollView setZoomScale:minimumScale];
     
-    //Check if user is already liking a photo
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request setDelegate:self];
-    [request startAsynchronous];
+     likeBarButtonItem = [[UIBarButtonItem alloc ] initWithTitle:@"Like" 
+                                                           style:UIBarButtonItemStyleBordered 
+                                                          target:self 
+                                                          action:@selector(likeBarButtonItemClicked:)];
+    
+    self.navigationItem.rightBarButtonItem = likeBarButtonItem;
 }
 
 - (void)viewDidUnload
 {
-    likeButton = nil;
-    [self setLikeButton:nil];
-    [self setLikeButton:nil];
+    likeBarButtonItem = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -279,13 +277,13 @@
 - (void)requestFinished:(ASIHTTPRequest *)request {
     NSLog(@"Response %d ==> %@", request.responseStatusCode, [request responseString]);
     
-    if ([[[likeButton titleLabel] text] isEqualToString:@"Like"]) 
+    if ([likeBarButtonItem.title isEqualToString:@"Like"]) 
     {
-        [likeButton setTitle:@"Unlike" forState:UIControlStateNormal];
+        likeBarButtonItem.title = @"Unlike";
     }
     else
     {
-        [likeButton setTitle:@"Like" forState:UIControlStateNormal];
+        likeBarButtonItem.title = @"Like";
     }
 }
 
