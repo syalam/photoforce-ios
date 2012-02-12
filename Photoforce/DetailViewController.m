@@ -10,6 +10,7 @@
 #import "FlurryAnalytics.h"
 #import "ASIFormDataRequest.h"
 #import "AppDelegate.h"
+#import "FlurryAnalytics.h"
 
 #define ZOOM_STEP 2.0
 
@@ -36,6 +37,8 @@
         [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
         [request setDelegate:self];
         [request startAsynchronous];
+        
+        [FlurryAnalytics logEvent:@"LIKE_BUTTON_CLICKED"];
     }
     else
     {
@@ -46,6 +49,8 @@
         [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
         [request setDelegate:self];
         [request startAsynchronous]; 
+        
+        [FlurryAnalytics logEvent:@"UNLIKE_BUTTON_CLICKED"];
     }
     
 }
