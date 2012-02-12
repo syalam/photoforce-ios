@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C02F60D14E74F56007A7B68 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C02F60B14E74F56007A7B68 /* libFlurryAnalytics.a */; };
 		8C05992814A95CCC00242950 /* bgtexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992614A95CCC00242950 /* bgtexture.png */; };
 		8C05992914A95CCC00242950 /* bgtexture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992714A95CCC00242950 /* bgtexture@2x.png */; };
 		8C05992C14A9860600242950 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05992B14A9860600242950 /* image3.png */; };
 		8C05993614A98D2800242950 /* page-flip-4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C05993514A98D2800242950 /* page-flip-4.wav */; };
 		8C05993914A98D9900242950 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C05993814A98D9900242950 /* AudioToolbox.framework */; };
 		8C05994714A9A62100242950 /* embossed-poloroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C05994614A9A62100242950 /* embossed-poloroid.png */; };
-		8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */; };
 		8C1F673A14A7EAC700B475D8 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */; };
 		8C1F674214A7EC8D00B475D8 /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673D14A7EC8D00B475D8 /* image1.jpeg */; };
 		8C1F674314A7EC8D00B475D8 /* image2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C1F673E14A7EC8D00B475D8 /* image2.jpeg */; };
@@ -95,14 +95,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C02F60A14E74F56007A7B68 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
+		8C02F60B14E74F56007A7B68 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		8C05992614A95CCC00242950 /* bgtexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgtexture.png; sourceTree = "<group>"; };
 		8C05992714A95CCC00242950 /* bgtexture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgtexture@2x.png"; sourceTree = "<group>"; };
 		8C05992B14A9860600242950 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
 		8C05993514A98D2800242950 /* page-flip-4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "page-flip-4.wav"; sourceTree = "<group>"; };
 		8C05993814A98D9900242950 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8C05994614A9A62100242950 /* embossed-poloroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "embossed-poloroid.png"; sourceTree = "<group>"; };
-		8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
-		8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		8C1F673714A7EAC600B475D8 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
 		8C1F673814A7EAC600B475D8 /* JBKenBurnsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBKenBurnsView.m; sourceTree = "<group>"; };
 		8C1F673D14A7EC8D00B475D8 /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
@@ -225,8 +225,8 @@
 				F7859DE0148AB63D00B1F94C /* UIKit.framework in Frameworks */,
 				F7859DE2148AB63D00B1F94C /* Foundation.framework in Frameworks */,
 				F7859DE4148AB63D00B1F94C /* CoreGraphics.framework in Frameworks */,
-				8C1F673114A7E4C000B475D8 /* libFlurryAnalytics.a in Frameworks */,
 				F722474D14D7BC7B00487D07 /* Parse.framework in Frameworks */,
+				8C02F60D14E74F56007A7B68 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,8 +246,8 @@
 		8C1F672514A7E43D00B475D8 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
-				8C1F672F14A7E4C000B475D8 /* libFlurryAnalytics.a */,
-				8C1F673014A7E4C000B475D8 /* FlurryAnalytics.h */,
+				8C02F60A14E74F56007A7B68 /* FlurryAnalytics.h */,
+				8C02F60B14E74F56007A7B68 /* libFlurryAnalytics.a */,
 			);
 			name = Flurry;
 			path = ..;
