@@ -330,6 +330,8 @@
 	//  model should call this when its done loading
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:homeTableView];
+    
+    [FlurryAnalytics logEvent:@"PULL_TO_REFRESH_FINISHED"];
 }
 
 
