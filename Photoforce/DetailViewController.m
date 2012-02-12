@@ -71,25 +71,6 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-    imageScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
-    fullImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
-    [fullImageView setBackgroundColor:[UIColor blackColor]];
-    captionTextView = [[UITextView alloc]initWithFrame:CGRectMake(120, imageScrollView.frame.size.height - 60, 290, 25)];
-    [captionTextView setFont:[UIFont boldSystemFontOfSize:15]];
-    [captionTextView setTextColor:[UIColor whiteColor]];
-    [captionTextView setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:imageScrollView];
-    [imageScrollView addSubview:fullImageView];
-    [imageScrollView addSubview:captionTextView];
-    
-}
-*/
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -197,8 +178,12 @@
     [imageScrollView setMinimumZoomScale:minimumScale];
     [imageScrollView setZoomScale:minimumScale];
     
+    //Check if user is already liking a photo
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setDelegate:self];
+    [request startAsynchronous];
 }
-
 
 - (void)viewDidUnload
 {
