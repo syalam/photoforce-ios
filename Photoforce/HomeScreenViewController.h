@@ -41,5 +41,6 @@ typedef enum apiCall {
 - (UIImage*)imageWithImage:(UIImage*)imageToResize scaledToSize:(CGSize)size;
 - (UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect;
 - (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end

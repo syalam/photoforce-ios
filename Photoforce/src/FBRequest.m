@@ -360,4 +360,9 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
   _connection = nil;
 }
 
+- (void)cancel {
+    [_connection cancel];
+    [_connection release], _connection = nil;
+}
+
 @end
