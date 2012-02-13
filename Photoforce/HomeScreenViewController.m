@@ -147,7 +147,7 @@
 - (void) sendFacebookRequest {
     if (initialLoad) {
         activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityIndicator.frame = CGRectMake(120, 115, 100, 100);
+        activityIndicator.frame = CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 44, 36, 36);
         [activityIndicator startAnimating];
         [self.view addSubview:activityIndicator];
     }
