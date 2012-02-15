@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <Parse/Parse.h>
+#import "Facebook.h"
 
-@interface DetailViewController : UIViewController <UIScrollViewDelegate> {
+@interface DetailViewController : UIViewController <UIScrollViewDelegate,FBRequestDelegate> {
     IBOutlet UIScrollView *imageScrollView;
     IBOutlet UIImageView *fullImageView;
     IBOutlet UITextView *captionTextView;

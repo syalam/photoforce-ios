@@ -29,29 +29,45 @@
  }
 
 - (IBAction)likeBarButtonItemClicked:(id)sender {
-   
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithCapacity:1];
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    PFUser *user = [PFUser currentUser];
+    [delegate facebook].accessToken = [user facebookAccessToken];
+    [delegate facebook].expirationDate = [user facebookExpirationDate];
+    NSLog(@"%@", [NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]]);
     if ([[sender title] isEqualToString:@"Like"]) {
-        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
-        NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
-        [request setDelegate:self];
-        [request startAsynchronous];
+        [[delegate facebook] requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]] andParams:params andHttpMethod:@"POST" andDelegate:self];
+        
         
         [FlurryAnalytics logEvent:@"LIKE_BUTTON_CLICKED"];
     }
     else
     {
-        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
-        NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        [request setRequestMethod:@"DELETE"];
-        [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
-        [request setDelegate:self];
-        [request startAsynchronous]; 
+        [[delegate facebook] requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]] andParams:params andHttpMethod:@"DELETE" andDelegate:self];
         
         [FlurryAnalytics logEvent:@"UNLIKE_BUTTON_CLICKED"];
     }
+    
+}
+
+#pragma mark - Facebook Delegate Methods
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"received response");
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    if ([likeBarButtonItem.title isEqualToString:@"Like"]) 
+    {
+        likeBarButtonItem.title = @"Unlike";
+    }
+    else
+    {
+        likeBarButtonItem.title = @"Like";
+    }
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     
 }
 
