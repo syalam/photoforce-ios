@@ -22,6 +22,7 @@
     BOOL zoomed;
     BOOL tapped;
     NSUInteger *captionTapCount;
+    NSUInteger apiCall;
 }
 @property (nonatomic, copy) UIImage* imageToDisplay;
 @property (nonatomic, copy) NSString* captionToDisplay;

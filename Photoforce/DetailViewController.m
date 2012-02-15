@@ -31,7 +31,7 @@
 
 - (IBAction)likeBarButtonItemClicked:(id)sender {
     [SVProgressHUD show];
-    
+    apiCall = 1;
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithCapacity:1];
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     PFUser *user = [PFUser currentUser];
@@ -61,15 +61,27 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result { 
     [SVProgressHUD dismiss];
-    
-    if ([likeBarButtonItem.title isEqualToString:@"Like"]) 
-    {
-        likeBarButtonItem.title = @"Unlike";
+    if (apiCall == 1) {
+        if ([likeBarButtonItem.title isEqualToString:@"Like"]) 
+        {
+            likeBarButtonItem.title = @"Unlike";
+        }
+        else
+        {
+            likeBarButtonItem.title = @"Like";
+        }
     }
-    else
-    {
-        likeBarButtonItem.title = @"Like";
+    else {
+        PFUser *user = [PFUser currentUser];
+        NSArray *resultArray = [result objectForKey:@"data"];
+        for (NSUInteger i = 0; i < resultArray.count; i++) {
+            if ([[[resultArray objectAtIndex:i]valueForKey:@"id"]isEqualToString:[user facebookId]]) {
+                likeBarButtonItem.title = @"Unlike";
+            }
+        }
+        
     }
+
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
@@ -136,14 +148,6 @@
     imageScrollView.contentSize=CGSizeMake(imageToDisplay.size.width, imageToDisplay.size.height);
     imageScrollView.delegate = self;
     
-    //[imageScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone-linen"]]];
-    //[imageScrollView setBackgroundColor:[UIColor clearColor]];
-    
-    /*
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    //[singleTap setNumberOfTapsRequired:1];
-    [singleTap setNumberOfTouchesRequired:1];
-    [imageScrollView addGestureRecognizer:singleTap];*/
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
@@ -163,11 +167,6 @@
     [fullImageView setImage:fullImageView.image];
     
     fullImageView.center = imageScrollView.center;
-    /*fullImageView.layer.shadowColor = [UIColor blackColor].CGColor;
-    fullImageView.layer.shadowOpacity = 0.7f;
-    fullImageView.layer.shadowOffset = CGSizeMake(10.0f, 10.0f);
-    fullImageView.layer.shadowRadius = 5.0f;
-    fullImageView.layer.masksToBounds = NO;*/
     CGSize size = fullImageView.bounds.size;
     CGFloat curlFactor = 15.0f;
     CGFloat shadowDepth = 5.0f;
@@ -216,6 +215,15 @@
                                                           action:@selector(likeBarButtonItemClicked:)];
     
     self.navigationItem.rightBarButtonItem = likeBarButtonItem;
+    
+    //make facebook API call to see if this picture has alread been liked by this user
+    apiCall = 0;
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    PFUser *user = [PFUser currentUser];
+    [delegate facebook].accessToken = [user facebookAccessToken];
+    [delegate facebook].expirationDate = [user facebookExpirationDate];
+    
+    [[delegate facebook] requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]] andDelegate:self];
 }
 
 - (void)viewDidUnload
