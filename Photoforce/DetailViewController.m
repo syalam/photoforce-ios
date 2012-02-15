@@ -11,6 +11,7 @@
 #import "ASIFormDataRequest.h"
 #import "AppDelegate.h"
 #import "FlurryAnalytics.h"
+#import "SVProgressHUD.h"
 
 #define ZOOM_STEP 2.0
 
@@ -29,15 +30,17 @@
  }
 
 - (IBAction)likeBarButtonItemClicked:(id)sender {
+    [SVProgressHUD show];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithCapacity:1];
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     PFUser *user = [PFUser currentUser];
     [delegate facebook].accessToken = [user facebookAccessToken];
     [delegate facebook].expirationDate = [user facebookExpirationDate];
     NSLog(@"%@", [NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]]);
+    
     if ([[sender title] isEqualToString:@"Like"]) {
-        [[delegate facebook] requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]] andParams:params andHttpMethod:@"POST" andDelegate:self];
-        
+        [[delegate facebook] requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]]                                           andParams:params andHttpMethod:@"POST" andDelegate:self];
         
         [FlurryAnalytics logEvent:@"LIKE_BUTTON_CLICKED"];
     }
@@ -56,7 +59,9 @@
     NSLog(@"received response");
 }
 
-- (void)request:(FBRequest *)request didLoad:(id)result {
+- (void)request:(FBRequest *)request didLoad:(id)result { 
+    [SVProgressHUD dismiss];
+    
     if ([likeBarButtonItem.title isEqualToString:@"Like"]) 
     {
         likeBarButtonItem.title = @"Unlike";
@@ -68,6 +73,13 @@
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"You need to log out of Facebook and log back in. So sorry!" delegate:self 
+                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    
+    [PFUser logOut];
+    [self.navigationController dismissModalViewControllerAnimated:YES];
     
 }
 
