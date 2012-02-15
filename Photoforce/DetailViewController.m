@@ -34,9 +34,9 @@
     apiCall = 1;
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithCapacity:1];
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    PFUser *user = [PFUser currentUser];
-    [delegate facebook].accessToken = [user facebookAccessToken];
-    [delegate facebook].expirationDate = [user facebookExpirationDate];
+    //PFUser *user = [PFUser currentUser];
+    //[delegate facebook].accessToken = [user facebookAccessToken];
+    //[delegate facebook].expirationDate = [user facebookExpirationDate];
     NSLog(@"%@", [NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]]);
     
     if ([[sender title] isEqualToString:@"Like"]) {
@@ -219,11 +219,7 @@
     //make facebook API call to see if this picture has alread been liked by this user
     apiCall = 0;
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    PFUser *user = [PFUser currentUser];
-    [delegate facebook].accessToken = [user facebookAccessToken];
-    [delegate facebook].expirationDate = [user facebookExpirationDate];
-    
-    [[delegate facebook] requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]] andDelegate:self];
+    [[delegate facebook]requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", [photoObject valueForKey:@"object_id"]]andDelegate:self];
 }
 
 - (void)viewDidUnload
