@@ -19,4 +19,6 @@
 @property (nonatomic, retain) NSMutableDictionary *userPermissions;
 @property (strong, nonatomic) UINavigationController *navigationController;
 
+void uncaughtExceptionHandler(NSException *exception);
+
 @end

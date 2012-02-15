@@ -83,6 +83,8 @@
    andDelegate:(id <FBDialogDelegate>)delegate;
 
 - (BOOL)isSessionValid;
+- (void)cancelPendingRequest;
+
 
 @end
 

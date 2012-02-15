@@ -652,4 +652,10 @@ static NSString* kSDKVersion = @"2";
   NSLog(@"Failed to expire the session");
 }
 
+- (void)cancelPendingRequest {
+    [_request cancel];
+    [_request release], _request = nil;
+}
+
+
 @end

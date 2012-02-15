@@ -118,14 +118,20 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-
-
 }
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[delegate facebook] cancelPendingRequest];
+    [self doneLoadingTableViewData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -136,8 +142,10 @@
 }
 
 - (void)logOutButtonClicked:(id)sender {
-    AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [[delegate facebook]logout:self];
+    [PFUser logOut];
+    [self.navigationController dismissModalViewControllerAnimated:YES];
+    /*AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[delegate facebook]logout:self];*/
 }
 
 #pragma mark - Facebook Methods
@@ -145,25 +153,25 @@
 - (void) sendFacebookRequest {
     if (initialLoad) {
         activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityIndicator.frame = CGRectMake(120, 115, 100, 100);
+        activityIndicator.frame = CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 44, 36, 36);
         [activityIndicator startAnimating];
         [self.view addSubview:activityIndicator];
     }
-    [SVProgressHUD showWithStatus:@"Refreshing Photos"];
+    //[SVProgressHUD showWithStatus:@"Refreshing Photos"];
     
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
     NSString *getUsers = @"{'getUsers':'select uid2 from friend where uid1=me()'";
-    NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 200'";
-    NSString *getTagged = @"'getTagged':'select pid from photo_tag where subject in (select uid2 from #getUsers) order by created desc limit 200'";
+    NSString *getAlbums = @"'getAlbums':'select aid from album where owner in (select uid2 from #getUsers) order by modified desc limit 100'";
+    //NSString *getTagged = @"'getTagged':'select pid from photo_tag where subject in (select uid2 from #getUsers) order by created desc limit 100'";
     
-    //NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid from photo where aid in (select aid from #getAlbums) order by created desc limit 100'}";
+    NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid, object_id from photo where aid in (select aid from #getAlbums) order by created desc limit 100'}";
     
-    NSString *getPics = @"'getPics':'select src_big, created, owner, caption, aid from photo where aid in (select aid from #getAlbums) or pid in (select pid from #getTagged) order by created desc limit 200'}";
+    //NSString *getPics = @"'getPics':'select src_big, created, owner, aid from photo where aid in (select aid from #getAlbums) or pid in (select pid from #getTagged) order by created desc limit 200'}";
     
     
-    //NSString *fql = [NSString stringWithFormat:@"%@,%@,%@", getUsers, getAlbums, getPics];
-    NSString *fql = [NSString stringWithFormat:@"%@,%@,%@,%@", getUsers, getAlbums, getTagged, getPics];
+    NSString *fql = [NSString stringWithFormat:@"%@,%@,%@", getUsers, getAlbums, getPics];
+    //NSString *fql = [NSString stringWithFormat:@"%@,%@,%@,%@", getUsers, getAlbums, getTagged, getPics];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"q", nil];
     
     [[delegate facebook] requestWithGraphPath:@"fql" andParams:params andHttpMethod:@"GET" andDelegate:self];
@@ -192,7 +200,7 @@
     }
     
     homeTableView.hidden = NO;
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
 
     if ([result objectForKey:@"data"]) {
         NSMutableDictionary *resultSetDictionary = [[NSMutableDictionary alloc]initWithDictionary:result];
@@ -201,7 +209,7 @@
         for (id key in resultSetDictionary) {
             //facebookPhotosData = [[[resultSetDictionary valueForKey:key] objectAtIndex:2] valueForKey:@"fql_result_set"];
             facebookFeedData = [resultSetDictionary valueForKey:key];
-            facebookPhotosData = [[facebookFeedData objectAtIndex:3]valueForKey:@"fql_result_set"];
+            facebookPhotosData = [[facebookFeedData objectAtIndex:2]valueForKey:@"fql_result_set"];
         }
         
     }
@@ -301,6 +309,7 @@
     DetailViewController *dvc = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
     dvc.imageToDisplay = imageToDisplay;
     dvc.captionToDisplay = caption;
+    dvc.photoObject = [facebookPhotosData objectAtIndex:indexPath.row];
     //DetailViewController *dvc = [[DetailViewController alloc]initWithTitle:@"Photo" URL:url Caption:caption];
     
     [FlurryAnalytics logEvent:@"USER_CLICKED_PHOTO"];
@@ -327,6 +336,8 @@
 	//  model should call this when its done loading
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:homeTableView];
+    
+    [FlurryAnalytics logEvent:@"PULL_TO_REFRESH_FINISHED"];
 }
 
 

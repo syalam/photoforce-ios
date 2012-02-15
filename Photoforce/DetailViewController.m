@@ -8,12 +8,16 @@
 
 #import "DetailViewController.h"
 #import "FlurryAnalytics.h"
+#import "ASIFormDataRequest.h"
+#import "AppDelegate.h"
+#import "FlurryAnalytics.h"
 
 #define ZOOM_STEP 2.0
 
 @implementation DetailViewController
 @synthesize imageToDisplay;
 @synthesize captionToDisplay;
+@synthesize photoObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
  {
@@ -23,6 +27,34 @@
  }
  return self;
  }
+
+- (IBAction)likeBarButtonItemClicked:(id)sender {
+   
+    if ([[sender title] isEqualToString:@"Like"]) {
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
+        NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+        [request setDelegate:self];
+        [request startAsynchronous];
+        
+        [FlurryAnalytics logEvent:@"LIKE_BUTTON_CLICKED"];
+    }
+    else
+    {
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]];
+        NSLog(@"%@",[NSString stringWithFormat:@"https://graph.facebook.com/%@/likes", [photoObject valueForKey:@"object_id"]]);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"DELETE"];
+        [request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+        [request setDelegate:self];
+        [request startAsynchronous]; 
+        
+        [FlurryAnalytics logEvent:@"UNLIKE_BUTTON_CLICKED"];
+    }
+    
+}
+
 
 - (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption
 {
@@ -43,25 +75,6 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-    imageScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
-    fullImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 416)];
-    [fullImageView setBackgroundColor:[UIColor blackColor]];
-    captionTextView = [[UITextView alloc]initWithFrame:CGRectMake(120, imageScrollView.frame.size.height - 60, 290, 25)];
-    [captionTextView setFont:[UIFont boldSystemFontOfSize:15]];
-    [captionTextView setTextColor:[UIColor whiteColor]];
-    [captionTextView setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:imageScrollView];
-    [imageScrollView addSubview:fullImageView];
-    [imageScrollView addSubview:captionTextView];
-    
-}
-*/
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -81,6 +94,8 @@
     logo.backgroundColor = [UIColor clearColor];
     logo.font = [UIFont fontWithName:@"Zapfino" size:12.0];
     [customTitleView addSubview:logo];
+    
+    NSLog(@"%@", photoObject);
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationItem.titleView = customTitleView;
@@ -167,11 +182,17 @@
     [imageScrollView setMinimumZoomScale:minimumScale];
     [imageScrollView setZoomScale:minimumScale];
     
+     likeBarButtonItem = [[UIBarButtonItem alloc ] initWithTitle:@"Like" 
+                                                           style:UIBarButtonItemStyleBordered 
+                                                          target:self 
+                                                          action:@selector(likeBarButtonItemClicked:)];
+    
+    self.navigationItem.rightBarButtonItem = likeBarButtonItem;
 }
-
 
 - (void)viewDidUnload
 {
+    likeBarButtonItem = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -256,5 +277,20 @@
     imageScrollView.contentSize = self.view.frame.size;
     
 }
+
+#pragma mark - ASIHTTPRequest Delegate Methods
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSLog(@"Response %d ==> %@", request.responseStatusCode, [request responseString]);
+    
+    if ([likeBarButtonItem.title isEqualToString:@"Like"]) 
+    {
+        likeBarButtonItem.title = @"Unlike";
+    }
+    else
+    {
+        likeBarButtonItem.title = @"Like";
+    }
+}
+
 
 @end

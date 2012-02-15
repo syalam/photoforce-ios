@@ -69,6 +69,7 @@
 - (BOOL) loading;
 
 - (void) connect;
+- (void)cancel;
 
 @end
 
@@ -111,6 +112,5 @@
  * The result object is the raw response from the server of type NSData
  */
 - (void)request:(FBRequest *)request didLoadRawResponse:(NSData *)data;
-
 @end
 
