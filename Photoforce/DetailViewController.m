@@ -216,6 +216,11 @@
     
     self.navigationItem.rightBarButtonItem = likeBarButtonItem;
     
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     //make facebook API call to see if this picture has alread been liked by this user
     apiCall = 0;
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
