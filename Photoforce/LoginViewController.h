@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "JBKenBurnsView.h"
 #import "Facebook.h"
-#import "SlideToCancelViewController.h"
+#import "GradientButton.h"
 
-@interface LoginViewController : UIViewController <FBSessionDelegate, FBRequestDelegate,FBDialogDelegate, SlideToCancelDelegate> {
+@interface LoginViewController : UIViewController <FBSessionDelegate, FBRequestDelegate,FBDialogDelegate> {
     IBOutlet UILabel *logo;
     KenBurnsView *kenView;
     NSArray *permissions;
-    SlideToCancelViewController *slideToCancel;
+    GradientButton* loginButton;
 }
 
 -(void)setupKenBurnsView;
