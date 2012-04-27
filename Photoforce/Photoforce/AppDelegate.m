@@ -13,7 +13,7 @@
 #import "DetailViewController.h"
 
 
-static NSString* kAppId = @"210849718975311";
+static NSString* kAppId = @"266617523389474";
 
 @implementation AppDelegate
 
@@ -48,8 +48,10 @@ static NSString* kAppId = @"210849718975311";
         self.window.rootViewController = self.splitViewController;
     }
     
+    DetailViewController *detail = [[DetailViewController alloc]init];
+    
     // Initialize Facebook
-    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:masterViewController];
+    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:detail];
     
     // Check and retrieve authorization information
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

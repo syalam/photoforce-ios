@@ -10,7 +10,10 @@
 #import "FBConnect.h"
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, FBRequestDelegate, FBDialogDelegate,FBSessionDelegate> {
+    IBOutlet UIButton *loginButton;
 }
+
+- (IBAction)loginButtonClicked:(id)sender;
 
 @property (strong, nonatomic) id detailItem;
 

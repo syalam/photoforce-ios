@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "AppDelegate.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -111,6 +112,18 @@
 
 - (void)fbSessionInvalidated {
     
+}
+
+#pragma mark - IBAction Methods
+- (IBAction)loginButtonClicked:(id)sender {
+    NSArray *permissions = [NSArray arrayWithObjects:@"user_photos", @"offline_access", nil];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (![[delegate facebook] isSessionValid]) {
+        [[delegate facebook] authorize:permissions];
+    } else {
+        [self.navigationController dismissModalViewControllerAnimated:YES];
+    }
+
 }
 
 @end
