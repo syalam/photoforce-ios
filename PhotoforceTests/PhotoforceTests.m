@@ -2,8 +2,8 @@
 //  PhotoforceTests.m
 //  PhotoforceTests
 //
-//  Created by Reyaad Sidique on 12/3/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Reyaad Sidique on 4/22/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "PhotoforceTests.h"

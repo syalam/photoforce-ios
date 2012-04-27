@@ -2,33 +2,21 @@
 //  DetailViewController.h
 //  Photoforce
 //
-//  Created by Reyaad Sidique on 12/13/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Reyaad Sidique on 4/22/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
-#import <Parse/Parse.h>
-#import "Facebook.h"
+#import "AppDelegate.h"
 
-@interface DetailViewController : UIViewController <UIScrollViewDelegate,FBRequestDelegate> {
-    IBOutlet UIScrollView *imageScrollView;
-    IBOutlet UIImageView *fullImageView;
-    IBOutlet UITextView *captionTextView;
-    UIBarButtonItem* likeBarButtonItem;
-    UIImage *image;
-    NSString *urlString;
-    NSString *detailCaption;
-    BOOL zoomed;
-    BOOL tapped;
-    NSUInteger *captionTapCount;
-    NSUInteger apiCall;
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate> {
+    IBOutlet UIButton *loginButton;
 }
-@property (nonatomic, copy) UIImage* imageToDisplay;
-@property (nonatomic, copy) NSString* captionToDisplay;
-@property (nonatomic, retain) NSDictionary* photoObject;
 
-- (id)initWithTitle:(NSString *)title URL:(NSString *)url Caption:(NSString *)caption;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+- (IBAction)loginButtonClicked:(id)sender;
+
+@property (strong, nonatomic) id detailItem;
+
+@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 
 @end
