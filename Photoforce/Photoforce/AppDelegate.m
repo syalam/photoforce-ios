@@ -20,11 +20,17 @@ static NSString* kAppId = @"266617523389474";
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
 @synthesize splitViewController = _splitViewController;
-@synthesize facebook = _facebook;
-@synthesize userPermissions = _userPermissions;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Parse setApplicationId:@"61ZxKrd2KsVmiuxHBMlBi5bKmaySbRMk4dR8xLv2" 
+                  clientKey:@"py5GtitW9ctDA6fypv4tvQIbngsiyhiGv7bVYXGN"];
+    
+    [PFFacebookUtils initializeWithApplicationId:@"266617523389474"];
+
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     MasterViewController *masterViewController;
@@ -48,38 +54,6 @@ static NSString* kAppId = @"266617523389474";
         self.window.rootViewController = self.splitViewController;
     }
     
-    DetailViewController *detail = [[DetailViewController alloc]init];
-    
-    // Initialize Facebook
-    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:detail];
-    
-    // Check and retrieve authorization information
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    
-    NSString *url = [NSString stringWithFormat:@"fb%@://authorize",kAppId];
-    BOOL bSchemeInPlist = NO; // find out if the sceme is in the plist file.
-    NSArray* aBundleURLTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
-    if ([aBundleURLTypes isKindOfClass:[NSArray class]] &&
-        ([aBundleURLTypes count] > 0)) {
-        NSDictionary* aBundleURLTypes0 = [aBundleURLTypes objectAtIndex:0];
-        if ([aBundleURLTypes0 isKindOfClass:[NSDictionary class]]) {
-            NSArray* aBundleURLSchemes = [aBundleURLTypes0 objectForKey:@"CFBundleURLSchemes"];
-            if ([aBundleURLSchemes isKindOfClass:[NSArray class]] &&
-                ([aBundleURLSchemes count] > 0)) {
-                NSString *scheme = [aBundleURLSchemes objectAtIndex:0];
-                if ([scheme isKindOfClass:[NSString class]] &&
-                    [url hasPrefix:scheme]) {
-                    bSchemeInPlist = YES;
-                }
-            }
-        }
-    }
-
-
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -105,7 +79,6 @@ static NSString* kAppId = @"266617523389474";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [[self facebook] extendAccessTokenIfNeeded];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -113,12 +86,5 @@ static NSString* kAppId = @"266617523389474";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [self.facebook handleOpenURL:url];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [self.facebook handleOpenURL:url];
-}
 
 @end

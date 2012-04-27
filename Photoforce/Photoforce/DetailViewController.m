@@ -93,37 +93,24 @@
     self.masterPopoverController = nil;
 }
 
-#pragma mark - FBSessionDelegate Methods
-- (void)fbDidLogin {
-    
-}
 
--(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    
-}
-
--(void)fbDidNotLogin:(BOOL)cancelled {
-    
-}
-
-- (void)fbDidLogout {
-    
-}
-
-- (void)fbSessionInvalidated {
-    
-}
 
 #pragma mark - IBAction Methods
 - (IBAction)loginButtonClicked:(id)sender {
-    NSArray *permissions = [NSArray arrayWithObjects:@"user_photos", @"offline_access", nil];
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (![[delegate facebook] isSessionValid]) {
-        [[delegate facebook] authorize:permissions];
-    } else {
-        [self.navigationController dismissModalViewControllerAnimated:YES];
-    }
-
+    NSArray *permissions = [[NSArray alloc]initWithObjects:@"user_photos", @"friends_photos", nil];
+    [PFFacebookUtils logInWithPermissions:permissions block:^ (PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+        }
+        else {
+            NSLog(@"User with facebook id %@ logged in!", user.username);
+            //get user's details from facebook
+            [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
+        }
+        
+    }];
 }
+
+
 
 @end

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FBConnect.h"
+#import <Parse/Parse.h>
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController <FBSessionDelegate, FBRequestDelegate, FBDialogDelegate> {
+@interface MasterViewController : UITableViewController {
     
 }
 

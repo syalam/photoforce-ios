@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FBConnect.h"
+#import <Parse/Parse.h>
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, FBRequestDelegate, FBDialogDelegate,FBSessionDelegate> {
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate> {
     IBOutlet UIButton *loginButton;
 }
 

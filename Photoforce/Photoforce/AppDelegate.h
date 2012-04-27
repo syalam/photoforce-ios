@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Facebook.h"
+#import <Parse/Parse.h>
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
-    Facebook *facebook;
-    NSMutableDictionary *userPermissions;
+
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -21,8 +20,5 @@
 
 @property (strong, nonatomic) UISplitViewController *splitViewController;
 
-@property (nonatomic, retain) Facebook *facebook;
-
-@property (nonatomic, retain) NSMutableDictionary *userPermissions;
 
 @end

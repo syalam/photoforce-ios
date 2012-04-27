@@ -148,30 +148,5 @@
     }
 }
 
-#pragma mark - FBSessionDelegate Methods
-- (void)fbDidLogin {
-    
-}
-
--(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    
-}
-
--(void)fbDidNotLogin:(BOOL)cancelled {
-    
-}
-
-- (void)fbDidLogout {
-    
-}
-
-- (void)fbSessionInvalidated {
-    
-}
-
-#pragma mark - FBRequestDelegate Methods
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    
-}
 
 @end
