@@ -1,0 +1,637 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F703D873154B20A30068418B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D872154B20A30068418B /* UIKit.framework */; };
+		F703D875154B20A30068418B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D874154B20A30068418B /* Foundation.framework */; };
+		F703D877154B20A30068418B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D876154B20A30068418B /* CoreGraphics.framework */; };
+		F703D87D154B20A30068418B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F703D87B154B20A30068418B /* InfoPlist.strings */; };
+		F703D87F154B20A30068418B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D87E154B20A30068418B /* main.m */; };
+		F703D883154B20A30068418B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D882154B20A30068418B /* AppDelegate.m */; };
+		F703D886154B20A30068418B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D885154B20A30068418B /* MasterViewController.m */; };
+		F703D889154B20A30068418B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D888154B20A30068418B /* DetailViewController.m */; };
+		F703D88C154B20A30068418B /* MasterViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F703D88A154B20A30068418B /* MasterViewController_iPhone.xib */; };
+		F703D88F154B20A30068418B /* MasterViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F703D88D154B20A30068418B /* MasterViewController_iPad.xib */; };
+		F703D892154B20A30068418B /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F703D890154B20A30068418B /* DetailViewController_iPhone.xib */; };
+		F703D895154B20A30068418B /* DetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F703D893154B20A30068418B /* DetailViewController_iPad.xib */; };
+		F703D89D154B20A30068418B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D89C154B20A30068418B /* SenTestingKit.framework */; };
+		F703D89E154B20A30068418B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D872154B20A30068418B /* UIKit.framework */; };
+		F703D89F154B20A30068418B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D874154B20A30068418B /* Foundation.framework */; };
+		F703D8A7154B20A30068418B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F703D8A5154B20A30068418B /* InfoPlist.strings */; };
+		F703D8AA154B20A30068418B /* PhotoforceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8A9154B20A30068418B /* PhotoforceTests.m */; };
+		F703D8D6154B20FF0068418B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8B9154B20FF0068418B /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8D7154B20FF0068418B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F703D8BC154B20FF0068418B /* FBDialog.bundle */; };
+		F703D8D8154B20FF0068418B /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8BE154B20FF0068418B /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8D9154B20FF0068418B /* FBFrictionlessRequestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8C0154B20FF0068418B /* FBFrictionlessRequestSettings.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8DA154B20FF0068418B /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8C2154B20FF0068418B /* FBLoginDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8DB154B20FF0068418B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8C4154B20FF0068418B /* FBRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8DC154B20FF0068418B /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8C8154B20FF0068418B /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8DD154B20FF0068418B /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8CA154B20FF0068418B /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8DE154B20FF0068418B /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8CC154B20FF0068418B /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8DF154B20FF0068418B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8CE154B20FF0068418B /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8E0154B20FF0068418B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8D0154B20FF0068418B /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F703D8E1154B20FF0068418B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D8D2154B20FF0068418B /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F703D8A0154B20A30068418B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F703D865154B20A20068418B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F703D86D154B20A30068418B;
+			remoteInfo = Photoforce;
+		};
+		F703D8E3154B20FF0068418B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F703D8B5154B20FF0068418B /* facebook-ios-sdk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "facebook-ios-sdk";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F703D86E154B20A30068418B /* Photoforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photoforce.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F703D872154B20A30068418B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F703D874154B20A30068418B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F703D876154B20A30068418B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F703D87A154B20A30068418B /* Photoforce-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photoforce-Info.plist"; sourceTree = "<group>"; };
+		F703D87C154B20A30068418B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F703D87E154B20A30068418B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F703D880154B20A30068418B /* Photoforce-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photoforce-Prefix.pch"; sourceTree = "<group>"; };
+		F703D881154B20A30068418B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F703D882154B20A30068418B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F703D884154B20A30068418B /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		F703D885154B20A30068418B /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		F703D887154B20A30068418B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		F703D888154B20A30068418B /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		F703D88B154B20A30068418B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController_iPhone.xib; sourceTree = "<group>"; };
+		F703D88E154B20A30068418B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController_iPad.xib; sourceTree = "<group>"; };
+		F703D891154B20A30068418B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController_iPhone.xib; sourceTree = "<group>"; };
+		F703D894154B20A30068418B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController_iPad.xib; sourceTree = "<group>"; };
+		F703D89B154B20A30068418B /* PhotoforceTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoforceTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F703D89C154B20A30068418B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F703D8A4154B20A30068418B /* PhotoforceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoforceTests-Info.plist"; sourceTree = "<group>"; };
+		F703D8A6154B20A30068418B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F703D8A8154B20A30068418B /* PhotoforceTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoforceTests.h; sourceTree = "<group>"; };
+		F703D8A9154B20A30068418B /* PhotoforceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoforceTests.m; sourceTree = "<group>"; };
+		F703D8B5154B20FF0068418B /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
+		F703D8B8154B20FF0068418B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
+		F703D8B9154B20FF0068418B /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
+		F703D8BA154B20FF0068418B /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = facebook_ios_sdk_Prefix.pch; sourceTree = "<group>"; };
+		F703D8BB154B20FF0068418B /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
+		F703D8BC154B20FF0068418B /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
+		F703D8BD154B20FF0068418B /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
+		F703D8BE154B20FF0068418B /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDialog.m; sourceTree = "<group>"; };
+		F703D8BF154B20FF0068418B /* FBFrictionlessRequestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFrictionlessRequestSettings.h; sourceTree = "<group>"; };
+		F703D8C0154B20FF0068418B /* FBFrictionlessRequestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFrictionlessRequestSettings.m; sourceTree = "<group>"; };
+		F703D8C1154B20FF0068418B /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
+		F703D8C2154B20FF0068418B /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
+		F703D8C3154B20FF0068418B /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
+		F703D8C4154B20FF0068418B /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
+		F703D8C6154B20FF0068418B /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		F703D8C7154B20FF0068418B /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		F703D8C8154B20FF0068418B /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		F703D8C9154B20FF0068418B /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		F703D8CA154B20FF0068418B /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		F703D8CB154B20FF0068418B /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		F703D8CC154B20FF0068418B /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		F703D8CD154B20FF0068418B /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		F703D8CE154B20FF0068418B /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		F703D8CF154B20FF0068418B /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		F703D8D0154B20FF0068418B /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		F703D8D1154B20FF0068418B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		F703D8D2154B20FF0068418B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F703D86B154B20A30068418B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F703D873154B20A30068418B /* UIKit.framework in Frameworks */,
+				F703D875154B20A30068418B /* Foundation.framework in Frameworks */,
+				F703D877154B20A30068418B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F703D897154B20A30068418B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F703D89D154B20A30068418B /* SenTestingKit.framework in Frameworks */,
+				F703D89E154B20A30068418B /* UIKit.framework in Frameworks */,
+				F703D89F154B20A30068418B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F703D863154B20A20068418B = {
+			isa = PBXGroup;
+			children = (
+				F703D8B3154B20E60068418B /* Facebook SDK */,
+				F703D878154B20A30068418B /* Photoforce */,
+				F703D8A2154B20A30068418B /* PhotoforceTests */,
+				F703D871154B20A30068418B /* Frameworks */,
+				F703D86F154B20A30068418B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F703D86F154B20A30068418B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F703D86E154B20A30068418B /* Photoforce.app */,
+				F703D89B154B20A30068418B /* PhotoforceTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F703D871154B20A30068418B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F703D872154B20A30068418B /* UIKit.framework */,
+				F703D874154B20A30068418B /* Foundation.framework */,
+				F703D876154B20A30068418B /* CoreGraphics.framework */,
+				F703D89C154B20A30068418B /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F703D878154B20A30068418B /* Photoforce */ = {
+			isa = PBXGroup;
+			children = (
+				F703D8E6154B24750068418B /* Authentication */,
+				F703D8E5154B24620068418B /* Home */,
+				F703D881154B20A30068418B /* AppDelegate.h */,
+				F703D882154B20A30068418B /* AppDelegate.m */,
+				F703D879154B20A30068418B /* Supporting Files */,
+			);
+			path = Photoforce;
+			sourceTree = "<group>";
+		};
+		F703D879154B20A30068418B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F703D87A154B20A30068418B /* Photoforce-Info.plist */,
+				F703D87B154B20A30068418B /* InfoPlist.strings */,
+				F703D87E154B20A30068418B /* main.m */,
+				F703D880154B20A30068418B /* Photoforce-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F703D8A2154B20A30068418B /* PhotoforceTests */ = {
+			isa = PBXGroup;
+			children = (
+				F703D8A8154B20A30068418B /* PhotoforceTests.h */,
+				F703D8A9154B20A30068418B /* PhotoforceTests.m */,
+				F703D8A3154B20A30068418B /* Supporting Files */,
+			);
+			path = PhotoforceTests;
+			sourceTree = "<group>";
+		};
+		F703D8A3154B20A30068418B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F703D8A4154B20A30068418B /* PhotoforceTests-Info.plist */,
+				F703D8A5154B20A30068418B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F703D8B3154B20E60068418B /* Facebook SDK */ = {
+			isa = PBXGroup;
+			children = (
+				F703D8B4154B20FF0068418B /* src */,
+			);
+			name = "Facebook SDK";
+			sourceTree = "<group>";
+		};
+		F703D8B4154B20FF0068418B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F703D8B5154B20FF0068418B /* facebook-ios-sdk.xcodeproj */,
+				F703D8B8154B20FF0068418B /* Facebook.h */,
+				F703D8B9154B20FF0068418B /* Facebook.m */,
+				F703D8BA154B20FF0068418B /* facebook_ios_sdk_Prefix.pch */,
+				F703D8BB154B20FF0068418B /* FBConnect.h */,
+				F703D8BC154B20FF0068418B /* FBDialog.bundle */,
+				F703D8BD154B20FF0068418B /* FBDialog.h */,
+				F703D8BE154B20FF0068418B /* FBDialog.m */,
+				F703D8BF154B20FF0068418B /* FBFrictionlessRequestSettings.h */,
+				F703D8C0154B20FF0068418B /* FBFrictionlessRequestSettings.m */,
+				F703D8C1154B20FF0068418B /* FBLoginDialog.h */,
+				F703D8C2154B20FF0068418B /* FBLoginDialog.m */,
+				F703D8C3154B20FF0068418B /* FBRequest.h */,
+				F703D8C4154B20FF0068418B /* FBRequest.m */,
+				F703D8C5154B20FF0068418B /* JSON */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		F703D8B6154B20FF0068418B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F703D8E4154B20FF0068418B /* libfacebook_ios_sdk.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F703D8C5154B20FF0068418B /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				F703D8C6154B20FF0068418B /* JSON.h */,
+				F703D8C7154B20FF0068418B /* NSObject+SBJSON.h */,
+				F703D8C8154B20FF0068418B /* NSObject+SBJSON.m */,
+				F703D8C9154B20FF0068418B /* NSString+SBJSON.h */,
+				F703D8CA154B20FF0068418B /* NSString+SBJSON.m */,
+				F703D8CB154B20FF0068418B /* SBJSON.h */,
+				F703D8CC154B20FF0068418B /* SBJSON.m */,
+				F703D8CD154B20FF0068418B /* SBJsonBase.h */,
+				F703D8CE154B20FF0068418B /* SBJsonBase.m */,
+				F703D8CF154B20FF0068418B /* SBJsonParser.h */,
+				F703D8D0154B20FF0068418B /* SBJsonParser.m */,
+				F703D8D1154B20FF0068418B /* SBJsonWriter.h */,
+				F703D8D2154B20FF0068418B /* SBJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		F703D8E5154B24620068418B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F703D884154B20A30068418B /* MasterViewController.h */,
+				F703D885154B20A30068418B /* MasterViewController.m */,
+				F703D88A154B20A30068418B /* MasterViewController_iPhone.xib */,
+				F703D88D154B20A30068418B /* MasterViewController_iPad.xib */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		F703D8E6154B24750068418B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				F703D887154B20A30068418B /* DetailViewController.h */,
+				F703D888154B20A30068418B /* DetailViewController.m */,
+				F703D890154B20A30068418B /* DetailViewController_iPhone.xib */,
+				F703D893154B20A30068418B /* DetailViewController_iPad.xib */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F703D86D154B20A30068418B /* Photoforce */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F703D8AD154B20A30068418B /* Build configuration list for PBXNativeTarget "Photoforce" */;
+			buildPhases = (
+				F703D86A154B20A30068418B /* Sources */,
+				F703D86B154B20A30068418B /* Frameworks */,
+				F703D86C154B20A30068418B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Photoforce;
+			productName = Photoforce;
+			productReference = F703D86E154B20A30068418B /* Photoforce.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F703D89A154B20A30068418B /* PhotoforceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F703D8B0154B20A30068418B /* Build configuration list for PBXNativeTarget "PhotoforceTests" */;
+			buildPhases = (
+				F703D896154B20A30068418B /* Sources */,
+				F703D897154B20A30068418B /* Frameworks */,
+				F703D898154B20A30068418B /* Resources */,
+				F703D899154B20A30068418B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F703D8A1154B20A30068418B /* PBXTargetDependency */,
+			);
+			name = PhotoforceTests;
+			productName = PhotoforceTests;
+			productReference = F703D89B154B20A30068418B /* PhotoforceTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F703D865154B20A20068418B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = F703D868154B20A20068418B /* Build configuration list for PBXProject "Photoforce" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F703D863154B20A20068418B;
+			productRefGroup = F703D86F154B20A30068418B /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F703D8B6154B20FF0068418B /* Products */;
+					ProjectRef = F703D8B5154B20FF0068418B /* facebook-ios-sdk.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F703D86D154B20A30068418B /* Photoforce */,
+				F703D89A154B20A30068418B /* PhotoforceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F703D8E4154B20FF0068418B /* libfacebook_ios_sdk.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libfacebook_ios_sdk.a;
+			remoteRef = F703D8E3154B20FF0068418B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F703D86C154B20A30068418B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F703D87D154B20A30068418B /* InfoPlist.strings in Resources */,
+				F703D88C154B20A30068418B /* MasterViewController_iPhone.xib in Resources */,
+				F703D88F154B20A30068418B /* MasterViewController_iPad.xib in Resources */,
+				F703D892154B20A30068418B /* DetailViewController_iPhone.xib in Resources */,
+				F703D895154B20A30068418B /* DetailViewController_iPad.xib in Resources */,
+				F703D8D7154B20FF0068418B /* FBDialog.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F703D898154B20A30068418B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F703D8A7154B20A30068418B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F703D899154B20A30068418B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F703D86A154B20A30068418B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F703D87F154B20A30068418B /* main.m in Sources */,
+				F703D883154B20A30068418B /* AppDelegate.m in Sources */,
+				F703D886154B20A30068418B /* MasterViewController.m in Sources */,
+				F703D889154B20A30068418B /* DetailViewController.m in Sources */,
+				F703D8D6154B20FF0068418B /* Facebook.m in Sources */,
+				F703D8D8154B20FF0068418B /* FBDialog.m in Sources */,
+				F703D8D9154B20FF0068418B /* FBFrictionlessRequestSettings.m in Sources */,
+				F703D8DA154B20FF0068418B /* FBLoginDialog.m in Sources */,
+				F703D8DB154B20FF0068418B /* FBRequest.m in Sources */,
+				F703D8DC154B20FF0068418B /* NSObject+SBJSON.m in Sources */,
+				F703D8DD154B20FF0068418B /* NSString+SBJSON.m in Sources */,
+				F703D8DE154B20FF0068418B /* SBJSON.m in Sources */,
+				F703D8DF154B20FF0068418B /* SBJsonBase.m in Sources */,
+				F703D8E0154B20FF0068418B /* SBJsonParser.m in Sources */,
+				F703D8E1154B20FF0068418B /* SBJsonWriter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F703D896154B20A30068418B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F703D8AA154B20A30068418B /* PhotoforceTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F703D8A1154B20A30068418B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F703D86D154B20A30068418B /* Photoforce */;
+			targetProxy = F703D8A0154B20A30068418B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F703D87B154B20A30068418B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F703D87C154B20A30068418B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F703D88A154B20A30068418B /* MasterViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F703D88B154B20A30068418B /* en */,
+			);
+			name = MasterViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		F703D88D154B20A30068418B /* MasterViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F703D88E154B20A30068418B /* en */,
+			);
+			name = MasterViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		F703D890154B20A30068418B /* DetailViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F703D891154B20A30068418B /* en */,
+			);
+			name = DetailViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		F703D893154B20A30068418B /* DetailViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F703D894154B20A30068418B /* en */,
+			);
+			name = DetailViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		F703D8A5154B20A30068418B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F703D8A6154B20A30068418B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F703D8AB154B20A30068418B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F703D8AC154B20A30068418B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F703D8AE154B20A30068418B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "Photoforce/Photoforce-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F703D8AF154B20A30068418B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "Photoforce/Photoforce-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F703D8B1154B20A30068418B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Photoforce.app/Photoforce";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "PhotoforceTests/PhotoforceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		F703D8B2154B20A30068418B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Photoforce.app/Photoforce";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Photoforce/Photoforce-Prefix.pch";
+				INFOPLIST_FILE = "PhotoforceTests/PhotoforceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F703D868154B20A20068418B /* Build configuration list for PBXProject "Photoforce" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F703D8AB154B20A30068418B /* Debug */,
+				F703D8AC154B20A30068418B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F703D8AD154B20A30068418B /* Build configuration list for PBXNativeTarget "Photoforce" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F703D8AE154B20A30068418B /* Debug */,
+				F703D8AF154B20A30068418B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F703D8B0154B20A30068418B /* Build configuration list for PBXNativeTarget "PhotoforceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F703D8B1154B20A30068418B /* Debug */,
+				F703D8B2154B20A30068418B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F703D865154B20A20068418B /* Project object */;
+}

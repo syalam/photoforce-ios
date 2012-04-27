@@ -2,18 +2,15 @@
 //  DetailViewController.h
 //  Photoforce
 //
-//  Created by Reyaad Sidique on 4/22/12.
+//  Created by Reyaad Sidique on 4/27/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import "FBConnect.h"
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate> {
-    IBOutlet UIButton *loginButton;
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, FBRequestDelegate, FBDialogDelegate,FBSessionDelegate> {
 }
-
-- (IBAction)loginButtonClicked:(id)sender;
 
 @property (strong, nonatomic) id detailItem;
 

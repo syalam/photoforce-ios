@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  Photoforce
 //
-//  Created by Reyaad Sidique on 4/22/12.
+//  Created by Reyaad Sidique on 4/27/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,38 +12,28 @@
 
 #import "DetailViewController.h"
 
-static NSString* kAppId = @"266617523389474";
+
+static NSString* kAppId = @"210849718975311";
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
 @synthesize splitViewController = _splitViewController;
-@synthesize facebook;
+@synthesize facebook = _facebook;
+@synthesize userPermissions = _userPermissions;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:self];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    
-    /*if (![facebook isSessionValid]) {
-        [facebook authorize:nil];
-    }*/
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    MasterViewController *masterViewController;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        MasterViewController *masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController_iPhone" bundle:nil];
+        masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController_iPhone" bundle:nil];
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
         self.window.rootViewController = self.navigationController;
     } else {
-        MasterViewController *masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController_iPad" bundle:nil];
+        masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController_iPad" bundle:nil];
         UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
         
         DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
@@ -57,6 +47,38 @@ static NSString* kAppId = @"266617523389474";
         
         self.window.rootViewController = self.splitViewController;
     }
+    
+    // Initialize Facebook
+    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:masterViewController];
+    
+    // Check and retrieve authorization information
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    NSString *url = [NSString stringWithFormat:@"fb%@://authorize",kAppId];
+    BOOL bSchemeInPlist = NO; // find out if the sceme is in the plist file.
+    NSArray* aBundleURLTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+    if ([aBundleURLTypes isKindOfClass:[NSArray class]] &&
+        ([aBundleURLTypes count] > 0)) {
+        NSDictionary* aBundleURLTypes0 = [aBundleURLTypes objectAtIndex:0];
+        if ([aBundleURLTypes0 isKindOfClass:[NSDictionary class]]) {
+            NSArray* aBundleURLSchemes = [aBundleURLTypes0 objectForKey:@"CFBundleURLSchemes"];
+            if ([aBundleURLSchemes isKindOfClass:[NSArray class]] &&
+                ([aBundleURLSchemes count] > 0)) {
+                NSString *scheme = [aBundleURLSchemes objectAtIndex:0];
+                if ([scheme isKindOfClass:[NSString class]] &&
+                    [url hasPrefix:scheme]) {
+                    bSchemeInPlist = YES;
+                }
+            }
+        }
+    }
+
+
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -81,7 +103,7 @@ static NSString* kAppId = @"266617523389474";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [facebook extendAccessTokenIfNeeded];
+    [[self facebook] extendAccessTokenIfNeeded];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -89,51 +111,12 @@ static NSString* kAppId = @"266617523389474";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-#pragma mark - FacebookConnect Session Delegate Methods
-
-// Pre iOS 4.2 support
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [facebook handleOpenURL:url]; 
+    return [self.facebook handleOpenURL:url];
 }
 
-// For iOS 4.2+ support
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [facebook handleOpenURL:url]; 
-}
-
-- (void)fbDidLogin {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-}
-
-- (void) fbDidLogout {
-    // Remove saved authorization information if it exists
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"]) {
-        [defaults removeObjectForKey:@"FBAccessTokenKey"];
-        [defaults removeObjectForKey:@"FBExpirationDateKey"];
-        [defaults synchronize];
-    }
-}
-
-- (void)fbDidNotLogin:(BOOL)cancelled {
-    
-}
-
--(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    NSLog(@"token extended");
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
-    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-}
-
-- (void)fbSessionInvalidated {
-    
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url];
 }
 
 @end

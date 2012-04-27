@@ -2,7 +2,7 @@
 //  DetailViewController.m
 //  Photoforce
 //
-//  Created by Reyaad Sidique on 4/22/12.
+//  Created by Reyaad Sidique on 4/27/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -92,16 +92,25 @@
     self.masterPopoverController = nil;
 }
 
-#pragma mark - Button Clicks
-- (IBAction)loginButtonClicked:(id)sender {
-    NSArray *permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"read_stream", @"user_photos",@"friends_photos", nil];
+#pragma mark - FBSessionDelegate Methods
+- (void)fbDidLogin {
     
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (![[delegate facebook] isSessionValid]) {
-        [[delegate facebook] authorize:permissions];
-    } else {
-        [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
-    }
+}
+
+-(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
+    
+}
+
+-(void)fbDidNotLogin:(BOOL)cancelled {
+    
+}
+
+- (void)fbDidLogout {
+    
+}
+
+- (void)fbSessionInvalidated {
+    
 }
 
 @end

@@ -2,15 +2,17 @@
 //  AppDelegate.h
 //  Photoforce
 //
-//  Created by Reyaad Sidique on 4/22/12.
+//  Created by Reyaad Sidique on 4/27/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "FBConnect.h"
+#import "Facebook.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate> {
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
     Facebook *facebook;
+    NSMutableDictionary *userPermissions;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -20,5 +22,7 @@
 @property (strong, nonatomic) UISplitViewController *splitViewController;
 
 @property (nonatomic, retain) Facebook *facebook;
+
+@property (nonatomic, retain) NSMutableDictionary *userPermissions;
 
 @end

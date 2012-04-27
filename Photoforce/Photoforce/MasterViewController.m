@@ -2,7 +2,7 @@
 //  MasterViewController.m
 //  Photoforce
 //
-//  Created by Reyaad Sidique on 4/22/12.
+//  Created by Reyaad Sidique on 4/27/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -41,9 +41,9 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    DetailViewController *login = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
+    DetailViewController *login = [[DetailViewController alloc]initWithNibName:@"DetailViewController_iPhone" bundle:nil];
     UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:login];
-    [self.navigationController presentViewController:navc animated:YES completion:NULL];
+    [self.navigationController presentViewController:navc animated:NO completion:NULL];
 }
 
 - (void)viewDidUnload
@@ -146,6 +146,32 @@
     } else {
         self.detailViewController.detailItem = object;
     }
+}
+
+#pragma mark - FBSessionDelegate Methods
+- (void)fbDidLogin {
+    
+}
+
+-(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
+    
+}
+
+-(void)fbDidNotLogin:(BOOL)cancelled {
+    
+}
+
+- (void)fbDidLogout {
+    
+}
+
+- (void)fbSessionInvalidated {
+    
+}
+
+#pragma mark - FBRequestDelegate Methods
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    
 }
 
 @end
