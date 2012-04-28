@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
+typedef enum apiCall {
+    kAPILogin,
+    kAPIGetAlbumCoverURL,
+} apiCall;
+
 @interface APICalls : NSObject <PF_FBRequestDelegate> {
-    
+    int currentAPICall;
 }
 
 @end

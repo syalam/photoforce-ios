@@ -96,7 +96,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id contentForThisRow = [_contentList objectAtIndex:indexPath.row];
-    NSLog(@"%@", [contentForThisRow valueForKey:@"name"]);
+    NSLog(@"%@", [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"]);
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -104,13 +104,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            cell.textLabel.text = [contentForThisRow valueForKey:@"name"];
-            dispatch_async(imageQueue_, ^{
+            cell.textLabel.text = [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"];
+            /*dispatch_async(imageQueue_, ^{
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                 });
-            });
+            });*/
         }
     }
 
@@ -164,7 +164,7 @@
     
     if (currentAPICall == kAPILogin) {
         currentAPICall = kAPIGetAlbumCoverURL;
-        //NSArray *fbDataArray = [result valueForKey:@"data"];
+        contentArray = [result valueForKey:@"data"];
         for (NSUInteger i = 0; i < contentArray.count; i++) {
             [[PFFacebookUtils facebook]requestWithGraphPath:[[contentArray objectAtIndex:i]valueForKey:@"cover_photo"] andDelegate:self];
         }
@@ -172,6 +172,15 @@
     }
     else if (currentAPICall == kAPIGetAlbumCoverURL) {
         NSLog(@"%@", result);
+        NSDictionary *resultDictionary = result;
+        NSMutableArray *objectsToDisplay = [[NSMutableArray alloc]init];
+        for (NSUInteger i = 0; i < contentArray.count; i++) {
+            if ([[[contentArray objectAtIndex:i]valueForKey:@"cover_photo"]isEqualToString:[resultDictionary valueForKey:@"id"]]) {
+                [objectsToDisplay addObject:[NSDictionary dictionaryWithObjectsAndKeys:[contentArray objectAtIndex:i], @"data", resultDictionary, @"coverImage", nil]];
+            }
+        }
+        [self setContentList:objectsToDisplay];
+        [self.tableView reloadData];
     }
     
 }
