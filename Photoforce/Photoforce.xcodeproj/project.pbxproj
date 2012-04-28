@@ -32,6 +32,7 @@
 		F703D8FA154B58DF0068418B /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D8F9154B58DF0068418B /* libz.1.1.3.dylib */; };
 		F703D8FC154B58E70068418B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D8FB154B58E70068418B /* Security.framework */; };
 		F703D8FE154B58EC0068418B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D8FD154B58EC0068418B /* QuartzCore.framework */; };
+		F703D906154B70340068418B /* APICalls.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D905154B70340068418B /* APICalls.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		F703D8F9154B58DF0068418B /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		F703D8FB154B58E70068418B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F703D8FD154B58EC0068418B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F703D904154B70340068418B /* APICalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICalls.h; sourceTree = "<group>"; };
+		F703D905154B70340068418B /* APICalls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICalls.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,7 @@
 		F703D878154B20A30068418B /* Photoforce */ = {
 			isa = PBXGroup;
 			children = (
+				F703D903154B70120068418B /* API Requests */,
 				F703D8E6154B24750068418B /* Authentication */,
 				F703D8E5154B24620068418B /* Home */,
 				F703D881154B20A30068418B /* AppDelegate.h */,
@@ -211,6 +215,15 @@
 				F703D893154B20A30068418B /* DetailViewController_iPad.xib */,
 			);
 			name = Authentication;
+			sourceTree = "<group>";
+		};
+		F703D903154B70120068418B /* API Requests */ = {
+			isa = PBXGroup;
+			children = (
+				F703D904154B70340068418B /* APICalls.h */,
+				F703D905154B70340068418B /* APICalls.m */,
+			);
+			name = "API Requests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +339,7 @@
 				F703D883154B20A30068418B /* AppDelegate.m in Sources */,
 				F703D886154B20A30068418B /* MasterViewController.m in Sources */,
 				F703D889154B20A30068418B /* DetailViewController.m in Sources */,
+				F703D906154B70340068418B /* APICalls.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

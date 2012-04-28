@@ -9,12 +9,22 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
+typedef enum apiCall {
+    kAPILogin,
+    kAPIGetAlbumCoverURL,
+} apiCall;
+
+
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController {
-    
+@interface MasterViewController : UITableViewController <PF_FBRequestDelegate> {
+    int currentAPICall;
+    dispatch_queue_t imageQueue_;
+    NSMutableArray *contentArray;
 }
 
+
 @property (strong, nonatomic) DetailViewController *detailViewController;
+@property (nonatomic, retain) NSMutableArray *contentList;
 
 @end

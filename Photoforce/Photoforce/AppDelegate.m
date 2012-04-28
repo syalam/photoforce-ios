@@ -86,5 +86,14 @@ static NSString* kAppId = @"266617523389474";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [[PFFacebookUtils facebook]handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[PFFacebookUtils facebook]handleOpenURL:url];
+}
+
 
 @end

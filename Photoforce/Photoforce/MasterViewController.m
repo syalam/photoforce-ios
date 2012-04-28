@@ -18,6 +18,7 @@
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
+@synthesize contentList = _contentList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,9 +42,17 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    DetailViewController *login = [[DetailViewController alloc]initWithNibName:@"DetailViewController_iPhone" bundle:nil];
-    UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:login];
-    [self.navigationController presentViewController:navc animated:NO completion:NULL];
+    if (![PFUser currentUser]) {
+        DetailViewController *login = [[DetailViewController alloc]initWithNibName:@"DetailViewController_iPhone" bundle:nil];
+        UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:login];
+        [self.navigationController presentViewController:navc animated:NO completion:NULL];
+    }
+    
+    else {
+        imageQueue_ = dispatch_queue_create("com.tappforce.photoforce.imageQueue", NULL);
+        currentAPICall = kAPILogin;
+        [[PFFacebookUtils facebook]requestWithGraphPath:@"me/albums" andDelegate:self];
+    }
 }
 
 - (void)viewDidUnload
@@ -80,25 +89,31 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return _contentList.count;
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    id contentForThisRow = [_contentList objectAtIndex:indexPath.row];
+    NSLog(@"%@", [contentForThisRow valueForKey:@"name"]);
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell = nil;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = [contentForThisRow valueForKey:@"name"];
+            dispatch_async(imageQueue_, ^{
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                });
+            });
         }
     }
 
-
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    cell.textLabel.text = [object description];
     return cell;
 }
 
@@ -136,17 +151,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-	    if (!self.detailViewController) {
-	        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
-	    }
-	    self.detailViewController.detailItem = object;
-        [self.navigationController pushViewController:self.detailViewController animated:YES];
-    } else {
-        self.detailViewController.detailItem = object;
-    }
+    
 }
 
+
+#pragma mark - Facebook Request Delegate Methods
+- (void)request:(PF_FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"received response");
+}
+
+- (void)request:(PF_FBRequest *)request didLoad:(id)result {
+    
+    if (currentAPICall == kAPILogin) {
+        currentAPICall = kAPIGetAlbumCoverURL;
+        //NSArray *fbDataArray = [result valueForKey:@"data"];
+        for (NSUInteger i = 0; i < contentArray.count; i++) {
+            [[PFFacebookUtils facebook]requestWithGraphPath:[[contentArray objectAtIndex:i]valueForKey:@"cover_photo"] andDelegate:self];
+        }
+        
+    }
+    else if (currentAPICall == kAPIGetAlbumCoverURL) {
+        NSLog(@"%@", result);
+    }
+    
+}
+
+- (void)request:(PF_FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"%@", error);
+}
 
 @end
