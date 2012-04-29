@@ -42,12 +42,17 @@
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.title = @"Albums";
-
-    /*UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;*/
     
     selectedItems = [[NSMutableDictionary alloc]init];
     
+    UIBarButtonItem *downloadButton = [[UIBarButtonItem alloc]initWithTitle:@"Download" style:UIBarButtonItemStyleBordered target:self action:@selector(downloadButtonClicked:)];
+    self.navigationItem.rightBarButtonItem = downloadButton;
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if (![PFUser currentUser]) {
         DetailViewController *login = [[DetailViewController alloc]initWithNibName:@"DetailViewController_iPhone" bundle:nil];
         UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:login];
@@ -61,6 +66,7 @@
         currentAPICall = kAPILogin;
         [[PFFacebookUtils facebook]requestWithGraphPath:@"me/albums" andDelegate:self];
     }
+
 }
 
 - (void)viewDidUnload
@@ -249,6 +255,11 @@
 - (void)request:(PF_FBRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
     [SVProgressHUD dismissWithError:@"Error"];
+}
+
+#pragma mark - Button Clicks
+- (void)downloadButtonClicked:(id)sender {
+    
 }
 
 @end
