@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <Parse/Parse.h>
 
-@interface DownloadImages : NSObject {
+@interface DownloadImages : NSObject <PF_FBRequestDelegate> {
     
 }
 
 @property (strong, atomic) ALAssetsLibrary* library;
+@property (nonatomic, retain) NSMutableArray *albumIdArray;
 
 - (void)beginDownload;
 

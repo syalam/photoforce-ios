@@ -12,6 +12,8 @@
 
 #import "SVProgressHUD.h"
 
+#import "DownloadImages.h"
+
 @interface MasterViewController () {
     NSMutableArray *_objects;
 }
@@ -210,8 +212,6 @@
         [selectedItems setObject:albumId forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
     }
     
-    NSLog(@"%@", contentForThisRow);
-    
 }
 
 
@@ -259,7 +259,11 @@
 
 #pragma mark - Button Clicks
 - (void)downloadButtonClicked:(id)sender {
-    
+    NSArray *albumIDArray = [selectedItems allValues];
+    //NSLog(@"%@", albumIDArray);
+    DownloadImages *download = [[DownloadImages alloc]init];
+    download.albumIdArray = [albumIDArray mutableCopy];
+    [download beginDownload];
 }
 
 @end
