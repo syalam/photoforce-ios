@@ -36,6 +36,8 @@
 		F796F320154D089000BB7F80 /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F796F31F154D089000BB7F80 /* loadingImage.png */; };
 		F796F329154D163F00BB7F80 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F796F326154D163F00BB7F80 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F796F32A154D163F00BB7F80 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F796F327154D163F00BB7F80 /* SVProgressHUD.bundle */; };
+		F796F32C154D19E800BB7F80 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F796F32B154D19E800BB7F80 /* AssetsLibrary.framework */; };
+		F796F330154D1A3000BB7F80 /* DownloadImages.m in Sources */ = {isa = PBXBuildFile; fileRef = F796F32F154D1A3000BB7F80 /* DownloadImages.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,9 @@
 		F796F326154D163F00BB7F80 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		F796F327154D163F00BB7F80 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		F796F328154D163F00BB7F80 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		F796F32B154D19E800BB7F80 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		F796F32E154D1A3000BB7F80 /* DownloadImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadImages.h; sourceTree = "<group>"; };
+		F796F32F154D1A3000BB7F80 /* DownloadImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadImages.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F796F32C154D19E800BB7F80 /* AssetsLibrary.framework in Frameworks */,
 				F703D8FE154B58EC0068418B /* QuartzCore.framework in Frameworks */,
 				F703D8FC154B58E70068418B /* Security.framework in Frameworks */,
 				F703D8FA154B58DF0068418B /* libz.1.1.3.dylib in Frameworks */,
@@ -144,6 +150,7 @@
 		F703D871154B20A30068418B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F796F32B154D19E800BB7F80 /* AssetsLibrary.framework */,
 				F703D8FD154B58EC0068418B /* QuartzCore.framework */,
 				F703D8FB154B58E70068418B /* Security.framework */,
 				F703D8F9154B58DF0068418B /* libz.1.1.3.dylib */,
@@ -163,6 +170,7 @@
 		F703D878154B20A30068418B /* Photoforce */ = {
 			isa = PBXGroup;
 			children = (
+				F796F32D154D1A1600BB7F80 /* Download Photos */,
 				F703D903154B70120068418B /* API Requests */,
 				F703D8E6154B24750068418B /* Authentication */,
 				F703D8E5154B24620068418B /* Home */,
@@ -252,6 +260,15 @@
 				F796F328154D163F00BB7F80 /* SVProgressHUD.h */,
 			);
 			name = "Helper Classes";
+			sourceTree = "<group>";
+		};
+		F796F32D154D1A1600BB7F80 /* Download Photos */ = {
+			isa = PBXGroup;
+			children = (
+				F796F32E154D1A3000BB7F80 /* DownloadImages.h */,
+				F796F32F154D1A3000BB7F80 /* DownloadImages.m */,
+			);
+			name = "Download Photos";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +388,7 @@
 				F703D889154B20A30068418B /* DetailViewController.m in Sources */,
 				F703D906154B70340068418B /* APICalls.m in Sources */,
 				F796F329154D163F00BB7F80 /* SVProgressHUD.m in Sources */,
+				F796F330154D1A3000BB7F80 /* DownloadImages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
