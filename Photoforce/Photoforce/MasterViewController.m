@@ -10,6 +10,8 @@
 
 #import "DetailViewController.h"
 
+#import "SVProgressHUD.h"
+
 @interface MasterViewController () {
     NSMutableArray *_objects;
 }
@@ -24,7 +26,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
+        //self.title = NSLocalizedString(@"Master", @"Master");
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             self.clearsSelectionOnViewWillAppear = NO;
             self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
@@ -37,10 +39,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    self.title = @"Albums";
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    /*UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    self.navigationItem.rightBarButtonItem = addButton;*/
+    
+    selectedItems = [[NSMutableDictionary alloc]init];
     
     if (![PFUser currentUser]) {
         DetailViewController *login = [[DetailViewController alloc]initWithNibName:@"DetailViewController_iPhone" bundle:nil];
@@ -49,6 +55,7 @@
     }
     
     else {
+        [SVProgressHUD showWithStatus:@"Loading Albums"];
         arrayToDisplay = [[NSMutableArray alloc]init];
         imageQueue_ = dispatch_queue_create("com.tappforce.photoforce.imageQueue", NULL);
         currentAPICall = kAPILogin;
@@ -107,15 +114,45 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            cell.textLabel.text = [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"];
-            cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            cell.imageView.image = [UIImage imageNamed:@"loadingImage"];
-            dispatch_async(imageQueue_, ^{
-                NSData *imageData = [NSData dataWithContentsOfURL:coverImageURL];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.imageView.image = [UIImage imageWithData:imageData];
+            if ([selectedItems objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            UILabel *albumTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 0, 250, 40)];
+            albumTitleLabel.backgroundColor = [UIColor clearColor];
+            albumTitleLabel.font = [UIFont boldSystemFontOfSize:14];
+            albumTitleLabel.text = [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"];
+            
+            UIImageView *coverPhotoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 36, 36)];
+            coverPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+            
+            [cell.contentView addSubview:albumTitleLabel];
+            [cell.contentView addSubview:coverPhotoImageView];
+            
+            
+            //cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+            //cell.textLabel.text = [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"];
+            
+            //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+            //set a placeholder image while cover images are loading
+            if ([imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]) {
+                //cell.imageView.image = [UIImage imageWithData:[imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]];
+                coverPhotoImageView.image = [UIImage imageWithData:[imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]];
+
+            }
+            else {
+                //cell.imageView.image = [UIImage imageNamed:@"loadingImage"];
+                //asyncronously load cover image using GCD
+                dispatch_async(imageQueue_, ^{
+                    NSData *imageData = [NSData dataWithContentsOfURL:coverImageURL];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [imageDictionary setObject:imageData forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+                        //cell.imageView.image = [UIImage imageWithData:imageData];
+                        coverPhotoImageView.image = [UIImage imageWithData:[imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]];
+                    });
                 });
-            });
+            }
         }
     }
 
@@ -156,13 +193,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    id contentForThisRow = [_contentList objectAtIndex:indexPath.row];
+    NSString *albumId = [[contentForThisRow valueForKey:@"data"]valueForKey:@"id"];
+    if ([selectedItems objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]) {
+        [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+        [selectedItems removeObjectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+    }
+    else {
+        [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+        [selectedItems setObject:albumId forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+    }
+    
+    NSLog(@"%@", contentForThisRow);
     
 }
 
 
 #pragma mark - Facebook Request Delegate Methods
 - (void)request:(PF_FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"received response");
+    //NSLog(@"received response");
 }
 
 - (void)request:(PF_FBRequest *)request didLoad:(id)result {
@@ -189,6 +238,8 @@
         
         //check if all items have been added to the array before reloading the tableview
         if (arrayToDisplay.count == contentArray.count) {
+            [SVProgressHUD dismiss];
+            imageDictionary = [[NSMutableDictionary alloc]init];
             [self.tableView reloadData];
         }
     }
@@ -197,6 +248,7 @@
 
 - (void)request:(PF_FBRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
+    [SVProgressHUD dismissWithError:@"Error"];
 }
 
 @end

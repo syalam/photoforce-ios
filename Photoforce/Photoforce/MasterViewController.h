@@ -22,6 +22,8 @@ typedef enum apiCall {
     dispatch_queue_t imageQueue_;
     NSMutableArray *contentArray;
     NSMutableArray *arrayToDisplay;
+    NSMutableDictionary *selectedItems;
+    NSMutableDictionary *imageDictionary;
 }
 
 

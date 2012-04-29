@@ -34,6 +34,8 @@
 		F703D8FE154B58EC0068418B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D8FD154B58EC0068418B /* QuartzCore.framework */; };
 		F703D906154B70340068418B /* APICalls.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D905154B70340068418B /* APICalls.m */; };
 		F796F320154D089000BB7F80 /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F796F31F154D089000BB7F80 /* loadingImage.png */; };
+		F796F329154D163F00BB7F80 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F796F326154D163F00BB7F80 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F796F32A154D163F00BB7F80 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F796F327154D163F00BB7F80 /* SVProgressHUD.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,9 @@
 		F703D904154B70340068418B /* APICalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICalls.h; sourceTree = "<group>"; };
 		F703D905154B70340068418B /* APICalls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICalls.m; sourceTree = "<group>"; };
 		F796F31F154D089000BB7F80 /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
+		F796F326154D163F00BB7F80 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		F796F327154D163F00BB7F80 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		F796F328154D163F00BB7F80 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +169,7 @@
 				F703D881154B20A30068418B /* AppDelegate.h */,
 				F703D882154B20A30068418B /* AppDelegate.m */,
 				F703D879154B20A30068418B /* Supporting Files */,
+				F796F325154D162500BB7F80 /* Helper Classes */,
 			);
 			path = Photoforce;
 			sourceTree = "<group>";
@@ -236,6 +242,16 @@
 			);
 			name = Resources;
 			path = Photoforce;
+			sourceTree = "<group>";
+		};
+		F796F325154D162500BB7F80 /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F796F326154D163F00BB7F80 /* SVProgressHUD.m */,
+				F796F327154D163F00BB7F80 /* SVProgressHUD.bundle */,
+				F796F328154D163F00BB7F80 /* SVProgressHUD.h */,
+			);
+			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +330,7 @@
 				F703D892154B20A30068418B /* DetailViewController_iPhone.xib in Resources */,
 				F703D895154B20A30068418B /* DetailViewController_iPad.xib in Resources */,
 				F796F320154D089000BB7F80 /* loadingImage.png in Resources */,
+				F796F32A154D163F00BB7F80 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +370,7 @@
 				F703D886154B20A30068418B /* MasterViewController.m in Sources */,
 				F703D889154B20A30068418B /* DetailViewController.m in Sources */,
 				F703D906154B70340068418B /* APICalls.m in Sources */,
+				F796F329154D163F00BB7F80 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
