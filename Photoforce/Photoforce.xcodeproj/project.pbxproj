@@ -33,6 +33,7 @@
 		F703D8FC154B58E70068418B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D8FB154B58E70068418B /* Security.framework */; };
 		F703D8FE154B58EC0068418B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703D8FD154B58EC0068418B /* QuartzCore.framework */; };
 		F703D906154B70340068418B /* APICalls.m in Sources */ = {isa = PBXBuildFile; fileRef = F703D905154B70340068418B /* APICalls.m */; };
+		F796F320154D089000BB7F80 /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F796F31F154D089000BB7F80 /* loadingImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		F703D8FD154B58EC0068418B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F703D904154B70340068418B /* APICalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICalls.h; sourceTree = "<group>"; };
 		F703D905154B70340068418B /* APICalls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICalls.m; sourceTree = "<group>"; };
+		F796F31F154D089000BB7F80 /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				F703D878154B20A30068418B /* Photoforce */,
 				F703D8A2154B20A30068418B /* PhotoforceTests */,
+				F796F31D154D087800BB7F80 /* Resources */,
 				F703D871154B20A30068418B /* Frameworks */,
 				F703D86F154B20A30068418B /* Products */,
 			);
@@ -226,6 +229,15 @@
 			name = "API Requests";
 			sourceTree = "<group>";
 		};
+		F796F31D154D087800BB7F80 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F796F31F154D089000BB7F80 /* loadingImage.png */,
+			);
+			name = Resources;
+			path = Photoforce;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,6 +313,7 @@
 				F703D88F154B20A30068418B /* MasterViewController_iPad.xib in Resources */,
 				F703D892154B20A30068418B /* DetailViewController_iPhone.xib in Resources */,
 				F703D895154B20A30068418B /* DetailViewController_iPad.xib in Resources */,
+				F796F320154D089000BB7F80 /* loadingImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +556,7 @@
 				F703D8AF154B20A30068418B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F703D8B0154B20A30068418B /* Build configuration list for PBXNativeTarget "PhotoforceTests" */ = {
 			isa = XCConfigurationList;
@@ -551,6 +565,7 @@
 				F703D8B2154B20A30068418B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -21,6 +21,7 @@ typedef enum apiCall {
     int currentAPICall;
     dispatch_queue_t imageQueue_;
     NSMutableArray *contentArray;
+    NSMutableArray *arrayToDisplay;
 }
 
 

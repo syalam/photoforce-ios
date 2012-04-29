@@ -49,6 +49,7 @@
     }
     
     else {
+        arrayToDisplay = [[NSMutableArray alloc]init];
         imageQueue_ = dispatch_queue_create("com.tappforce.photoforce.imageQueue", NULL);
         currentAPICall = kAPILogin;
         [[PFFacebookUtils facebook]requestWithGraphPath:@"me/albums" andDelegate:self];
@@ -96,7 +97,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id contentForThisRow = [_contentList objectAtIndex:indexPath.row];
-    NSLog(@"%@", [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"]);
+    NSArray *imagesArray = [[[_contentList objectAtIndex:indexPath.row]valueForKey:@"coverImage"]valueForKey:@"images"];
+    NSURL *coverImageURL = [NSURL URLWithString:[[imagesArray objectAtIndex:6]valueForKey:@"source"]];
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -105,12 +108,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             cell.textLabel.text = [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"];
-            /*dispatch_async(imageQueue_, ^{
-                
+            cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+            cell.imageView.image = [UIImage imageNamed:@"loadingImage"];
+            dispatch_async(imageQueue_, ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:coverImageURL];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
+                    cell.imageView.image = [UIImage imageWithData:imageData];
                 });
-            });*/
+            });
         }
     }
 
@@ -171,16 +176,21 @@
         
     }
     else if (currentAPICall == kAPIGetAlbumCoverURL) {
-        NSLog(@"%@", result);
         NSDictionary *resultDictionary = result;
-        NSMutableArray *objectsToDisplay = [[NSMutableArray alloc]init];
+        NSMutableDictionary *objectsToDisplay = [[NSMutableDictionary alloc]init];
         for (NSUInteger i = 0; i < contentArray.count; i++) {
             if ([[[contentArray objectAtIndex:i]valueForKey:@"cover_photo"]isEqualToString:[resultDictionary valueForKey:@"id"]]) {
-                [objectsToDisplay addObject:[NSDictionary dictionaryWithObjectsAndKeys:[contentArray objectAtIndex:i], @"data", resultDictionary, @"coverImage", nil]];
+                [objectsToDisplay setObject:[contentArray objectAtIndex:i] forKey:@"data"];
+                [objectsToDisplay setObject:resultDictionary forKey:@"coverImage"];
+                [arrayToDisplay addObject:objectsToDisplay];
             }
         }
-        [self setContentList:objectsToDisplay];
-        [self.tableView reloadData];
+        [self setContentList:arrayToDisplay];
+        
+        //check if all items have been added to the array before reloading the tableview
+        if (arrayToDisplay.count == contentArray.count) {
+            [self.tableView reloadData];
+        }
     }
     
 }
