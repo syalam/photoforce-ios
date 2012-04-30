@@ -199,13 +199,16 @@
 {
     id contentForThisRow = [_contentList objectAtIndex:indexPath.row];
     NSString *albumId = [[contentForThisRow valueForKey:@"data"]valueForKey:@"id"];
+    NSString *albumName = [[contentForThisRow valueForKey:@"data"]valueForKey:@"name"];
     if ([selectedItems objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]) {
         [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
         [selectedItems removeObjectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+        [selectedAlbumNameDictionary removeObjectForKey:[NSString  stringWithFormat:@"%d name", indexPath.row]];
     }
     else {
         [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
         [selectedItems setObject:albumId forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+        [selectedAlbumNameDictionary setObject:albumName forKey:[NSString  stringWithFormat:@"%d name", indexPath.row]];
     }
     
 }
@@ -246,7 +249,8 @@
         }
     }
     else if (currentAPICall == kAPIGetPhotos) {
-        NSLog(@"%@", result);
+        NSString *albumName = [albumNameArray objectAtIndex:counter];
+        NSLog(@"%@", albumName);
         NSMutableArray *photoDataArray = [result valueForKey:@"data"];
         for (NSUInteger i = 0; i < photoDataArray.count; i++) {
             NSURL *photoURL = [[NSURL alloc]initWithString:[[photoDataArray objectAtIndex:i]valueForKey:@"source"]];
@@ -254,12 +258,18 @@
                 NSData *imageData = [NSData dataWithContentsOfURL:photoURL];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIImage *image = [UIImage imageWithData:imageData];
-                    [self.library saveImage:image toAlbum:@"Test" withCompletionBlock:^(NSError *error) {
-                        
+                    [self.library saveImage:image toAlbum:albumName withCompletionBlock:^(NSError *error) {
+                        if (!error) {
+                            NSLog(@"%@", @"BOSS");
+                            if (counter == albumNameArray.count) {
+                                [SVProgressHUD dismiss];
+                            }
+                        }
                     }];
                 });
             });
         }
+        counter ++;
     }
 }
 
@@ -270,7 +280,11 @@
 
 #pragma mark - Button Clicks
 - (void)downloadButtonClicked:(id)sender {
+    [SVProgressHUD showWithStatus:@"Downloading"];
     NSArray *albumIDArray = [selectedItems allValues];
+    albumNameArray  = [selectedAlbumNameDictionary allValues];
+    NSLog(@"%@", albumNameArray);
+    counter = 0;
     currentAPICall = kAPIGetPhotos;
     for (NSUInteger i = 0; i < albumIDArray.count; i++) {
         [[PFFacebookUtils facebook]requestWithGraphPath:[NSString stringWithFormat:@"%@/photos", [albumIDArray objectAtIndex:i]] andDelegate:self];

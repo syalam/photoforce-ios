@@ -28,7 +28,8 @@ typedef enum apiCall {
     NSMutableDictionary *selectedItems;
     NSMutableDictionary *selectedAlbumNameDictionary;
     NSMutableDictionary *imageDictionary;
-    NSString *albumName;
+    NSArray *albumNameArray;
+    NSUInteger counter;
 }
 
 
