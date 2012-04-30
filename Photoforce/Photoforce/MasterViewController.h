@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
 typedef enum apiCall {
     kAPILogin,
     kAPIGetAlbumCoverURL,
+    kAPIGetPhotos,
 } apiCall;
 
 
@@ -23,11 +26,14 @@ typedef enum apiCall {
     NSMutableArray *contentArray;
     NSMutableArray *arrayToDisplay;
     NSMutableDictionary *selectedItems;
+    NSMutableDictionary *selectedAlbumNameDictionary;
     NSMutableDictionary *imageDictionary;
+    NSString *albumName;
 }
 
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 @property (nonatomic, retain) NSMutableArray *contentList;
+@property (strong, atomic) ALAssetsLibrary* library;
 
 @end

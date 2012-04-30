@@ -38,6 +38,7 @@
 		F796F32A154D163F00BB7F80 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F796F327154D163F00BB7F80 /* SVProgressHUD.bundle */; };
 		F796F32C154D19E800BB7F80 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F796F32B154D19E800BB7F80 /* AssetsLibrary.framework */; };
 		F796F330154D1A3000BB7F80 /* DownloadImages.m in Sources */ = {isa = PBXBuildFile; fileRef = F796F32F154D1A3000BB7F80 /* DownloadImages.m */; };
+		F796F337154E1E5900BB7F80 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = F796F336154E1E5900BB7F80 /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		F796F32B154D19E800BB7F80 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		F796F32E154D1A3000BB7F80 /* DownloadImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadImages.h; sourceTree = "<group>"; };
 		F796F32F154D1A3000BB7F80 /* DownloadImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadImages.m; sourceTree = "<group>"; };
+		F796F335154E1E5900BB7F80 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
+		F796F336154E1E5900BB7F80 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +258,8 @@
 		F796F325154D162500BB7F80 /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F796F335154E1E5900BB7F80 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
+				F796F336154E1E5900BB7F80 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 				F796F326154D163F00BB7F80 /* SVProgressHUD.m */,
 				F796F327154D163F00BB7F80 /* SVProgressHUD.bundle */,
 				F796F328154D163F00BB7F80 /* SVProgressHUD.h */,
@@ -389,6 +394,7 @@
 				F703D906154B70340068418B /* APICalls.m in Sources */,
 				F796F329154D163F00BB7F80 /* SVProgressHUD.m in Sources */,
 				F796F330154D1A3000BB7F80 /* DownloadImages.m in Sources */,
+				F796F337154E1E5900BB7F80 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

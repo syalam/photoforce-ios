@@ -15,9 +15,10 @@
 
 - (void)beginDownload {
     _library = [[ALAssetsLibrary alloc] init];
-    for (int i = 0; i < _albumIdArray.count; i++) {
-        [[PFFacebookUtils facebook]requestWithGraphPath:[NSString stringWithFormat:@"%@/photos", [_albumIdArray objectAtIndex:i]] andDelegate:self];
-    }
+    /*for (int i = 0; i < _albumIdArray.count; i++) {
+        //[[PFFacebookUtils facebook]requestWithGraphPath:[NSString stringWithFormat:@"%@/photos", [_albumIdArray objectAtIndex:i]] andDelegate:self];
+    }*/
+    [[PFFacebookUtils facebook]requestWithGraphPath:@"me/albums" andDelegate:self];
 }
 
 #pragma mark - Facebook Request Delegate Methods

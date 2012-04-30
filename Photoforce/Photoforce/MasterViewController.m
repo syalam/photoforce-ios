@@ -23,6 +23,7 @@
 
 @synthesize detailViewController = _detailViewController;
 @synthesize contentList = _contentList;
+@synthesize library = _library;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +47,8 @@
     self.title = @"Albums";
     
     selectedItems = [[NSMutableDictionary alloc]init];
+    selectedAlbumNameDictionary = [[NSMutableDictionary alloc]init];
+    _library = [[ALAssetsLibrary alloc] init];
     
     UIBarButtonItem *downloadButton = [[UIBarButtonItem alloc]initWithTitle:@"Download" style:UIBarButtonItemStyleBordered target:self action:@selector(downloadButtonClicked:)];
     self.navigationItem.rightBarButtonItem = downloadButton;
@@ -138,19 +141,12 @@
             [cell.contentView addSubview:albumTitleLabel];
             [cell.contentView addSubview:coverPhotoImageView];
             
-            
-            //cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
-            //cell.textLabel.text = [[contentForThisRow objectForKey:@"data"]valueForKey:@"name"];
-            
-            //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
             //set a placeholder image while cover images are loading
             if ([imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]) {
-                //cell.imageView.image = [UIImage imageWithData:[imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]];
                 coverPhotoImageView.image = [UIImage imageWithData:[imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]];
 
             }
             else {
-                //cell.imageView.image = [UIImage imageNamed:@"loadingImage"];
                 //asyncronously load cover image using GCD
                 dispatch_async(imageQueue_, ^{
                     NSData *imageData = [NSData dataWithContentsOfURL:coverImageURL];
@@ -249,7 +245,22 @@
             [self.tableView reloadData];
         }
     }
-    
+    else if (currentAPICall == kAPIGetPhotos) {
+        NSLog(@"%@", result);
+        NSMutableArray *photoDataArray = [result valueForKey:@"data"];
+        for (NSUInteger i = 0; i < photoDataArray.count; i++) {
+            NSURL *photoURL = [[NSURL alloc]initWithString:[[photoDataArray objectAtIndex:i]valueForKey:@"source"]];
+            dispatch_async(imageQueue_, ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:photoURL];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *image = [UIImage imageWithData:imageData];
+                    [self.library saveImage:image toAlbum:@"Test" withCompletionBlock:^(NSError *error) {
+                        
+                    }];
+                });
+            });
+        }
+    }
 }
 
 - (void)request:(PF_FBRequest *)request didFailWithError:(NSError *)error {
@@ -260,10 +271,10 @@
 #pragma mark - Button Clicks
 - (void)downloadButtonClicked:(id)sender {
     NSArray *albumIDArray = [selectedItems allValues];
-    //NSLog(@"%@", albumIDArray);
-    DownloadImages *download = [[DownloadImages alloc]init];
-    download.albumIdArray = [albumIDArray mutableCopy];
-    [download beginDownload];
+    currentAPICall = kAPIGetPhotos;
+    for (NSUInteger i = 0; i < albumIDArray.count; i++) {
+        [[PFFacebookUtils facebook]requestWithGraphPath:[NSString stringWithFormat:@"%@/photos", [albumIDArray objectAtIndex:i]] andDelegate:self];
+    }
 }
 
 @end
