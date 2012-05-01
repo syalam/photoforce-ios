@@ -315,11 +315,14 @@
 #pragma mark - Helper Methods
 - (void)savePhotos:(NSMutableArray *)itemsToSave {
     for (NSUInteger i = 0; i < itemsToSave.count; i++) {
-        NSString *albumName = [[itemsToSave objectAtIndex:i]valueForKey:@"albumName"];
-        NSURL *photoURL = [[NSURL alloc]initWithString:[[itemsToSave objectAtIndex:i]valueForKey:@"photo"]];
-        dispatch_async(imageQueue_, ^{
+        NSString *albumName = [NSString stringWithFormat:@"%@", [[itemsToSave objectAtIndex:i]valueForKey:@"albumName"]];
+        NSString *urlString = [NSString stringWithFormat:@"%@", [[itemsToSave objectAtIndex:i]valueForKey:@"photo"]];
+        NSLog(@"%@", urlString);
+        NSLog(@"%@", albumName);
+        NSURL *photoURL = [[NSURL alloc]initWithString:urlString];
+        //dispatch_async(imageQueue_, ^{
             NSData *imageData = [NSData dataWithContentsOfURL:photoURL];
-            dispatch_async(dispatch_get_main_queue(), ^{
+          //  dispatch_async(dispatch_get_main_queue(), ^{
                 UIImage *image = [UIImage imageWithData:imageData];
                 [self.library saveImage:image toAlbum:albumName withCompletionBlock:^(NSError *error) {
                     if (!error) {
@@ -339,8 +342,8 @@
                         
                     }];
                 }];*/
-            });
-        });
+            //});
+        //});
     }
 }
 
