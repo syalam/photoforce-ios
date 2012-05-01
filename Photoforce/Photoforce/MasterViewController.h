@@ -32,9 +32,11 @@ typedef enum apiCall {
     NSUInteger counter;
 }
 
-
 @property (strong, nonatomic) DetailViewController *detailViewController;
 @property (nonatomic, retain) NSMutableArray *contentList;
 @property (strong, atomic) ALAssetsLibrary* library;
+
+
+- (void)savePhotos:(NSMutableArray *)itemsToSave;
 
 @end

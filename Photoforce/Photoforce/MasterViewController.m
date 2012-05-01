@@ -152,7 +152,6 @@
                     NSData *imageData = [NSData dataWithContentsOfURL:coverImageURL];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [imageDictionary setObject:imageData forKey:[NSString stringWithFormat:@"%d", indexPath.row]];
-                        //cell.imageView.image = [UIImage imageWithData:imageData];
                         coverPhotoImageView.image = [UIImage imageWithData:[imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]];
                     });
                 });
@@ -249,7 +248,7 @@
         }
     }
     else if (currentAPICall == kAPIGetPhotos) {
-        NSString *albumName = [albumNameArray objectAtIndex:counter];
+       /* NSString *albumName = [albumNameArray objectAtIndex:counter];
         NSLog(@"%@", albumName);
         NSMutableArray *photoDataArray = [result valueForKey:@"data"];
         for (NSUInteger i = 0; i < photoDataArray.count; i++) {
@@ -269,7 +268,18 @@
                 });
             });
         }
-        counter ++;
+        counter ++;*/
+        //NSLog(@"%@", result);
+        NSMutableArray *resultArray = [result valueForKey:@"data"];
+        NSMutableArray *itemsToDownload = [[NSMutableArray alloc]init];
+        for (NSUInteger i = 0; i < resultArray.count; i++) {
+            for (NSUInteger count = 0; count < _contentList.count; count ++) {
+                if ([[[resultArray objectAtIndex:i]valueForKey:@"album_object_id"] isEqualToString:[[[_contentList objectAtIndex:count]valueForKey:@"data"]valueForKey:@"id"]]) {
+                    [itemsToDownload addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[[_contentList objectAtIndex:count]valueForKey:@"data"]valueForKey:@"name"], @"albumName", [[resultArray objectAtIndex:i]valueForKey:@"src"], @"photo", nil]];
+                }
+            }
+        }
+        [self savePhotos:itemsToDownload];
     }
 }
 
@@ -280,14 +290,57 @@
 
 #pragma mark - Button Clicks
 - (void)downloadButtonClicked:(id)sender {
-    [SVProgressHUD showWithStatus:@"Downloading"];
+    //[SVProgressHUD showWithStatus:@"Downloading"];
     NSArray *albumIDArray = [selectedItems allValues];
     albumNameArray  = [selectedAlbumNameDictionary allValues];
     NSLog(@"%@", albumNameArray);
     counter = 0;
     currentAPICall = kAPIGetPhotos;
+    NSString *parameters;
     for (NSUInteger i = 0; i < albumIDArray.count; i++) {
-        [[PFFacebookUtils facebook]requestWithGraphPath:[NSString stringWithFormat:@"%@/photos", [albumIDArray objectAtIndex:i]] andDelegate:self];
+        if ([parameters length] > 0) {
+            parameters = [NSString stringWithFormat:@"%@ or album_object_id =  '%@'", parameters, [albumIDArray objectAtIndex:i]];
+        }
+        else {
+            parameters = [albumIDArray objectAtIndex:i];
+        }
+        //[[PFFacebookUtils facebook]requestWithGraphPath:[NSString stringWithFormat:@"%@/photos", [albumIDArray objectAtIndex:i]] andDelegate:self];
+    }
+    NSLog(@"%@", parameters);
+    NSString *fql = [NSString stringWithFormat:@"%@ %@", @"select src, album_object_id from photo where album_object_id = ", parameters];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"q", nil];
+    [[PFFacebookUtils facebook]requestWithGraphPath:@"fql" andParams:params andDelegate:self];
+}
+
+#pragma mark - Helper Methods
+- (void)savePhotos:(NSMutableArray *)itemsToSave {
+    for (NSUInteger i = 0; i < itemsToSave.count; i++) {
+        NSString *albumName = [[itemsToSave objectAtIndex:i]valueForKey:@"albumName"];
+        NSURL *photoURL = [[NSURL alloc]initWithString:[[itemsToSave objectAtIndex:i]valueForKey:@"photo"]];
+        dispatch_async(imageQueue_, ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:photoURL];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *image = [UIImage imageWithData:imageData];
+                [self.library saveImage:image toAlbum:albumName withCompletionBlock:^(NSError *error) {
+                    if (!error) {
+                        NSLog(@"%d", i);
+                        NSLog(@"%@", @"BOSS");
+                    }
+                }];
+                
+                /*[_library writeImageDataToSavedPhotosAlbum:imageData metadata:NULL completionBlock:^(NSURL *assetURL, NSError *error) {
+                    [_library addAssetsGroupAlbumWithName:albumName resultBlock:^(ALAssetsGroup *group) {
+                        [self.library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+                            [group addAsset:asset];
+                        }failureBlock:^(NSError *error) {
+                            
+                        }];
+                    }failureBlock:^(NSError *error) {
+                        
+                    }];
+                }];*/
+            });
+        });
     }
 }
 
