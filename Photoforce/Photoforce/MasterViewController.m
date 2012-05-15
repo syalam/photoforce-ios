@@ -141,7 +141,6 @@
             [cell.contentView addSubview:albumTitleLabel];
             [cell.contentView addSubview:coverPhotoImageView];
             
-            //set a placeholder image while cover images are loading
             if ([imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]) {
                 coverPhotoImageView.image = [UIImage imageWithData:[imageDictionary objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]]];
 
